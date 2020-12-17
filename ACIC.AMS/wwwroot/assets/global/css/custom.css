@@ -1,0 +1,180 @@
+﻿.portlet{
+    margin-bottom:5px;
+}
+.portlet-title {
+    min-height: 31px !important;
+    border-bottom: 3px solid #edf0f4;
+
+}
+.portlet.box.white > .portlet-title {
+    background-color: #f9f9f9;
+}
+.portlet.box.white > .portlet-title > .caption {
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.portlet.box.green > .portlet-title > .caption {
+    padding-top: 8px;
+    font-size: 14px;
+}
+.portlet.box > .portlet-title {
+    border-bottom: 2px solid #edf0f4;
+}
+
+
+.portlet > .portlet-title > .tools {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.portlet-body{
+    padding-top: 0px !important;
+}
+
+.table > tbody > tr > td{
+    padding-bottom: 1px !important;
+}
+
+.table > tbody > tr > td.action {
+    padding-top: 2px !important;
+}
+
+.margin-b-0{
+    margin-bottom:0 !important;
+}
+.margin-b-5 {
+    margin-bottom: 5px !important;
+}
+.modal-xl {
+    width: 1200px;
+}
+.modal-450 {
+    width: 450px;
+}
+.modal-750 {
+    width: 750px;
+}
+
+div.menu-account-list ul{
+    padding-left:0px;
+}
+
+div.menu-account-list ul li{
+    list-style:none;
+    padding:10px 5px 10px 15px;
+}
+
+    div.menu-account-list ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight:300 !important;
+    }
+    div.menu-account-list ul li a span.title {
+        text-decoration: none;
+        color: black;
+    }
+    div.menu-account-list ul li.active {
+        background: #4bb678;
+        padding-top:15px;
+        padding-bottom:15px;
+    }
+
+    div.menu-account-list ul li a:hover {
+        color: #4bb678;
+    }
+
+    div.menu-account-list ul li.active a {
+        color: white;
+    }
+
+.page-header.navbar {
+    background-color: #f9f9f9;
+}
+
+.page-content-wrapper .page-content {
+    background: #edf0f4;
+    padding-bottom: 0 !important;
+}
+.page-content{
+    padding-top:0 !important;
+}
+.page-footer {
+    background-color: #f9f9f9;
+}
+.page-bar.top{
+    float:left;
+    background:none!important;
+    color:black;
+    margin:0!important;
+    padding-top:5px !important;
+    padding-left:5px;
+}
+
+    .page-bar.top ul.page-breadcrumb{
+        padding-top:0;
+    }
+    .page-bar.top ul.page-breadcrumb li {
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+        .page-bar.top ul.page-breadcrumb li.active {
+            background: #4bb678;
+        }
+        .page-bar.top ul.page-breadcrumb li.active a{
+            color: white;
+        }
+
+    .page-bar.top ul.page-breadcrumb li a{
+        color: black;
+        text-decoration:none;
+    }
+
+.page-sidebar.navbar-collapse.collapse {
+    background: white;
+    margin-top: 5px;
+}
+
+#expiringAccountlistMenu-accounts li {
+    padding-left: 5px;
+}
+
+.offset-left-20{
+    margin-left: -20px !important;
+}
+
+.no-pad-right{
+    padding-right: 0px;
+}
+.offset-pad-left-5{
+    padding-left:5px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #4bb678;
+    border-color: #4bb678;
+}
+.btn-success:hover{
+    color: #fff;
+    background-color: #4bb678;
+    border-color: #4bb678;
+}
+
+.modal-footer{
+    border-top:none !important;
+}
+.modal-header{
+    border-bottom: none!important;
+}
+
+#tblContacts > tr.active > td{
+    background-color: #4bb678 !important;
+    color:white;
+}
+#tblContacts tr:hover{
+    cursor:pointer;
+}

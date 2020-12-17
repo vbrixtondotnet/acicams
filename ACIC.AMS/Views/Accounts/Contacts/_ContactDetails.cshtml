@@ -1,0 +1,96 @@
+﻿<div class="modal fade" id="mdlContactDetails" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-750">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Contact Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form" id="contactDetailsContent">
+                        <div class="row">
+                            <div class="col-md-4" style="border-right:1px solid #e7ecf1">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <img src="~/assets/images/avatar.png" style="width:70%;" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3 style="margin-top:5px;" data-model="fullName" class="binding-service-field"></h3>
+                                        <strong style="text-transform:uppercase;color:#659be0;font-size:16px;" data-model="title" class="binding-service-field"></strong><br/>
+                                        <strong data-model="company" class="binding-service-field">Anytime Transport</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <strong style="font-size:32px;color:#3f7455"><span class="glyphicon glyphicon-phone-alt"> </span></strong>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong style="font-size:16px;line-height:1.5">Business:</strong><br />
+                                            <strong style="font-size:16px;line-height:1.5">Direct:</strong><br />
+                                            <strong style="font-size:16px;line-height:1.5">Mobile:</strong><br />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span style="margin-top:2px;display:block;" data-model="mblBusiness" class="binding-service-field"></span>
+                                            <span style="margin-top: 6px; display: block;" data-model="mblDirect" class="binding-service-field"></span>
+                                            <span style="margin-top: 5px; display: block;" data-model="mblMobile" class="binding-service-field"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:20px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <strong style="font-size:32px;color:#3f7455"><span class="glyphicon glyphicon-envelope"> </span></strong>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong style="font-size:16px;line-height:1.5">Email 1:</strong><br />
+                                            <strong style="font-size:16px;line-height:1.5">Email 2:</strong><br />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span style="margin-top:2px;display:block;" data-model="email1" class="binding-service-field"></span>
+                                            <span style="margin-top: 6px; display: block;" data-model="email2" class="binding-service-field"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:30px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <strong style="font-size:32px;color:#3f7455"><span class="glyphicon glyphicon-list-alt"> </span></strong>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong style="font-size:16px;line-height:1.5">Notes</strong><br />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span ></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-10">
+                                            <span data-model="notes" class="binding-service-field"></span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" id="btnEditContact"> <i class="fa fa-pencil"></i>&nbsp;Edit</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ACIC.AMS/.vs/ACIC.AMS
+/ACIC.AMS/.config
+/.vs
+/ACIC.AMS/bin
+/ACIC.AMS/obj
+/ACIC.AMS/Properties
+/ACIC.AMS.DataStore/bin
+/ACIC.AMS.DataStore/obj
+/ACIC.AMS.Domain/bin
+/ACIC.AMS.Domain/obj
+/ACIC.AMS.Dto/bin
+/ACIC.AMS.Dto/obj
+/ACIC.AMS.Repository/bin
+/ACIC.AMS.Repository/obj
+/ACIC.AMS.Services/bin
+/ACIC.AMS.Services/obj

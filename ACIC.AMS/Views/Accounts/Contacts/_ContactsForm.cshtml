@@ -1,0 +1,116 @@
+﻿<div class="modal fade" id="mdlAddContact" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">New Contact</h4>
+            </div>
+            <form class="form-horizontal" role="form" id="frmContact">
+                <div class="modal-body">
+                    <div class="portlet light bordered">
+                        <div class="portlet-body form">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">First</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="firstName" id="txtFirstName" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Middle</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="middleName" id="txtMiddleame">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Last</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="lastName" id="txtLastName" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Title</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" data-model="title"  id="slcTitle" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Notes</label>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" rows="3" data-model="notes"  id="txtNotes"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Contact Type</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" data-model="type" disabled  id="txtType">
+                                                    <option value="Account">Account</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Company</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" disabled  id="slcCompany">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Business</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="mblBusiness" id="txtBusiness">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Direct</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="mblDirect" id="txtDirect">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="mblMobile" id="txtMobile">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Email 1</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="email1" id="txtEmail1">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Email 2</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="email2" id="txtEmail2">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>&nbsp;Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

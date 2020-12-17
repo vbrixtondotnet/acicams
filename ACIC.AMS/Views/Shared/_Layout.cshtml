@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ACIC | AMS Beta</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <partial name="_PageStyleSheets" />
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="/scripts/js/login/authentication.js" type="text/javascript"></script>
+    <script src="/scripts/services/shared/bindings.service.js" type="text/javascript"></script>
+
+    <script src="/scripts/components/shared/account.list.menu.component.js" type="text/javascript"></script>
+    <script src="/scripts/services/accounts/account.service.js" type="text/javascript"></script>
+    <script src="/scripts/services/shared/states.services.js" type="text/javascript"></script>
+
+    <script>
+        Authentication.checkToken();
+    </script>
+
+    <partial name="_PageScripts" />
+
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
+    <div class="page-wrapper" style="background:#edf0f4">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="index.html">
+                        <img src="~/assets/images/Logo.PNG" alt="logo" class="logo-default" style="margin-top:5px;width:200px;" />
+                    </a>
+                </div>
+                <div class="page-bar top">
+                    <ul class="page-breadcrumb">
+                        <li class="active">
+                            <a href="/Accounts"><strong>ACCOUNTS</strong></a>
+                        </li>
+                        <li>
+                            <a href="index.html">CONTACTS</a>
+                        </li>
+                        <li>
+                            <a href="index.html">CARRIERS</a>
+                        </li>
+                        <li>
+                            <a href="index.html">HOW TO</a>
+                        </li>
+                        <li>
+                            <a href="index.html">EMAILS</a>
+                        </li>
+                        <li>
+                            <a href="index.html">LINKS</a>
+                        </li>
+                        <li>
+                            <a href="index.html">REPORTS</a>
+                        </li>
+                        <li>
+                            <a href="index.html">COMMISSIONS</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="~/assets/images/user-48.png" />
+                                <span class="username" id="loggedInUserName" style="color:black;"> Jezreel </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="" id="userProfileLink">
+                                        <i class="icon-user"></i> My Profile
+                                    </a>
+                                </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="javascript:Authentication.logOut()">
+                                        <i class="icon-key"></i> Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <partial name="AccountList.cshtml" />
+                    <partial name="ExpiringAccounts.cshtml" />
+
+
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
+                </div>
+                <!-- END SIDEBAR -->
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE BAR -->
+
+                    <div class="row" style="border-left:5px solid #edf0f4;padding-top:5px;">
+                        <div class="col-md-12" style="padding-left:0px;">
+                            @RenderBody()
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+            <!-- BEGIN QUICK SIDEBAR -->
+            <a href="javascript:;" class="page-quick-sidebar-toggler">
+                <i class="icon-login"></i>
+            </a>
+
+            <!-- END QUICK SIDEBAR -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer text-center">
+            <div class="page-footer-inner" style="width:100%;">
+                2020 &copy; ACIC AMS BETA
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+    </div>
+    <script>
+        AccountListMenu.init();
+        $("#loggedInUserName").html(Authentication.userInfo().emailAddress);
+        $("#userProfileLink").attr('href', '/User/Profile/' + Authentication.userInfo().id);
+    </script>
+
+</body>
+</html>

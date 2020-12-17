@@ -1,0 +1,139 @@
+﻿<div class="col-md-6 no-pad-right">
+    <div class="portlet box white">
+        <div class="portlet-title">
+            <div class="caption" id="accountDetailsLegalName">
+            </div>
+            <div class="tools">
+                <button type="button" class="btn btn-info btn-sm" id="btnUpdateAccount" title="Edit Account">
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </div>
+        </div>
+        <div class="portlet-body" style="height:308px;font-size:16px;">
+            <div class="row hide" id="accountDetailsRow" style="padding-top:15px;">
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>DBA</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsDba"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Status</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsStatus"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>Tax ID</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsTaxId"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Type</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsType"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>USDOT</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsUsdot"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Operation</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsOperation"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>State Permit</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsStatePermit"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Radius</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsRadius"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>Mailing</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsMailing"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Source</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsSource"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:5px;">
+                    <div class="col-md-7">
+                        <div class="col-md-4">
+                            <strong><small>Garaging</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsGaraging"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <strong><small>Agent</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <small id="accountDetailsAgent"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center" style="padding-top:100px;" id="accountDetailsPreloader">
+                    <img src="~/assets/images/preloader.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="/Views/Accounts/Details/_DetailsForm.cshtml" />
+
+<script src="/scripts/components/accounts/account.details.component.js" type="text/javascript"></script>
+<script src="/scripts/models/accounts/account.model.js" type="text/javascript"></script>
+<script src="/scripts/services/accounts/agents.service.js" type="text/javascript"></script>
+<script>
+    AccountDetails.init();
+</script>
