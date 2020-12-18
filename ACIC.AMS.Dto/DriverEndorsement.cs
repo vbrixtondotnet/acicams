@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
-#nullable disable
-
-namespace ACIC.AMS.Domain.Models
+namespace ACIC.AMS.Dto
 {
-    public partial class Driver : BaseModel
+    public class DriverEndorsement
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DriverId { get; set; }
         public bool Excluded { get; set; }
         public string LastName { get; set; }
@@ -27,6 +22,16 @@ namespace ACIC.AMS.Domain.Models
         public bool OwnerOperator { get; set; }
         public int? AccountId { get; set; }
         public string Notes { get; set; }
-        public bool Active { get; set; }
+        public List<DriverCoverage> DriverCoverages {get;set;}
+
+    }
+
+    public class DriverCoverage
+    {
+        public int CoverageTypeId { get; set; }
+        public double? Premium { get; set; }
+        public double? PremiumTax { get; set; }
+        public double? BrokerFee { get; set; }
+        public double? TotalAmount { get; set; }
     }
 }

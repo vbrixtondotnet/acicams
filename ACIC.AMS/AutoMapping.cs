@@ -16,11 +16,11 @@ namespace ACIC.AMS.Web
             CreateMap<Dto.Account, Domain.Models.Account>();
             CreateMap<Dto.Agent, Domain.Models.Agent>();
             CreateMap<Domain.Models.Agent, Dto.Agent>();
-            CreateMap<Domain.Models.DdUsstate, Dto.DdUsState>();
-            CreateMap<Dto.DdUsState, Domain.Models.DdUsstate >();
+            CreateMap<Domain.Models.DdUsstate, Dto.UsState>();
+            CreateMap<Dto.UsState, Domain.Models.DdUsstate >();
             CreateMap<Dto.Driver, Domain.Models.Driver>();
             CreateMap<Domain.Models.Driver, Dto.Driver>();
-            CreateMap<Domain.Models.DdContactsTitle, Dto.DdContactsTitle>();
+            CreateMap<Domain.Models.DdContactsTitle, Dto.ContactsTitle>();
             CreateMap<Domain.Models.Contact, Dto.Contact>();
             CreateMap<Dto.Contact, Domain.Models.Contact>();
         }

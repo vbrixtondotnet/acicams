@@ -35,6 +35,29 @@
             }
         })
 
+        var checkboxes = form.find('input[type="checkbox"]');
+        $.each(checkboxes, function (ind, checkbox) {
+            var dataModel = $(checkbox).attr("data-model");
+            if (dataModel) {
+                $(checkbox).attr("checked",model[dataModel]);
+                $(checkbox).on("change", function () {
+                    var checked = $(checkbox).is(':checked');
+                    model[dataModel] = checked;
+                });
+            }
+        })
+
+        var dateFields = form.find('input[type="date"]');
+        $.each(dateFields, function (ind, input) {
+            var dataModel = $(input).attr("data-model");
+            if (dataModel) {
+                $(input).val(model[dataModel]);
+                $(input).on("change", function () {
+                    model[dataModel] = $(this).val();
+                });
+            }
+        });
+
     },
     bindModelToLabels: function (containerId, model) {
         $("#" + containerId).find('.binding-service-field').each(function (ind, label) {

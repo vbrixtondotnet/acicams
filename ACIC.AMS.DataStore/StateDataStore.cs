@@ -17,12 +17,12 @@ namespace ACIC.AMS.DataStore
 
         }
 
-        public List<DdUsState> GetCities(string stateId)
+        public List<UsState> GetCities(string stateId)
         {
-            List<DdUsState> retval = new List<DdUsState>();
+            List<UsState> retval = new List<UsState>();
             var dbAgents = _context.DdUsstate.Where(s => s.StateId == stateId).ToList();
             dbAgents.ForEach(st => {
-                retval.Add(_mapper.Map<Dto.DdUsState>(st));
+                retval.Add(_mapper.Map<Dto.UsState>(st));
             });
 
             return retval;

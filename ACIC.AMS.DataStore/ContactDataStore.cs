@@ -20,13 +20,13 @@ namespace ACIC.AMS.DataStore
             return _mapper.Map<Dto.Account>(dbAccount);
         }
 
-        public List<DdContactsTitle> GetContactTitles()
+        public List<ContactsTitle> GetContactTitles()
         {
-            List<DdContactsTitle> retval = new List<DdContactsTitle>();
+            List<ContactsTitle> retval = new List<ContactsTitle>();
             var dbContactTitles = _context.DdContactsTitle.ToList();
 
             dbContactTitles.ForEach(ct => {
-                retval.Add(_mapper.Map<DdContactsTitle>(ct));
+                retval.Add(_mapper.Map<ContactsTitle>(ct));
             });
 
             return retval; 

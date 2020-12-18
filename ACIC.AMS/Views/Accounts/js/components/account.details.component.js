@@ -8,29 +8,13 @@ var AccountDetails = {
     },
     displayDetails: function () {
         $("#accountDetailsLegalName").html(CurrentAccount.legalName);
-        $("#accountDetailsDba").html(CurrentAccount.dba);
-        $("#accountDetailsStatus").html(CurrentAccount.status);
-        $("#accountDetailsTaxId").html(CurrentAccount.taxId);
-        $("#accountDetailsType").html(CurrentAccount.type);
-        $("#accountDetailsUsdot").html(CurrentAccount.usdot);
-        $("#accountDetailsOperation").html(CurrentAccount.operationType);
-        $("#accountDetailsStatePermit").html(CurrentAccount.statePermit);
-        $("#accountDetailsRadius").html(CurrentAccount.operationRadius);
-        $("#accountDetailsMailing").html(CurrentAccount.mailingAddress);
-        $("#accountDetailsSource").html(CurrentAccount.source);
-        $("#accountDetailsGaraging").html(CurrentAccount.garageAddressComplete);
-        $("#accountDetailsAgent").html(CurrentAccount.agent);
+        BindingService.bindModelToLabels("accountDetailsContent", CurrentAccount);
         $("#accountDetailsPreloader").addClass('hide');
         $("#accountDetailsRow").removeClass('hide');
     },
     populateAccountForm: function (data) {
         AccountDetails.account = data;
         BindingService.bindModelToForm("frmAccountDetails", AccountDetails.account);
-        $("#slcMailingState").trigger('change');
-        $("#slcGaragingState").trigger('change');
-
-    },
-    getAgents: function () {
         $("#slcAgent").html('');
         AgentService.getAgents(function (data) {
             $("#slcAgent").append('<option value=""></option>');
@@ -42,6 +26,9 @@ var AccountDetails = {
                     $("#slcAgent").val(CurrentAccount.agentId);
                 }
             }
+            $("#slcMailingState").trigger('change');
+            $("#slcGaragingState").trigger('change');
+            BindingService.bindModelToForm("frmAccountDetails", AccountDetails.account);
         });
     },
     populateMailingZip: function () {
@@ -131,7 +118,7 @@ var AccountDetails = {
     initEventHandlers: function () {
         $("#btnUpdateAccount").click(function () {
             $("#mdlUpdateAccount").modal('show');
-            AccountDetails.getAgents();
+            $("#accountDetailsFormTitle").html("Update Account");
 
             App.blockUI({
                 target: "#detailsFormContainer",

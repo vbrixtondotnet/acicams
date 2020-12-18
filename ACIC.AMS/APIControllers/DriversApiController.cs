@@ -34,5 +34,45 @@ namespace ACIC.AMS.Web.APIControllers
             return Ok(drivers);
         }
 
+        [Route("drivers/{id}/history")]
+        [HttpGet]
+        public IActionResult GetDriverHistory(int id)
+        {
+            List<DriverHistory> driverHistory = driverDataStore.GetDriverHistories(id);
+
+            return Ok(driverHistory);
+        }
+
+        [Route("drivers/{id}")]
+        [HttpDelete]
+        public IActionResult DeleteDriver(int id)
+        {
+            SPRowCountResult deleteDriverResult = driverDataStore.DeleteDriver(id);
+
+            return Ok(deleteDriverResult);
+        }
+
+
+        [Route("accounts/{id}/drivers")]
+        [HttpPost]
+        public IActionResult SaveNewDriver([FromBody] DriverEndorsement driverEndorsement)
+        {
+            try
+            {
+                DriverEndorsement driverEndorsementResponse = driverDataStore.Save(driverEndorsement);
+
+                if(driverEndorsementResponse != null)
+                    return Ok(driverEndorsementResponse);
+
+                return BadRequest();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
     }
 }

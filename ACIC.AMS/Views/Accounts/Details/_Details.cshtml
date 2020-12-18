@@ -9,7 +9,7 @@
                 </button>
             </div>
         </div>
-        <div class="portlet-body" style="height:308px;font-size:16px;">
+        <div class="portlet-body" style="height:310px;font-size:16px;" id="accountDetailsContent">
             <div class="row hide" id="accountDetailsRow" style="padding-top:15px;">
                 <div class="col-md-12" style="padding:5px;">
                     <div class="col-md-7">
@@ -17,7 +17,7 @@
                             <strong><small>DBA</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsDba"></small>
+                            <small data-model="dba" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -25,7 +25,7 @@
                             <strong><small>Status</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsStatus"></small>
+                            <small data-model="status" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                             <strong><small>Tax ID</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsTaxId"></small>
+                            <small data-model="taxId" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -43,7 +43,7 @@
                             <strong><small>Type</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsType"></small>
+                            <small data-model="type" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                             <strong><small>USDOT</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsUsdot"></small>
+                            <small data-model="usdot" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -61,7 +61,7 @@
                             <strong><small>Operation</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsOperation"></small>
+                            <small data-model="operationType" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             <strong><small>State Permit</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsStatePermit"></small>
+                            <small data-model="statePermit" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -79,7 +79,7 @@
                             <strong><small>Radius</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsRadius"></small>
+                            <small data-model="operationRadius" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                             <strong><small>Mailing</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsMailing"></small>
+                            <small data-model="mailingAddress" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -97,7 +97,7 @@
                             <strong><small>Source</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsSource"></small>
+                            <small data-model="source" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                             <strong><small>Garaging</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsGaraging"></small>
+                            <small data-model="garageAddressComplete" class="binding-service-field"></small>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -115,7 +115,7 @@
                             <strong><small>Agent</small></strong>
                         </div>
                         <div class="col-md-8">
-                            <small id="accountDetailsAgent"></small>
+                            <small data-model="agent" class="binding-service-field"></small>
                         </div>
                     </div>
                 </div>
@@ -129,11 +129,8 @@
     </div>
 </div>
 
-<partial name="/Views/Accounts/Details/_DetailsForm.cshtml" />
+<partial name="_DetailsForm.cshtml" />
 
-<script src="/scripts/components/accounts/account.details.component.js" type="text/javascript"></script>
-<script src="/scripts/models/accounts/account.model.js" type="text/javascript"></script>
-<script src="/scripts/services/accounts/agents.service.js" type="text/javascript"></script>
 <script>
     AccountDetails.init();
 </script>

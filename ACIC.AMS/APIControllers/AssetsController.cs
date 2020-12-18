@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -104,6 +105,18 @@ namespace ACIC.AMS.Web.APIControllers
             var stream = System.IO.File.OpenRead(path);
 
             return new FileStreamResult(stream, "application/octet-stream");
+        }
+
+        [Route("modals")]
+        [HttpGet]
+        public IActionResult HelloWorld()
+        {
+            var path = Path.Combine(
+                       Directory.GetCurrentDirectory(), "Views", "Accounts", "Details", "_DetailsForm.cshtml");
+
+            var stream = System.IO.File.OpenRead(path);
+
+            return Ok(stream);
         }
 
     }

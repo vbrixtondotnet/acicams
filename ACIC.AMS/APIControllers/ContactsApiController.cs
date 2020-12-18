@@ -29,7 +29,7 @@ namespace ACIC.AMS.Web.APIControllers
         [HttpGet]
         public IActionResult GetContactTitles(int id)
         {
-            List<DdContactsTitle> titles = contactDataStore.GetContactTitles();
+            List<ContactsTitle> titles = contactDataStore.GetContactTitles();
 
             return Ok(titles);
         }

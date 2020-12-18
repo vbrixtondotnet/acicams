@@ -20,11 +20,13 @@ namespace ACIC.AMS.Web.APIControllers
     public class AccountsApiController : ControllerBase
     {
         private readonly IAccountDataStore accountDataStore;
-        private readonly IContactDataStore contactDataStore;
-        public AccountsApiController(IAccountDataStore accountDataStore, IContactDataStore contactDataStore)
+        private readonly IContactDataStore contactDataStore; 
+        private readonly IPolicyDataStore policyDataStore;
+        public AccountsApiController(IAccountDataStore accountDataStore, IContactDataStore contactDataStore, IPolicyDataStore policyDataStore)
         {
             this.accountDataStore = accountDataStore;
             this.contactDataStore = contactDataStore;
+            this.policyDataStore = policyDataStore;
         }
 
         [Route("accounts/{id}/details")]
@@ -74,6 +76,15 @@ namespace ACIC.AMS.Web.APIControllers
         {
             List<Contact> contacts = contactDataStore.GetByAccountId(id);
             return Ok(contacts);
+
+        }
+
+        [Route("accounts/{id}/coveragetypes")]
+        [HttpGet]
+        public IActionResult GetAvailableCoverageTypes(int id)
+        {
+            List<CoverageType> coverageTypes = policyDataStore.GetAvailableCoverageTypes(id);
+            return Ok(coverageTypes);
 
         }
 

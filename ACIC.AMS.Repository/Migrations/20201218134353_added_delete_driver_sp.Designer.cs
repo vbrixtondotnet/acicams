@@ -4,14 +4,16 @@ using ACIC.AMS.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ACIC.AMS.Repository.Migrations
 {
     [DbContext(typeof(ACICDBContext))]
-    partial class ACICDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201218134353_added_delete_driver_sp")]
+    partial class added_delete_driver_sp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

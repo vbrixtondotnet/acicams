@@ -15,8 +15,9 @@
     <None Remove="Views\Accounts\js\services\agents.service.js" />
     <None Remove="Views\Accounts\js\services\contacts.service.js" />
     <None Remove="Views\Accounts\js\services\drivers.service.js" />
+    <None Remove="Views\Accounts\js\services\policy.service.js" />
     <None Remove="Views\Shared\js\services\bindings.service.js" />
-    <None Remove="Views\Shared\js\services\states.services.js" />
+    <None Remove="Views\Shared\js\services\states.service.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\models\account.model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\services\policy.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\services\account.service.js">
@@ -56,7 +60,7 @@
     <Content Include="Views\Shared\js\services\bindings.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\js\services\states.services.js">
+    <Content Include="Views\Shared\js\services\states.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -89,6 +93,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Accounts\Policies\" />
     <Folder Include="Views\Shared\js\models\" />
   </ItemGroup>
 

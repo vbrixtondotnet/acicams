@@ -29,7 +29,7 @@ namespace ACIC.AMS.Web.APIControllers
         [HttpGet]
         public IActionResult GetCities(string stateid)
         {
-            List<DdUsState> states = addressDataStore.GetCities(stateid);
+            List<UsState> states = addressDataStore.GetCities(stateid);
 
             if (states != null)
                 return Ok(states);

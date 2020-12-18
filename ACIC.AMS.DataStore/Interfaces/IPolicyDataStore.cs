@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ACIC.AMS.DataStore.Interfaces
 {
-    public interface IStateDataStore
+    public interface IPolicyDataStore
     {
-        List<UsState> GetCities(string stateId);
+        List<CoverageType> GetAvailableCoverageTypes(int accountId);
     }
 }

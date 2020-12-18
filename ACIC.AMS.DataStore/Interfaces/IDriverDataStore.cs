@@ -8,5 +8,11 @@ namespace ACIC.AMS.DataStore.Interfaces
     public interface IDriverDataStore
     {
         List<Driver> GetDrivers(int accountId);
+
+        DriverEndorsement Save(DriverEndorsement driverEndorsement);
+
+        List<DriverHistory> GetDriverHistories(int driverId);
+
+        SPRowCountResult DeleteDriver(int driverId);
     }
 }

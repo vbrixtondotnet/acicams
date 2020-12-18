@@ -16,9 +16,9 @@ var AccountListMenu = {
         });
         $("#btnAddAccount").on("click", function () {
             $("#mdlUpdateAccount").modal('show');
+            $("#accountDetailsFormTitle").html("Add Account");
             var newAccount = AccountModel.new();
             AccountDetails.populateAccountForm(newAccount);
-            AccountDetails.getAgents();
 
         });
     },

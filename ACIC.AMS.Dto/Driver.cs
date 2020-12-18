@@ -6,12 +6,6 @@ namespace ACIC.AMS.Dto
 {
     public class Driver
     {
-        DateTime? dateHired;
-        string dateHiredString;
-        string cdlyearLic;
-        DateTime? terminated;
-        string terminatedString;
-
         public int DriverId { get; set; }
         public bool Excluded { get; set; }
         public string LastName { get; set; }
@@ -22,26 +16,60 @@ namespace ACIC.AMS.Dto
         public string Email { get; set; }
         public string State { get; set; }
         public string Cdlnumber { get; set; }
-        public string CdlyearLic { get { return this.cdlyearLic; } set { this.cdlyearLic = value == null ? string.Empty : value; } }
-        public DateTime? DateHired
+        public string CdlnumberFormatted
         {
-            get { return dateHired; }
-            set
+            get
             {
-                this.dateHired = value;
-                this.dateHiredString = value == null ? string.Empty : value.ToString();
+                if (this.Cdlnumber != null) return Cdlnumber;
+
+                else return string.Empty;
             }
         }
-        public string DateHiredString { get { return this.dateHiredString; } }
-        public DateTime? Terminated { get {
-                return this.terminated;
-            } set {
-                this.terminated = value;
-                this.terminatedString = value == null ? string.Empty : value.ToString();
-            } }
-        public string TerminatedString { get { return this.terminatedString; } }
+        public string CdlyearLic { get; set; }
+        public string CdlyearLicFormatted
+        {
+            get
+            {
+                if (this.CdlyearLic != null) return CdlyearLic;
+
+                else return string.Empty;
+            }
+        }
+        public DateTime? DateHired { get; set; }
+        public string DateHiredFormatted
+        {
+            get
+            {
+                if (this.DateHired != null) return Convert.ToDateTime(DateHired).ToString("yyyy/MM/dd");
+
+                else return string.Empty;
+            }
+        }
+        public DateTime? Terminated { get; set; }
+        public string TerminatedFormatted
+        {
+            get
+            {
+                if (this.Terminated != null) return Convert.ToDateTime(Terminated).ToString("yyyy/MM/dd");
+
+                else return string.Empty;
+            }
+        }
         public bool OwnerOperator { get; set; }
         public int? AccountId { get; set; }
         public string Notes { get; set; }
+        public bool Active { get; set; }
+
+        public string Status { get { return Active ? "Active" : "InActive"; } }
+        public string FullName { get { return $"{FirstName} {Middle} {LastName}"; } }
+        public string DobFormatted
+        {
+            get
+            {
+                if (this.Dob != null) return Convert.ToDateTime(Dob).ToString("yyyy/MM/dd");
+
+                else return string.Empty;
+            }
+        }
     }
 }

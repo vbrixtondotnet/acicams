@@ -1,0 +1,166 @@
+﻿<style>
+    #dTableNewDriverCoverageTypes > tbody > tr > td{
+        padding-top:1px;
+    }
+    #dTableNewDriverCoverageTypes > tbody > tr > td.pad8 {
+        padding-top: 8px;
+    }
+    #dTableNewDriverCoverageTypes > tbody > tr > td.padb8 {
+        padding-bottom: 8px;
+    }
+
+    input[type='text'].totals {
+        font-weight: bold;
+        border: none;
+        background: none;
+        font-size: 15px !important;
+        color: #659be0 !important;
+    }
+</style>
+<div class="modal fade" id="mdlDriver" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">New Driver</h4>
+            </div>
+
+            <form class="form-horizontal" role="form" id="frmNewDriver">
+                <div class="modal-body">
+                    <div class="portlet light bordered">
+                        <div class="portlet-body form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">First</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" required data-model="firstName"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Middle</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" data-model="middle"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Last</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" required data-model="lastName"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Date Hired</label>
+                                            <div class="col-md-9">
+                                                <input type="date" class="form-control" placeholder="mm/dd/yyy"  data-model="dateHired">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Terminated</label>
+                                            <div class="col-md-9">
+                                                <input type="date" class="form-control" placeholder="mm/dd/yyy" data-model="terminated">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Phone</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control"  data-model="phone"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Email</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" data-model="email"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">&nbsp;</label>
+                                            <div class="col-md-9">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox" data-model="ownerOperator"> Owner Operator?
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Date Of Birth</label>
+                                            <div class="col-md-9">
+                                                <input type="date" class="form-control" placeholder="mm/dd/yyy" data-model="dob">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">State License</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" data-model="state" required>
+                                                    <partial name="/Views/Shared/_USStatesDropdownOptions.cshtml" />
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">CDL Number</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control"  data-model="cdlnumber" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Year License</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" data-model="cdlyearLic" required>
+                                                    <option value=""></option>
+                                                    @for (var year = DateTime.Now.Year; year > 1970; year--)
+                                                    {
+                                                        <option value="@year">@year</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Notes</label>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" style="height:86px;" data-model="notes"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-red-mint hide" id="policy-validator"><i class="fa fa-exclamation-triangle"></i>&nbsp; Please select at elast one active policy! </p>
+                                    <div class="table-scrollable">
+                                        <table class="table table-bordered table-hover table-checkable dataTable" id="dTableNewDriverCoverageTypes" role="grid" aria-describedby="sample_1_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="3"> Account Active Policies </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Premium </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Premium Tax</th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Broker Fee </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Total Amount </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="availableCoverageTypes">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" disabled id="btnSaveNewDriver"><i class="fa fa-save"></i>&nbsp;Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -4,14 +4,16 @@ using ACIC.AMS.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ACIC.AMS.Repository.Migrations
 {
     [DbContext(typeof(ACICDBContext))]
-    partial class ACICDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201218071740_added_get_available_coverage_types")]
+    partial class added_get_available_coverage_types
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -694,9 +696,6 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<int?>("AccountId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Cdlnumber")
                         .HasColumnType("nvarchar(max)");

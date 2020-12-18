@@ -72,6 +72,8 @@ namespace ACIC.AMS
             services.AddTransient<IAgentDataStore, AgentDataStore>();
             services.AddTransient<IStateDataStore, StateDataStore>();
             services.AddTransient<IDriverDataStore, DriverDataStore>();
+            services.AddTransient<IEndorsementDataStore, EndorsementDataStore>();
+            services.AddTransient<IPolicyDataStore, PolicyDataStore>();
             services.AddScoped<IMapper, Mapper>();
 
 

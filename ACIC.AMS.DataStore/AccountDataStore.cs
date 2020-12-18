@@ -56,15 +56,17 @@ namespace ACIC.AMS.DataStore
                 updatedAccount.DateModified = DateTime.Now;
                 updatedAccount.DateCreated = dbAccount.DateCreated;
                 _context.Update(updatedAccount);
+                _context.SaveChanges();
             }
             else
             {
                 var newAccount = _mapper.Map<Domain.Models.Account>(account);
                 newAccount.DateCreated = DateTime.Now;
                 _context.Account.Add(newAccount);
+                _context.SaveChanges();
+                account.AccountId = newAccount.AccountId;
             }
 
-            _context.SaveChanges();
             return GetAccountDetails(account.AccountId);
 
 

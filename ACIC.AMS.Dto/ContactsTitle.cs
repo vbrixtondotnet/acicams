@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACIC.AMS.Dto
 {
-    public class DdContactsTitle
+    public class ContactsTitle
     {
         public int Id { get; set; }
         public string TitleName { get; set; }

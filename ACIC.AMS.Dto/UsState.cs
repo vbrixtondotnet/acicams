@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACIC.AMS.Dto
 {
-    public class DdUsState
+    public class UsState
     {
         public int Id { get; set; }
         public string City { get; set; }

@@ -95,11 +95,14 @@
 
         $("#btnEditContact").click(function () {
             $("#mdlContactDetails").modal('hide');
+
+            $("#contactFormTitle").html("Update Contact");
             $("#mdlAddContact").modal('show');
             Contacts.populateContactForm(Contacts.contact);
         });
 
         $("#btnAddContact").click(function () {
+            $("#contactFormTitle").html("New Contact");
             $("#mdlAddContact").modal('show');
             var contact = ContactModel.new();
             contact.refId = CurrentAccount.accountId;
