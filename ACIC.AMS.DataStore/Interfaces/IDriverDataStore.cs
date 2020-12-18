@@ -10,6 +10,7 @@ namespace ACIC.AMS.DataStore.Interfaces
         List<Driver> GetDrivers(int accountId);
 
         DriverEndorsement Save(DriverEndorsement driverEndorsement);
+        Driver Update(Driver driver);
 
         List<DriverHistory> GetDriverHistories(int driverId);
 

@@ -44,6 +44,13 @@ namespace ACIC.AMS.Dto
 
                 else return string.Empty;
             }
+            set
+            {
+                if (value != string.Empty)
+                {
+                    this.DateHired = Convert.ToDateTime(value);
+                }
+            }
         }
         public DateTime? Terminated { get; set; }
         public string TerminatedFormatted
@@ -54,13 +61,20 @@ namespace ACIC.AMS.Dto
 
                 else return string.Empty;
             }
+            set
+            {
+                if (value != string.Empty)
+                {
+                    this.Terminated = Convert.ToDateTime(value);
+                }
+            }
         }
         public bool OwnerOperator { get; set; }
         public int? AccountId { get; set; }
         public string Notes { get; set; }
         public bool Active { get; set; }
 
-        public string Status { get { return Active ? "Active" : "InActive"; } }
+        public string Status { get { return Active ? "Active" : "InActive"; } set { this.Active = value == "Active"; } }
         public string FullName { get { return $"{FirstName} {Middle} {LastName}"; } }
         public string DobFormatted
         {
@@ -69,6 +83,13 @@ namespace ACIC.AMS.Dto
                 if (this.Dob != null) return Convert.ToDateTime(Dob).ToString("yyyy/MM/dd");
 
                 else return string.Empty;
+            }
+            set
+            {
+                if(value != string.Empty)
+                {
+                    this.Dob = Convert.ToDateTime(value);
+                }
             }
         }
     }

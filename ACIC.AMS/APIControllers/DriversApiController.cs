@@ -52,6 +52,22 @@ namespace ACIC.AMS.Web.APIControllers
             return Ok(deleteDriverResult);
         }
 
+        [Route("drivers")]
+        [HttpPatch]
+        public IActionResult EditDriver([FromBody] Driver driverDto)
+        {
+            try
+            {
+                Driver driverResult = driverDataStore.Update(driverDto);
+
+                return Ok(driverResult);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
 
         [Route("accounts/{id}/drivers")]
         [HttpPost]

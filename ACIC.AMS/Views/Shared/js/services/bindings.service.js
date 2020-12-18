@@ -51,7 +51,8 @@
         $.each(dateFields, function (ind, input) {
             var dataModel = $(input).attr("data-model");
             if (dataModel) {
-                $(input).val(model[dataModel]);
+                var formattedDate = model[dataModel].replace('/', '-').replace('/','-');
+                $(input).val(formattedDate);
                 $(input).on("change", function () {
                     model[dataModel] = $(this).val();
                 });

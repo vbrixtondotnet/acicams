@@ -80,6 +80,18 @@ namespace ACIC.AMS.DataStore
             return null;
 
         }
-            
+
+        public Driver Update(Driver driver)
+        {
+            var dbDriver = _context.Driver.Where(a => a.DriverId == driver.DriverId).AsNoTracking().FirstOrDefault();
+
+            var updatedDriver = _mapper.Map<Domain.Models.Driver>(driver);
+            updatedDriver.DateModified = DateTime.Now;
+            updatedDriver.DateCreated = dbDriver.DateCreated;
+            _context.Update(updatedDriver);
+            _context.SaveChanges();
+
+            return driver;
+        }
     }
 }

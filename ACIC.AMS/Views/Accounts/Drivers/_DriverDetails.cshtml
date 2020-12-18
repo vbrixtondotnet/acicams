@@ -1,6 +1,7 @@
 ﻿<style>
-    table.history > tbody > tr > td{
-        padding-top:5px; padding-bottom:5px !important;
+    table.history > tbody > tr > td {
+        padding-top: 5px;
+        padding-bottom: 5px !important;
     }
 </style>
 <div class="modal fade" id="mdlDriverDetails" tabindex="-1" role="basic" aria-hidden="true">
@@ -10,143 +11,313 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Driver Details</h4>
             </div>
-            <div class="modal-body">
-                <div class="portlet light bordered">
-                    <div class="portlet-body form" id="driverDetailsContent">
-                        <div class="row">
-                            <div class="col-md-6" style="border-right:1px solid #e7ecf1">
+            <form action="#" id="frmDriverEditForm">
+                <div class="modal-body">
+                    <div class="form-body">
+                        <div class="portlet light bordered">
+                            <div class="portlet-body form" id="driverDetailsContent">
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <img src="~/assets/images/avatar.png" style="width:35%;" />
+                                    <div class="col-md-6" style="border-right:1px solid #e7ecf1">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <img src="~/assets/images/avatar.png" style="width:35%;" />
+                                            </div>
+                                        </div>
+                                        <div class="edit-fields hide">
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">First Name</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" required data-model="firstName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top: 10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Middle Name</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" data-model="middle" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Last Name</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" required data-model="lastName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Date Hired</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyy" data-model="dateHiredFormatted">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Terminated</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyy" data-model="terminatedFormatted">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label"></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label class="mt-checkbox mt-checkbox-outline">
+                                                            <input type="checkbox" data-model="ownerOperator">  Owner Operator?
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-fields">
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h3 style="margin-top:5px;" data-model="fullName" class="binding-service-field"></h3>
+                                                    <strong style="text-transform:uppercase;color:#659be0;font-size:16px;">Driver <span class="label label-sm label-warning hide" id="labelOwner" style="border-left:2px solid gray;"> OWNER </span></strong><br />
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top:20px;">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Account:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="company" class="binding-service-field">Anytime Transport</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Date Hired:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="dateHiredFormatted" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Terminated:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="terminatedFormatted" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h3 style="margin-top:5px;" data-model="fullName" class="binding-service-field"></h3>
-                                        <strong style="text-transform:uppercase;color:#659be0;font-size:16px;">Driver</strong><br />
-                                        <span class="label label-sm label-warning hide" id="labelOwner"> OWNER </span>
+                                    <div class="col-md-6">
+                                        <div class="display-fields">
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Status:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="status" class="binding-service-field" style="text-transform:uppercase">ACTIVE</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Date of Birth:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="dobFormatted" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>CDL Number:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="cdlnumber" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Year License:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="cdlyearLic" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>State License:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="state" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Phone:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="phone" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                    <div class="col-md-5">
+                                                        <strong>Email:</strong>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span data-model="phone" class="binding-service-field"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="edit-fields hide">
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Status</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" data-model="status">
+                                                            <option value="Active">Active</option>
+                                                            <option value="InActive">InActive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top: 10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Date Of Birth</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyy" data-model="dobFormatted">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">CDL Number</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" data-model="cdlnumber" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Year License</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" data-model="cdlyearLic" required>
+                                                            <option value=""></option>
+                                                            @for (var year = DateTime.Now.Year; year > 1970; year--)
+                                                            {
+                                                                <option value="@year">@year</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">State License</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" data-model="state" required>
+                                                            <partial name="/Views/Shared/_USStatesDropdownOptions.cshtml" />
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Phone</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" data-model="phone" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="padding-top:10px;">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Email</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" data-model="email" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:20px;">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Account:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="company" class="binding-service-field">Anytime Transport</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Date Hired:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="dateHiredFormatted" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Terminated:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="terminatedFormatted" class="binding-service-field"></span>
-                                        </div>
+                                    <div class="col-md-12" style="padding-left:30px;">
+                                        <p><strong>HISTORY</strong></p>
+                                        <table class="table table-bordered table-hover table-checkable dataTable history" role="grid" aria-describedby="sample_1_info">
+                                            <thead>
+                                                <tr role="row" style="background:#e7ecf1;">
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Date</th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Transaction </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Company </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblDriverHistory">
+                                                <tr>
+                                                    <td>12/12/2020</td>
+                                                    <td>Added to Physical Damage coverage [RK61107A20]</td>
+                                                    <td>Anytime Transport</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Status:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="status" class="binding-service-field" style="text-transform:uppercase">ACTIVE</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12"  style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Date of Birth:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="dobFormatted" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>CDL Number:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="cdlnumber" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Year License:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="cdlyearLic" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Mobile No:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="phone" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
-                                        <div class="col-md-5">
-                                            <strong>Email:</strong>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <span data-model="phone" class="binding-service-field"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:20px;">
-                            <div class="col-md-12" style="padding-left:30px;">
-                                <p><strong>HISTORY</strong></p>
-                                <table class="table table-bordered table-hover table-checkable dataTable history" role="grid" aria-describedby="sample_1_info">
-                                    <thead>
-                                        <tr role="row" style="background:#e7ecf1;">
-                                            <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Date</th>
-                                            <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Transaction </th>
-                                            <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Company </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tblDriverHistory">
-                                        <tr>
-                                            <td>12/12/2020</td>
-                                            <td>Added to Physical Damage coverage [RK61107A20]</td>
-                                            <td>Anytime Transport</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="btnEditDriver"> <i class="fa fa-pencil"></i>&nbsp;Edit</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteDriver"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger hide" id="btnCancelEditDriver">&nbsp;Cancel</button>
+                    <button type="button" class="btn btn-success" id="btnEditDriver"> <i class="fa fa-pencil"></i>&nbsp;Edit</button>
+                    <button type="submit" class="btn btn-info hide" id="btnSaveDriverChanges"><i class="fa fa-save"></i>&nbsp;Save</button>
+                    <button type="button" class="btn btn-danger" id="btnDeleteDriver"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+                </div>
+            </form>
         </div>
         <!-- /.modal-content -->
     </div>

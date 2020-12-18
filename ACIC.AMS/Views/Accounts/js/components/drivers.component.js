@@ -143,6 +143,8 @@
 
         $("#tblDriverHistory").html('');
 
+        BindingService.bindModelToForm("frmDriverEditForm", driver);
+
         DriverService.getDriverHistory(id, function (data) {
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
@@ -157,6 +159,13 @@
             }
         });
 
+        $("#driverDetailsContent").find('.edit-fields').addClass('hide');
+        $("#driverDetailsContent").find('.display-fields').removeClass('hide');
+        $("#btnSaveDriverChanges").addClass('hide');
+        $("#btnCancelEditDriver").addClass('hide');
+        $("#btnEditDriver").removeClass('hide');
+        $("#btnDeleteDriver").removeClass('hide');
+
     },
     confirmDeleteDriver: function () {
         $("#deleteUserName").html(Drivers.driver.fullName);
@@ -167,6 +176,14 @@
         DriverService.deleteDriver(Drivers.driver.driverId, function (data) {
             $("#btnProceedDeleteDriver").removeAttr("disabled");
             $("#mdlDeleteDriverConfirmation").modal('hide');
+            $("#mdlDriverDetails").modal('hide');
+            Drivers.getDrivers(CurrentAccount.accountId);
+        });
+    },
+    updateDriver: function () {
+        $("#btnSaveDriverChanges").attr("disabled", true);
+        DriverService.updateDriver(Drivers.driver, function (data) {
+            $("#btnSaveDriverChanges").removeAttr("disabled");
             $("#mdlDriverDetails").modal('hide');
             Drivers.getDrivers(CurrentAccount.accountId);
         });
@@ -252,6 +269,29 @@
 
         $("#btnProceedDeleteDriver").click(function () {
             Drivers.deleteDriver();
+            return false;
+        });
+
+        $("#btnEditDriver").click(function () {
+            $("#driverDetailsContent").find('.edit-fields').removeClass('hide');
+            $("#driverDetailsContent").find('.display-fields').addClass('hide');
+            $("#btnSaveDriverChanges").removeClass('hide');
+            $("#btnCancelEditDriver").removeClass('hide');
+            $("#btnDeleteDriver").addClass('hide');
+            $("#btnEditDriver").addClass('hide');
+        });
+
+        $("#btnCancelEditDriver").click(function () {
+            $("#driverDetailsContent").find('.edit-fields').addClass('hide');
+            $("#driverDetailsContent").find('.display-fields').removeClass('hide');
+            $("#btnSaveDriverChanges").addClass('hide');
+            $("#btnCancelEditDriver").addClass('hide');
+            $("#btnDeleteDriver").removeClass('hide');
+            $("#btnEditDriver").removeClass('hide');
+        });
+
+        $("#frmDriverEditForm").on("submit", function () {
+            Drivers.updateDriver();
             return false;
         });
 

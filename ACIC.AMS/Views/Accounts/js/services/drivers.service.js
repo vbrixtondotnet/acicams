@@ -37,5 +37,17 @@
                 if (callback) callback(data);
             }
         });
+    },
+    updateDriver: function (driver, callback) {
+        $.ajax({
+            type: "PATCH",
+            url: "/api/drivers",
+            data: JSON.stringify(driver),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
     }
 }

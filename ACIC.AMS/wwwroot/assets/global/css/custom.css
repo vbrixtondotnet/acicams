@@ -1,4 +1,5 @@
-﻿.portlet{
+﻿
+.portlet{
     margin-bottom:5px;
 }
 .portlet-title {
@@ -100,6 +101,8 @@ div.menu-account-list ul li{
 .page-content-wrapper .page-content {
     background: #edf0f4;
     padding-bottom: 0 !important;
+    overflow-x: hidden !important;
+    padding-right: 3px;
 }
 .page-content{
     padding-top:0 !important;
