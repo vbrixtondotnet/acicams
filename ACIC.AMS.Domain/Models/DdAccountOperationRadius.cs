@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ACIC.AMS.Domain.Models
 {
-    public partial class DdAccountsOperationRadius : BaseModel
+    public partial class DdAccountOperationRadius : BaseModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

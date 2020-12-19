@@ -30,7 +30,7 @@ namespace ACIC.AMS.Repository
         public virtual DbSet<DdAccountSource> DdAccountSource { get; set; }
         public virtual DbSet<DdAccountStatus> DdAccountStatus { get; set; }
         public virtual DbSet<DdAccountType> DdAccountType { get; set; }
-        public virtual DbSet<DdAccountsOperationRadius> DdAccountsOperationRadius { get; set; }
+        public virtual DbSet<DdAccountOperationRadius> DdAccountOperationRadius { get; set; }
         public virtual DbSet<DdAccountsOperationType> DdAccountsOperationType { get; set; }
         public virtual DbSet<DdContactsTitle> DdContactsTitle { get; set; }
         public virtual DbSet<DdCoverageType> DdCoverageType { get; set; }

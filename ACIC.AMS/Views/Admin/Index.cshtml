@@ -1,23 +1,16 @@
-﻿
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="display-4">User Management</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <!-- BEGIN SAMPLE TABLE PORTLET-->
-        <div class="portlet box green">
+﻿<div class="row offset-left-20">
+    <div class="col-md-6 no-pad-right">
+        <div class="portlet box white">
             <div class="portlet-title">
                 <div class="caption">
-                    Active Users
+                    ACTIVE USERS
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn default btn-outline btn-sm" id="btnAddUser"><i class="fa fa-plus"></i>Add New</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btnAddUser" title="Add User"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="row">
+            <div class="portlet-body" style="height: 308px;">
+                <div class="row hide users-content">
                     <div class="col-md-12">
                         <table class="table table-striped table-hover margin-b-5" id="tblUsers">
                             <thead>
@@ -30,28 +23,29 @@
                                 </tr>
                             </thead>
                             <tbody id="tbUserList">
-                                
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                <div class="row" id="usersPreloader">
+                    <div class="col-md-12 text-center" style="padding-top:100px;">
+                        <img src="~/assets/images/preloader.gif" />
+                    </div>
+                </div>
+
             </div>
         </div>
-        <!-- END SAMPLE TABLE PORTLET-->
     </div>
-
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <!-- BEGIN SAMPLE TABLE PORTLET-->
-        <div class="portlet box green">
+    <div class="col-md-6 offset-pad-left-5">
+        <div class="portlet box white">
             <div class="portlet-title">
                 <div class="caption">
-                    Deleted Users
+                    DELETED USERS
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="row">
+            <div class="portlet-body" style="height: 308px;">
+                <div class="row hide deleted-users-content">
                     <div class="col-md-12">
                         <table class="table table-striped table-hover margin-b-5" id="tblUsersDeleted">
                             <thead>
@@ -68,12 +62,18 @@
                         </table>
                     </div>
                 </div>
+                
+                <div class="row" id="deletedUsersPreloader">
+                    <div class="col-md-12 text-center" style="padding-top:100px;">
+                        <img src="~/assets/images/preloader.gif" />
+                    </div>
+                </div>
+
             </div>
         </div>
-        <!-- END SAMPLE TABLE PORTLET-->
     </div>
-
 </div>
+
 <div class="modal fade" id="mdlAddUser" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

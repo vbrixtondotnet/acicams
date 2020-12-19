@@ -4,14 +4,16 @@ using ACIC.AMS.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ACIC.AMS.Repository.Migrations
 {
     [DbContext(typeof(ACICDBContext))]
-    partial class ACICDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201219042342_updated_table_name_DdAccountOperationRadius")]
+    partial class updated_table_name_DdAccountOperationRadius
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

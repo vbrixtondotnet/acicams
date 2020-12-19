@@ -8,38 +8,39 @@
                 <button type="button" class="btn btn-info btn-sm" id="btnAddVehicle" title="Add Vehicle"><i class="fa fa-plus"></i></button>
             </div>
         </div>
-        <div class="portlet-body" style="height:275px;">
+        <div class="portlet-body" style="height:220px;">
             <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-hover" id="dTableVehicles">
-                        <thead>
-                            <tr>
-                                <th> Name </th>
-                                <th> VIN </th>
-                                <th> Unit </th>
-                                <th> Type </th>
-                                <th> Value </th>
-                                <th> Driver </th>
-                                <th> &nbsp; </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> Freighliner </td>
-                                <td> 321654ASDAS654 </td>
-                                <td>   </td>
-                                <td> Tractor </td>
-                                <td> 130,000 </td>
-                                <td> Jet Li </td>
-                                <td class="action"> <button class="btn btn-success btn-sm" title="View Details"><i class="fa fa-search"></i></button>  </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped table-hover" id="dTableVehicles">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> VIN </th>
+                            <th> Unit </th>
+                            <th> Type </th>
+                            <th> Value </th>
+                            <th> Driver </th>
+                            <th> &nbsp; </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Freighliner </td>
+                            <td> 321654ASDAS654 </td>
+                            <td>   </td>
+                            <td> Tractor </td>
+                            <td> 130,000 </td>
+                            <td> Jet Li </td>
+                            <td class="action"> <button class="btn btn-success btn-sm" title="View Details"><i class="fa fa-search"></i></button>  </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
+<partial name="_VehiclesForm.cshtml" />
+
 <script>
     var table;
     if ($.fn.dataTable.isDataTable('#dTableVehicles')) {

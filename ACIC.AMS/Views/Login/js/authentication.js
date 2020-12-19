@@ -3,6 +3,12 @@
         var token = localStorage.getItem('accessToken');
         if (token == null)
             location.href = "/Login";
+        else {
+            var role = this.getRole();
+            var page = Utility.getCurrentPage();
+
+            if (page == "Admin" && role != "Admin") location.href = "/Accounts"; 
+        }
     },
     checkUserLogIn: function () {
         var token = localStorage.getItem('accessToken');
@@ -15,6 +21,10 @@
     },
     userInfo: function () {
         return JSON.parse(localStorage.getItem('userInfo'));
+    },
+    getRole: function () {
+        var userInfo = this.userInfo();
+        return userInfo.role;
     },
     signIn: function (username, password, callback) {
         var data = {

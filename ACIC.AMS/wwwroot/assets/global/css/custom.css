@@ -14,6 +14,8 @@
     color: black;
     font-weight: bold;
     font-size: 14px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 
 .portlet.box.green > .portlet-title > .caption {
@@ -68,7 +70,9 @@ div.menu-account-list ul{
 
 div.menu-account-list ul li{
     list-style:none;
-    padding:10px 5px 10px 15px;
+    padding:4px 5px 4px 15px;
+    font-size:13.5px;
+
 }
 
     div.menu-account-list ul li a {
@@ -81,13 +85,11 @@ div.menu-account-list ul li{
         color: black;
     }
     div.menu-account-list ul li.active {
-        background: #4bb678;
-        padding-top:15px;
-        padding-bottom:15px;
+        background: #508edb;
     }
 
     div.menu-account-list ul li a:hover {
-        color: #4bb678;
+        color: #508edb;
     }
 
     div.menu-account-list ul li.active a {
@@ -95,7 +97,10 @@ div.menu-account-list ul li{
     }
 
 .page-header.navbar {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e7ecf1;
+    min-height:34px;
+    height:34px;
 }
 
 .page-content-wrapper .page-content {
@@ -115,25 +120,26 @@ div.menu-account-list ul li{
     background:none!important;
     color:black;
     margin:0!important;
-    padding-top:5px !important;
+    padding-top:2px !important;
     padding-left:5px;
 }
 
     .page-bar.top ul.page-breadcrumb{
         padding-top:0;
+        padding-bottom:0;
     }
     .page-bar.top ul.page-breadcrumb li {
         padding-right: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 4px;
+        padding-bottom: 4px;
         padding-left: 10px;
     }
         .page-bar.top ul.page-breadcrumb li.active {
-            background: #4bb678;
+            background: #ffffff;
         }
-        .page-bar.top ul.page-breadcrumb li.active a{
-            color: white;
-        }
+            .page-bar.top ul.page-breadcrumb li.active a {
+                color: #508edb;
+            }
 
     .page-bar.top ul.page-breadcrumb li a{
         color: black;
@@ -179,9 +185,64 @@ div.menu-account-list ul li{
 }
 
 #tblContacts > tr.active > td{
-    background-color: #4bb678 !important;
+    background-color: #508edb !important;
     color:white;
+}
+
+#tblContacts > tr.active > td button.btn-success.btn-sm{
+    color: white !important;
 }
 #tblContacts tr:hover{
     cursor:pointer;
+}
+
+.btn-info.btn-sm {
+    border: none;
+    background: none;
+    color: #508edb;
+    font-size:16px;
+    padding:0!important;
+}
+
+.btn-success.btn-sm {
+    border: none;
+    background: none;
+    color: #4bb678;
+    font-size: 16px;
+    padding: 0 !important;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle{
+    padding-top:7px;
+    padding-left:4px;
+}
+
+.page-header.navbar .page-logo{
+    min-height:34px;
+    height:34px;
+}
+
+.page-header-fixed .page-container
+{
+    margin-top:32px;
+}
+
+.dataTables_info
+{
+    margin-left:10px;
+}
+
+.table > thead:first-child > tr:first-child > th{
+    padding-left:10px;
+    padding-bottom:4px;
+    padding-top:4px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding:2px;
 }

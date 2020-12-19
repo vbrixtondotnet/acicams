@@ -11,13 +11,17 @@
     <None Remove="Views\Accounts\js\components\drivers.component.js" />
     <None Remove="Views\Accounts\js\models\account.model.js" />
     <None Remove="Views\Accounts\js\models\contact.model.js" />
+    <None Remove="Views\Accounts\js\models\driver.endorsement.model.js" />
     <None Remove="Views\Accounts\js\services\account.service.js" />
     <None Remove="Views\Accounts\js\services\agents.service.js" />
     <None Remove="Views\Accounts\js\services\contacts.service.js" />
     <None Remove="Views\Accounts\js\services\drivers.service.js" />
     <None Remove="Views\Accounts\js\services\policy.service.js" />
+    <None Remove="Views\Shared\js\components\account.list.menu.component.js" />
     <None Remove="Views\Shared\js\services\bindings.service.js" />
     <None Remove="Views\Shared\js\services\states.service.js" />
+    <None Remove="Views\Shared\js\services\utility.service.js" />
+    <None Remove="Views\Shared\js\services\validation.service.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +38,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\models\account.model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\models\driver.endorsement.model.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\services\policy.service.js">
@@ -57,10 +64,19 @@
     <Content Include="Views\Login\js\authentication.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Shared\js\components\account.list.menu.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Shared\js\services\bindings.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\js\services\states.service.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\js\services\utility.service.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\js\services\validation.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -87,13 +103,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Views\Shared\js\components\account.list.menu.component.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Accounts\Policies\" />
     <Folder Include="Views\Shared\js\models\" />
   </ItemGroup>
 

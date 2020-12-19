@@ -83,10 +83,7 @@
             "active": true
         };
 
-        App.blockUI({
-            target: "#frmUser",
-            iconOnly: true
-        });
+        
 
         $.ajax({
             type: "POST",
@@ -122,10 +119,8 @@
     },
     getActiveUsers: function () {
         $("#tbUserList").html('');
-        App.blockUI({
-            target: "#tbUserList",
-            iconOnly: true
-        });
+        $(".users-content").addClass('hide');
+        $("#usersPreloader").removeClass('hide');
         $.ajax({
             type: "GET",
             url: "/api/users?deleted=false",
@@ -164,16 +159,14 @@
                 }
             },
             complete: function () {
-                App.unblockUI("#tbUserList");
+                $(".users-content").removeClass('hide');
+                $("#usersPreloader").addClass('hide');
             }
         });
     },
     getDeletedUsers: function () {
-        $("#tbUserListDeleted").html('');
-        App.blockUI({
-            target: "#tbUserListDeleted",
-            iconOnly: true
-        });
+        $("#deletedUsersPreloader").removeClass('hide');
+        $(".deleted-users-content").addClass('hide');
         $.ajax({
             type: "GET",
             url: "/api/users?deleted=true",
@@ -212,7 +205,9 @@
                 }
             },
             complete: function () {
-                App.unblockUI("#tbUserListDeleted");
+
+                $("#deletedUsersPreloader").addClass('hide');
+                $(".deleted-users-content").removeClass('hide');
             }
         });
     },
