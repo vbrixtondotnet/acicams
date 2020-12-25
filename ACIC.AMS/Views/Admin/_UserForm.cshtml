@@ -1,0 +1,61 @@
+﻿<div class="modal fade" id="mdlAddUser" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="mdl-user-form-title">Add User</h4>
+            </div>
+            <form role="form" id="frmUser" oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
+                <div class="modal-body">
+                    <div class="portlet light bordered">
+
+                        <div class="portlet-body form">
+
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" required data-model="firstName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <input type="text" class="form-control" data-model="middleName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" required data-model="lastName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control" required data-model="emailAddress">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" required data-model="password" name=up>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" required data-model="password" name=up2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="form-control" required data-model="role">
+                                        <option value=""></option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="CSR">CSR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" id="btnSave"><i class="fa fa-save"></i>&nbsp;Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

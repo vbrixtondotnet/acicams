@@ -9,14 +9,18 @@
     <None Remove="Views\Accounts\js\components\account.details.component.js" />
     <None Remove="Views\Accounts\js\components\contacts.component.js" />
     <None Remove="Views\Accounts\js\components\drivers.component.js" />
+    <None Remove="Views\Accounts\js\components\vehicles.component.js" />
     <None Remove="Views\Accounts\js\models\account.model.js" />
     <None Remove="Views\Accounts\js\models\contact.model.js" />
     <None Remove="Views\Accounts\js\models\driver.endorsement.model.js" />
+    <None Remove="Views\Accounts\js\models\vehicle.endorsement.model.js" />
     <None Remove="Views\Accounts\js\services\account.service.js" />
     <None Remove="Views\Accounts\js\services\agents.service.js" />
     <None Remove="Views\Accounts\js\services\contacts.service.js" />
     <None Remove="Views\Accounts\js\services\drivers.service.js" />
     <None Remove="Views\Accounts\js\services\policy.service.js" />
+    <None Remove="Views\Accounts\js\services\vehicles.service.js" />
+    <None Remove="Views\Admin\js\services\users.service.js" />
     <None Remove="Views\Shared\js\components\account.list.menu.component.js" />
     <None Remove="Views\Shared\js\services\bindings.service.js" />
     <None Remove="Views\Shared\js\services\states.service.js" />
@@ -31,6 +35,9 @@
     <Content Include="Views\Accounts\js\components\contacts.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Accounts\js\components\vehicles.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Accounts\js\components\drivers.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -40,7 +47,13 @@
     <Content Include="Views\Accounts\js\models\account.model.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Accounts\js\models\vehicle.endorsement.model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Accounts\js\models\driver.endorsement.model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\services\vehicles.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\services\policy.service.js">
@@ -58,7 +71,10 @@
     <Content Include="Views\Accounts\js\services\drivers.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Admin\js\Admin.js">
+    <Content Include="Views\Admin\js\components\admin.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Admin\js\services\users.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Login\js\authentication.js">

@@ -6,20 +6,44 @@ namespace ACIC.AMS.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"CREATE OR ALTER PROCEDURE [dbo].GetAvailableCoverageTypes (
-	                                @AccountId int
-                                )
-                                AS
-                                BEGIN
-                                select 
-	                                c.Id, 
-	                                c.CoverageTypes 
-
-                                from DdCoverageType c inner join Policy p
-                                on c.Id = p.CoverageTypes
-                                where p.AccountId = @AccountId and p.Expiration > GETDATE()
-                                END");
-
+            migrationBuilder.Sql(@"CREATE  OR ALTER PROCEDURE [dbo].GetAvailableCoverageTypes (  
+                                    @AccountId int  
+                                )  
+                                AS  
+                                BEGIN  
+                                    select   
+                                    c.Id,   
+                                    c.CoverageTypes as [Name],
+	                                p.[PolicyId]
+                                      ,p.[PolicyNumber]
+	                                  ,a.[LegalName] as Company
+                                      ,p.[TotalFactor]
+                                      ,p.[BasePerUnit]
+                                      ,p.[NonTaxedRateUnit]
+                                      ,p.[Bfrate]
+                                      ,p.[Strate]
+                                      ,p.[Pdrate]
+                                      ,p.[TrailerRate]
+                                      ,p.[Premium]
+                                      ,p.[Surcharge]
+                                      ,p.[PolicyFees]
+                                      ,p.[Mgafees]
+                                      ,p.[SurplusTax]
+                                      ,p.[BrokerFees]
+                                      ,p.[OtherFees]
+                                      ,p.[TotalPremium]
+                                      ,p.[CommRate]
+                                      ,p.[Commission]
+                                      ,p.[AgentSplit]
+                                      ,p.[AgentComm]
+                                      ,p.[AgentBfshare]
+                                      ,p.[InceptionStage]
+	                                  ,p.[PDNonOwnedTrailerRate]
+                                from DdCoverageType c inner join Policy p  
+                                left join Account a on a.AccountId=p.AccountId
+                                on c.Id = p.CoverageTypes  
+                                where p.AccountId = @AccountId and p.Expiration > GETDATE()  
+                                END  ");
            
         }
 

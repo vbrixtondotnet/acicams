@@ -21,7 +21,7 @@ var AccountDetails = {
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     var agent = data[i];
-                    var agentRow = '<option value="' + agent.agentId + '">' + agent.firstName + ' ' + agent.lastName + '</option>';
+                    var agentRow = '<option value="' + agent.id + '">' + agent.fullName + '</option>';
                     $("#slcAgent").append(agentRow);
                     $("#slcAgent").val(CurrentAccount.agentId);
                 }

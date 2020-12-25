@@ -1,0 +1,263 @@
+﻿<style>
+    table.history > tbody > tr > td {
+        padding-top: 5px;
+        padding-bottom: 5px !important;
+    }
+</style>
+<div class="modal fade" id="mdlVehicleDetails" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-850">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Vehicle Details</h4>
+            </div>
+            <form action="#" id="frmVehicleEditForm">
+                <div class="modal-body">
+                    <div class="form-body">
+                        <div class="portlet light bordered">
+                            <div class="portlet-body form" id="vehicleDetailsContent">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding:0;">
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Account:</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span data-model="company" class="binding-service-field"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Year:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="vYear" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <select class="form-control" data-model="vYear" required>
+                                                        <option value=""></option>
+                                                        @for (var year = DateTime.Now.Year; year > 1970; year--)
+                                                        {
+                                                            <option value="@year">@year</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Make:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="vehMakeName" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <select class="form-control vehicle-makes" id="sclVehicleMakes" required data-model="make">
+                                                        <option value=""></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Vin:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="vin" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <input type="text" class="form-control" data-model="vin" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Type:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="vehTypeName" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <select class="form-control vehicle-type" required data-model="type">
+                                                        <option value=""></option>
+                                                        <option value="1">Tractor</option>
+                                                        <option value="2">Trailer</option>
+                                                        <option value="3">Truck</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Model:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="model" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <input type="text" class="form-control" data-model="model" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>Unit #:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="vUnit" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <input type="text" class="form-control" data-model="vUnit" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;">
+                                                <div class="col-md-4">
+                                                    <strong>PD Value:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="pdvalue" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <input type="text" class="form-control" required data-model="pdvalue" onkeypress="return ValidationService.isNumberKey(this, event);" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="padding-left:0px;padding-right:0;">
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;padding-right:0;">
+                                                <div class="col-md-4">
+                                                    <strong>Driver:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="driver" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <select class="form-control vehicle-drivers" required data-model="driverId">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 edit-fields hide text-right" style="padding-top:5px; padding-bottom:5px;">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox" id="chkDriverOwnerEdit" data-model="isDriverOwner"> Driver is the owner?
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-12" id="driverOwnerDetailsContainer" style="padding-top:5px; padding-bottom:5px;padding-right:0;">
+                                                <div class="col-md-4">
+                                                    <strong>Owner:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="ownerOperator" class="binding-service-field"></span>
+                                                </div>
+                                                <div class="col-md-8 edit-fields hide">
+                                                    <input type="text" class="form-control" data-model="ownerOperator" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-right edit-fields hide" style="padding-top:5px; padding-bottom:5px;">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox" id="chkNotOnLienEdit" data-model="notOnLien"> Vehicle is not on Lien?
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div id="vehicleOnLienDetailsContainer">
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;padding-right:0;">
+                                                    <div class="col-md-4">
+                                                        <strong>Lien Holder:</strong>
+                                                    </div>
+                                                    <div class="col-md-8 display-fields">
+                                                        <span data-model="bankName" class="binding-service-field"></span>
+                                                    </div>
+                                                    <div class="col-md-8 edit-fields hide">
+                                                        <select class="form-control vehicle-banks" data-model="bankId">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;padding-right:0;">
+                                                    <div class="col-md-4">
+                                                        <strong>Account #:</strong>
+                                                    </div>
+                                                    <div class="col-md-8 display-fields">
+                                                        <span data-model="accountNo" class="binding-service-field"></span>
+                                                    </div>
+                                                    <div class="col-md-8 edit-fields hide">
+                                                        <input type="text" class="form-control" data-model="accountNo" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12" style="padding-top:5px; padding-bottom:5px;padding-right:0;">
+                                                <div class="col-md-4">
+                                                    <strong>Notes:</strong>
+                                                </div>
+                                                <div class="col-md-8 display-fields">
+                                                    <span data-model="notes" class="binding-service-field"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 edit-fields hide" style="padding-right: 0;">
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" style="height:86px;" data-model="notes"></textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:20px;">
+                                    <div class="col-md-12" style="padding-left:30px;">
+                                        <p style="margin-bottom:5px;"><strong>Active Policies</strong></p>
+                                        <table class="table table-bordered table-hover table-checkable dataTable history" role="grid" aria-describedby="sample_1_info">
+                                            <thead>
+                                                <tr role="row" style="background:#e7ecf1;">
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Policy Number</th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Coverage Type </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Company </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblVehicleActivePolicies">
+                                                <tr>
+                                                    <td>12/12/2020</td>
+                                                    <td>Added to Physical Damage coverage [RK61107A20]</td>
+                                                    <td>Anytime Transport</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:20px;">
+                                    <div class="col-md-12" style="padding-left:30px;">
+                                        <p style="margin-bottom:5px;"><strong>HISTORY</strong></p>
+                                        <table class="table table-bordered table-hover table-checkable dataTable history" role="grid" aria-describedby="sample_1_info">
+                                            <thead>
+                                                <tr role="row" style="background:#e7ecf1;">
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Date</th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Transaction </th>
+                                                    <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 120px;"> Company </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblVehicleHistory">
+                                                <tr>
+                                                    <td>12/12/2020</td>
+                                                    <td>Added to Physical Damage coverage [RK61107A20]</td>
+                                                    <td>Anytime Transport</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger hide" id="btnCancelEditVehicle">&nbsp;Cancel</button>
+                    <button type="button" class="btn btn-success" id="btnEditVehicle"> <i class="fa fa-pencil"></i>&nbsp;Edit</button>
+                    <button type="submit" class="btn btn-info hide" id="btnSaveVehicleChanges"><i class="fa fa-save"></i>&nbsp;Save</button>
+                    <button type="button" class="btn btn-danger" id="btnDeleteVehicle"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

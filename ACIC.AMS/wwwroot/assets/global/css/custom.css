@@ -8,10 +8,10 @@
 
 }
 .portlet.box.white > .portlet-title {
-    background-color: #f9f9f9;
+    background-color: #508edb;
 }
 .portlet.box.white > .portlet-title > .caption {
-    color: black;
+    color: white;
     font-weight: bold;
     font-size: 14px;
     padding-top:5px;
@@ -184,22 +184,25 @@ div.menu-account-list ul li{
     border-bottom: none!important;
 }
 
-#tblContacts > tr.active > td{
-    background-color: #508edb !important;
-    color:white;
+#tblContacts > tr.active > td, #tblContacts > tr.active > td.sorting_1 {
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%) !important;
+    color: black;
 }
 
+
 #tblContacts > tr.active > td button.btn-success.btn-sm{
-    color: white !important;
+    color: black !important;
 }
-#tblContacts tr:hover{
-    cursor:pointer;
+
+#tblContacts tr:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%) !important;
+    color: black;
 }
 
 .btn-info.btn-sm {
     border: none;
     background: none;
-    color: #508edb;
     font-size:16px;
     padding:0!important;
 }
@@ -245,4 +248,15 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 .dataTables_wrapper .dataTables_paginate .paginate_button{
     padding:2px;
+}
+
+.validator-error {
+    border: 1px solid #EF4836;
+}
+.form-control.validator-error:focus {
+    border: 1px solid #EF4836;
+}
+
+.portlet.box.white{
+    border:none !important;
 }

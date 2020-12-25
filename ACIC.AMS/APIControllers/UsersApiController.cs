@@ -28,12 +28,23 @@ namespace ACIC.AMS.Web.APIControllers
         [HttpPost]
         public IActionResult SaveUser([FromBody] Dto.User userDto)
         {
-            User user = userDataStore.SaveUser(userDto);
-
-            if (user != null)
-                return Ok(user);
-            else
-                return BadRequest();
+            try
+            {
+                if (!userDataStore.UserExists(userDto.EmailAddress))
+                {
+                    User user = userDataStore.SaveUser(userDto);
+                    return Ok(user);
+                }
+                else
+                {
+                    return BadRequest($"User with email address {userDto.EmailAddress} already exists.");
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         [Route("users/{id}")]
@@ -50,9 +61,9 @@ namespace ACIC.AMS.Web.APIControllers
 
         [Route("users")]
         [HttpGet]
-        public IActionResult GetUsers(bool deleted)
+        public IActionResult GetUsers(bool deleted = false, bool agent = false)
         {
-            List<User> users = userDataStore.GetUsers(deleted);
+            List<User> users = userDataStore.GetUsers(deleted, agent);
 
             if (users != null)
                 return Ok(users);

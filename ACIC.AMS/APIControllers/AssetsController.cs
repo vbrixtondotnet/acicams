@@ -12,14 +12,8 @@ namespace ACIC.AMS.Web.APIControllers
 {
     [Route("scripts")]
     [ApiController]
-    public class AssetsController : ControllerBase
+    public class JsAssetsController : ControllerBase
     {
-        private readonly IWebHostEnvironment environment;
-        public AssetsController(IWebHostEnvironment environment)
-        {
-            this.environment = environment;
-        }
-
         [Route("js/{viewName}/{fileName}")]
         [HttpGet]
         public IActionResult GetJs(string viewName, string fileName)
@@ -95,18 +89,6 @@ namespace ACIC.AMS.Web.APIControllers
             }
         }
 
-        [Route("css/{viewName}/{fileName}")]
-        [HttpGet]
-        public IActionResult GetCss(string viewName, string fileName)
-        {
-            var path = Path.Combine(
-                     Directory.GetCurrentDirectory(), "Views", viewName, "css", fileName);
-
-            var stream = System.IO.File.OpenRead(path);
-
-            return new FileStreamResult(stream, "application/octet-stream");
-        }
-
         [Route("modals")]
         [HttpGet]
         public IActionResult HelloWorld()
@@ -119,5 +101,22 @@ namespace ACIC.AMS.Web.APIControllers
             return Ok(stream);
         }
 
+    }
+
+    [Route("css")]
+    [ApiController]
+    public class CssAssetsController : ControllerBase
+    {
+        [Route("{viewName}/{fileName}")]
+        [HttpGet]
+        public IActionResult GetCss(string viewName, string fileName)
+        {
+            var path = Path.Combine(
+                     Directory.GetCurrentDirectory(), "Views", viewName, "css", fileName);
+
+            var stream = System.IO.File.OpenRead(path);
+
+            return new FileStreamResult(stream, "application/octet-stream");
+        }
     }
 }

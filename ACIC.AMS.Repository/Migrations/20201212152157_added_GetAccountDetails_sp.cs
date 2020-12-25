@@ -7,9 +7,9 @@ namespace ACIC.AMS.Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"
-                                    CREATE OR ALTER PROCEDURE [dbo].[GetAccountDetails](@AccountId int)  
-                                            AS  
-                                            BEGIN  
+                                    CREATE OR ALTER    PROCEDURE [dbo].[GetAccountDetails](@AccountId int)    
+                                            AS    
+                                            BEGIN    
                                        SELECT     
                                           [AccountId]    
                                           ,[Status] as [StatusId]    
@@ -38,17 +38,18 @@ namespace ACIC.AMS.Repository.Migrations
                                           ,source.Id as [SourceId]   
                                           ,[YearClient]    
                                           ,account.[AgentId]    
-                                          ,CONCAT(agent.FirstName,' ', agent.LastName) as Agent    
+                                          ,CONCAT(u.FirstName,' ', u.LastName) as Agent    
                                           ,account.[DateCreated]    
                                           ,account.[DateModified]    
                                        from Account account    
                                        left join DdAccountStatus astatus on astatus.Id = account.Status    
                                        left join DdAccountType atype on atype.Id = account.Type    
                                        left join DdAccountsOperationType aotype on aotype.Id = account.OperationType    
-                                       left join DdAccountsOperationRadius aoradius on aoradius.Id = account.OperationRadius    
-                                       left join Agent agent on agent.AgentId = account.AgentId    
-                                       left join DdAccountSource source on source.Id = account.Source   
-                                       WHERE account.AccountId = @AccountId  
+                                       left join DdAccountOperationRadius aoradius on aoradius.Id = account.OperationRadius    
+                                       left join Agent agent on agent.AgentId = account.AgentId  
+									   left join [User] u on u.Id = agent.UserId
+                                       left join DdAccountSource source on source.Id = account.Source    
+                                       WHERE account.AccountId = @AccountId    
                                             END  
                 
             ");

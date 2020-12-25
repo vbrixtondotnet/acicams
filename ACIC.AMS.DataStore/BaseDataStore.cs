@@ -81,14 +81,7 @@ namespace ACIC.AMS.DataStore
 
                         foreach (var prop in props)
                         {
-                            try
-                            {
-                                prop.SetValue(obj, row[prop.Name]);
-                            }
-                            catch
-                            {
-                                prop.SetValue(obj, null);
-                            }
+                            try { prop.SetValue(obj, row[prop.Name]);} catch { prop.SetValue(obj, null);}
                         }
 
                         retval.Add((T)Convert.ChangeType(obj, currentType));

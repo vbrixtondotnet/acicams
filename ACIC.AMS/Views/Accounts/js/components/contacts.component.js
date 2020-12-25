@@ -67,7 +67,7 @@
         Contacts.dTable = $("#dTableContacts").DataTable({
             "pageLength": 2,
             "searching": false,
-            "bLengthChange": false,
+            "bLengthChange": false, "bInfo": false,
             "columnDefs": [{
                 "targets": 4,
                 "orderable": false

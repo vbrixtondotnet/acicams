@@ -12,11 +12,7 @@ namespace ACIC.AMS.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AgentId { get; set; }
-        public bool Inactive { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Email { get; set; }
-        public string LoginId { get; set; }
+        public int UserId { get; set; }
         public double? CommSplitNew { get; set; }
         public double? CommSplitRenew { get; set; }
         public double? CommFixedAmount { get; set; }

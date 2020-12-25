@@ -69,11 +69,15 @@ namespace ACIC.AMS.DataStore
 
         
 
-        public List<User> GetUsers(bool deleted = false)
+        public List<User> GetUsers(bool deleted = false, bool agents = false)
         {
             List<User> retval = new List<User>();
+            List<Domain.Models.User> dbUsers;
 
-            List<Domain.Models.User> dbUsers = _context.User.Where(u => u.Active == !deleted).ToList();
+            if (!agents)
+                dbUsers = _context.User.Where(u => u.Active == !deleted && u.Role != "Agent").ToList();
+            else
+                dbUsers = _context.User.Where(u => u.Active == !deleted && u.Role == "Agent").ToList();
 
             dbUsers.ForEach( u => {
                 retval.Add(_mapper.Map<Dto.User>(u));
@@ -104,6 +108,12 @@ namespace ACIC.AMS.DataStore
                 return true;
             }
             return false;
+        }
+
+        public bool UserExists(string emailAddress)
+        {
+            var dbUser = _context.User.Where(u => u.EmailAddress.ToLower().Trim() == emailAddress.ToLower().Trim()).FirstOrDefault();
+            return dbUser != null;
         }
     }
 }

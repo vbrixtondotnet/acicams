@@ -20,13 +20,12 @@
                         <div class="form-body">
                             <form method="post" enctype="multipart/form-data" action="/User/Profile" oninput='up2.setCustomValidity(ConfirmPassword.value != Password.value ? "Passwords do not match." : "")'>
                                 <input type="hidden" value="@Model.Id" name="Id">
-                                <input type="hidden" value="@Model.AgentId" name="AgentId">
                                 <input type="hidden" value="@Model.Role" name="Role">
                                 <input type="hidden" value="@(Model.Active ? "true" : "false")" name="Active">
                                 <input type="hidden" value="@Model.EmailAddress" name="EmailAddress">
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" required id="txtFullName" value="@Model.FullName" name="FullName">
+                                    <input type="text" class="form-control" required id="txtFullName" value="@Model.EmailAddress" name="FullName">
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address</label>

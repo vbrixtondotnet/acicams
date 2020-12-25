@@ -27,5 +27,7 @@ namespace ACIC.AMS.Domain.Models
         public int? AccountId { get; set; }
         public int? DriverId { get; set; }
         public bool PolicyInclude { get; set; }
+        public bool IsDriverOwner { get; set; }
+        public bool NotOnLien { get; set; }
     }
 }

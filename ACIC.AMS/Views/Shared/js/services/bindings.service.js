@@ -13,6 +13,28 @@
             }
         });
 
+        var passwordFields = form.find('input[type="password"]');
+        $.each(passwordFields, function (ind, input) {
+            var dataModel = $(input).attr("data-model");
+            if (dataModel) {
+                $(input).val(model[dataModel]);
+                $(input).on("keyup", function () {
+                    model[dataModel] = $(this).val();
+                });
+            }
+        });
+
+        var emailFields = form.find('input[type="email"]');
+        $.each(emailFields, function (ind, input) {
+            var dataModel = $(input).attr("data-model");
+            if (dataModel) {
+                $(input).val(model[dataModel]);
+                $(input).on("keyup", function () {
+                    model[dataModel] = $(this).val();
+                });
+            }
+        });
+
         var selectFields = form.find('select');
         $.each(selectFields, function (ind, select) {
             var dataModel = $(select).attr("data-model");
@@ -51,8 +73,11 @@
         $.each(dateFields, function (ind, input) {
             var dataModel = $(input).attr("data-model");
             if (dataModel) {
-                var formattedDate = model[dataModel].replace('/', '-').replace('/','-');
-                $(input).val(formattedDate);
+                if (model[dataModel] != null) {
+                    var formattedDate = model[dataModel].replace('/', '-').replace('/', '-');
+                    $(input).val(formattedDate);
+                }
+               
                 $(input).on("change", function () {
                     model[dataModel] = $(this).val();
                 });

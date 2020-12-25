@@ -1,0 +1,38 @@
+﻿<div class="col-md-6 no-pad-right">
+    <div class="portlet box white">
+        <div class="portlet-title">
+            <div class="caption">
+                ACTIVE USERS
+            </div>
+            <div class="tools">
+                <button type="button" class="btn btn-info btn-sm" id="btnAddUser" title="Add User"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="portlet-body" style="height: 400px;">
+            <div class="row hide users-content">
+                <div class="col-md-12" style="padding:0;">
+                    <table class="table table-striped table-hover" id="tblUsers">
+                        <thead>
+                            <tr>
+                                <th> Email Address </th>
+                                <th> Full Name </th>
+                                <th> Agent ID </th>
+                                <th> Role </th>
+                                <th> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbUserList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" id="usersPreloader">
+                <div class="col-md-12 text-center" style="padding-top:100px;">
+                    <img src="~/assets/images/preloader.gif" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

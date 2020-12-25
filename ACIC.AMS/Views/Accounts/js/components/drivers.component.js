@@ -9,41 +9,40 @@
     onAddDriver: function () {
         $("#availableCoverageTypes").html('');
         $("#btnSaveNewDriver").attr("disabled", true);
-        PolicyService.getAvailableCoverageTypes(CurrentAccount.accountId, function (data) {
-            Drivers.driver = DriverEndorsementModel.new();
-            Drivers.driver.accountId = CurrentAccount.accountId;
-
-            if (data.length > 0) {
-                Drivers.availableCoverageTypes = data;
-                for (var i = 0; i < data.length; i++) {
-                    var coverageType = data[i];
-                    var coverageTypeRow = `<tr role="row">
+        Drivers.driver = DriverEndorsementModel.new();
+        Drivers.driver.accountId = CurrentAccount.accountId;
+        Drivers.availableCoverageTypes = Policy.availableCoverageTypes;
+        var data = Drivers.availableCoverageTypes;
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                var coverageType = data[i];
+                var coverageTypeRow = `<tr role="row">
                                                 <td class='pad8'>
                                                     <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                        <input type="checkbox" class="checkboxes coverage-type" data-id="`+ coverageType.id +`">
+                                                        <input type="checkbox" class="checkboxes coverage-type" data-id="`+ coverageType.id + `">
                                                         <span></span>
                                                     </label>
                                                 </td>
                                                 <td colspan="2" class='pad8'>
-                                                    `+ coverageType.coverageTypes + `
+                                                    `+ coverageType.name + `
                                                 </td>
                                                 <td>
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id +`"/>
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/>
                                                 </td>
                                                 <td class="center">  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id +`"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id +`"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type-total totals" data-coverage-field="totalAmount" disabled data-id="`+ coverageType.id +`"/>
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type-total totals" data-coverage-field="totalAmount" disabled data-id="`+ coverageType.id + `"/>
                                                 </td>
                                             </tr>`;
 
-                    $("#availableCoverageTypes").append(coverageTypeRow);
-                }
-                var coverageTypeRow = `<tr role="row">
+                $("#availableCoverageTypes").append(coverageTypeRow);
+            }
+            var coverageTypeRow = `<tr role="row">
                                                 <td class='pad8'></td>
                                                 <td colspan="2" class='pad8'><strong>TOTAL</strong></td>
                                                 <td>
@@ -60,33 +59,37 @@
                                                 </td>
                                             </tr>`;
 
-                $("#availableCoverageTypes").append(coverageTypeRow);
-                $("#btnSaveNewDriver").removeAttr("disabled");
-            }
-            else {
-                var coverageTypeRow = `<tr class="gradeX" role="row">
+            $("#availableCoverageTypes").append(coverageTypeRow);
+            $("#btnSaveNewDriver").removeAttr("disabled");
+        }
+        else {
+            var coverageTypeRow = `<tr class="gradeX" role="row">
                                                 <td class='pad8 padb8' colspan="8">
                                                 <span style="color:red;"><p class="font-red-mint"><i class="fa fa-exclamation-triangle"></i>&nbsp; The selected account does not have any active policy. Please create a new Policy for this account before you can add a new Driver. </p></span>
                                                 </td>
                                             </tr>`;
 
-                $("#availableCoverageTypes").append(coverageTypeRow);
-            }
+            $("#availableCoverageTypes").append(coverageTypeRow);
+        }
 
-            BindingService.bindModelToForm("frmNewDriver", Drivers.driver);
-
-        });
+        BindingService.bindModelToForm("frmNewDriver", Drivers.driver);
     },
     saveNewDriver: function () {
         App.blockUI({
             target: "#frmNewDriver",
             blockerOnly: true
         });
-        DriverService.saveNewDriver(Drivers.driver, function (data) {
-            App.unblockUI("#frmNewDriver");
-            $("#mdlDriver").modal('hide');
-            Drivers.getDrivers(CurrentAccount.accountId);
-        });
+        DriverService.saveNewDriver(Drivers.driver,
+            function (data) {
+                App.unblockUI("#frmNewDriver");
+                $("#mdlDriver").modal('hide');
+                Drivers.getDrivers(CurrentAccount.accountId);
+            },
+            function (data) {
+                App.unblockUI("#frmNewDriver");
+                alert(data.responseText);
+            }
+        );
     },
     calculateCoverageTotal: function (coverageTypeId, coverageType) {
         var premium = parseFloat(coverageType.premium);
@@ -214,7 +217,7 @@
         Drivers.dTable = $("#dTableDrivers").DataTable({
             "pageLength": 5,
             "searching": false,
-            "bLengthChange": false,
+            "bLengthChange": false, "bInfo": false,
             "columnDefs": [{
                 "targets": 6,
                 "orderable": false
@@ -227,7 +230,7 @@
             Drivers.onAddDriver();
         });
 
-        $("html").on("change", "input.checkboxes.coverage-type", function () {
+        $("html").on("change", "#availableCoverageTypes  input.checkboxes.coverage-type", function () {
             var checked = $(this).is(":checked");
             var coverageTypeId = $(this).attr('data-id');
             if (checked) {
@@ -248,7 +251,7 @@
             }
         });
 
-        $("html").on("keyup", "input[type='text'].coverage-type", function () {
+        $("html").on("keyup", "#availableCoverageTypes input[type='text'].coverage-type", function () {
             var coverageTypeId = parseInt($(this).attr('data-id'));
             var field = $(this).attr('data-coverage-field');
             var val = $(this).val() == '' ? 0 : $(this).val();

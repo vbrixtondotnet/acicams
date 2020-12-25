@@ -1,0 +1,41 @@
+﻿<div class="col-md-12">
+    <div class="portlet box white">
+        <div class="portlet-title">
+            <div class="caption">
+                AGENTS
+            </div>
+            <div class="tools">
+                <button type="button" class="btn btn-info btn-sm" id="btnAddAgent" title="Add Agent"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="portlet-body" style="height: 350px;">
+            <div class="row hide agents-content">
+                <div class="col-md-12" style="padding:0;">
+                    <table class="table table-striped table-hover" id="tblAgents">
+                        <thead>
+                            <tr>
+                                <th> Full Name </th>
+                                <th> Email Address </th>
+                                <th class="text-center"> Commission Split New </th>
+                                <th class="text-center"> Commission Split Renew </th>
+                                <th class="text-center"> Commission Fixed Amount</th>
+                                <th class="text-center"> Broker Fee Split </th>
+                                <th class="text-center"> Commission Payment Plan </th>
+                                <th> &nbsp; </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbAgentsList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" id="agentsPreloader">
+                <div class="col-md-12 text-center" style="padding-top:100px;">
+                    <img src="~/assets/images/preloader.gif" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

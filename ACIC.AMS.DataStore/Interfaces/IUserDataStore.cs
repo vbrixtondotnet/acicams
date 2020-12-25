@@ -8,7 +8,8 @@ namespace ACIC.AMS.DataStore.Interfaces
     public interface IUserDataStore 
     {
         Dto.User GetUserById(int id);
-        List<Dto.User> GetUsers(bool deleted = false);
+        bool UserExists(string emailAddress);
+        List<Dto.User> GetUsers(bool deleted = false, bool agent = false);
         Dto.User Login(string username, string password);
         Dto.User SaveUser(Dto.User user);
         bool SetActive(int id, bool active);

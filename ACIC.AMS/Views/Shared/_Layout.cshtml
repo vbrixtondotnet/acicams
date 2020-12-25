@@ -25,19 +25,13 @@
     </script>
 
     <partial name="_PageScripts" />
-
-    <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<!-- END HEAD -->
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
     <div class="page-wrapper" style="background:#edf0f4">
-        <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
-            <!-- BEGIN HEADER INNER -->
             <div class="page-header-inner ">
-                <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="index.html" style="width:100%;text-align:center;">
                         <img src="~/assets/images/Logo.PNG" alt="logo" class="logo-default" style="margin-top:2px;width:150px;" />
@@ -49,34 +43,31 @@
                             <a href="/Accounts"><strong>ACCOUNTS</strong></a>
                         </li>
                         <li class="main-nav main-nav-contacts">
-                            <a href="index.html">CONTACTS</a>
+                            <a href="index.html"><strong>CONTACTS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">CARRIERS</a>
+                            <a href="index.html"><strong>CARRIERS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">HOW TO</a>
+                            <a href="index.html"><strong>HOW TO</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">EMAILS</a>
+                            <a href="index.html"><strong>EMAILS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">LINKS</a>
+                            <a href="index.html"><strong>LINKS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">REPORTS</a>
+                            <a href="index.html"><strong>REPORTS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html">COMMISSIONS</a>
+                            <a href="index.html"><strong>COMMISSIONS</strong></a>
                         </li>
                         <li class="main-nav main-nav-admin">
-                            <a href="/Admin">USER MANAGEMENT</a>
+                            <a href="/Admin"><strong>USER MANAGEMENT</strong></a>
                         </li>
                     </ul>
-
                 </div>
-                <!-- END RESPONSIVE MENU TOGGLER -->
-                <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown dropdown-user">
@@ -99,62 +90,31 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- END USER LOGIN DROPDOWN -->
                     </ul>
                 </div>
-                <!-- END TOP NAVIGATION MENU -->
             </div>
-            <!-- END HEADER INNER -->
         </div>
-        <!-- END HEADER -->
-        <!-- BEGIN HEADER & CONTENT DIVIDER -->
         <div class="clearfix"> </div>
-        <!-- END HEADER & CONTENT DIVIDER -->
-        <!-- BEGIN CONTAINER -->
         <div class="page-container">
-            <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper">
-                <!-- BEGIN SIDEBAR -->
-                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                 <div class="page-sidebar navbar-collapse collapse">
                     <partial name="AccountList.cshtml" />
                     <partial name="ExpiringAccounts.cshtml" />
-
-
-                    <!-- END SIDEBAR MENU -->
-                    <!-- END SIDEBAR MENU -->
                 </div>
-                <!-- END SIDEBAR -->
             </div>
-            <!-- END SIDEBAR -->
-            <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
-                <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
-                    <!-- BEGIN PAGE BAR -->
-
                     <div class="row" style="border-left:5px solid #edf0f4;padding-top:5px;">
                         <div class="col-md-12" style="padding-left:0px;">
                             @RenderBody()
                         </div>
                     </div>
-
-
-
                 </div>
-                <!-- END CONTENT BODY -->
             </div>
-            <!-- END CONTENT -->
-            <!-- BEGIN QUICK SIDEBAR -->
             <a href="javascript:;" class="page-quick-sidebar-toggler">
                 <i class="icon-login"></i>
             </a>
-
-            <!-- END QUICK SIDEBAR -->
         </div>
-        <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
         <div class="page-footer text-center">
             <div class="page-footer-inner" style="width:100%;">
                 2020 &copy; ACIC AMS BETA
@@ -163,7 +123,6 @@
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
-        <!-- END FOOTER -->
     </div>
     <script>
         AccountListMenu.init();

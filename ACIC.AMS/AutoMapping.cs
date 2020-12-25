@@ -23,6 +23,9 @@ namespace ACIC.AMS.Web
             CreateMap<Domain.Models.DdContactsTitle, Dto.ContactsTitle>();
             CreateMap<Domain.Models.Contact, Dto.Contact>();
             CreateMap<Dto.Contact, Domain.Models.Contact>();
+            CreateMap<Domain.Models.DdVehicleMake, Dto.VehicleMake>();
+            CreateMap<Domain.Models.Bank, Dto.Bank>();
+            CreateMap<Dto.Vehicle, Domain.Models.Vehicle>();
         }
     }
 }

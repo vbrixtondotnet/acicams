@@ -20,21 +20,62 @@ namespace ACIC.AMS.Web.APIControllers
     public class AgentsApiController : ControllerBase
     {
         private readonly IAgentDataStore agentDataStore;
-        public AgentsApiController(IAgentDataStore agentDataStore)
+        private readonly IUserDataStore userDataStore;
+        public AgentsApiController(IAgentDataStore agentDataStore, IUserDataStore userDataStore)
         {
             this.agentDataStore = agentDataStore;
+            this.userDataStore = userDataStore;
         }
 
         [Route("agents")]
         [HttpGet]
         public IActionResult GetAgents()
         {
-            List<Agent> agents = agentDataStore.GetAll();
+            List<AgentUser> agents = agentDataStore.GetAll();
 
             if (agents != null)
                 return Ok(agents);
             else
                 return NotFound();
+        }
+
+        [Route("agents")]
+        [HttpPost]
+        public IActionResult SaveAgent(AgentUser agentUser)
+        {
+            try
+            {
+                if (agentUser.Id == 0)
+                {
+                    if (!userDataStore.UserExists(agentUser.EmailAddress))
+                    {
+                        AgentUser agentUserResponse = agentDataStore.Save(agentUser);
+
+                        if (agentUser != null)
+                            return Ok(agentUser);
+                    }
+                    else
+                    {
+                        return BadRequest($"Agent with email address {agentUser.EmailAddress} already exists.");
+                    }
+                }
+                else
+                {
+                    AgentUser agentUserResponse = agentDataStore.Save(agentUser);
+
+                    if (agentUser != null)
+                        return Ok(agentUser);
+
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return BadRequest();
+           
         }
 
     }

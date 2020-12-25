@@ -22,6 +22,7 @@ namespace ACIC.AMS.Domain.Models
         public string Description { get; set; }
         public string InsuredAddress { get; set; }
         public int? DriverId { get; set; }
+        public int? VehicleId { get; set; }
         public string Vin { get; set; }
         public double? ProRate { get; set; }
         public double? Pdvalue { get; set; }

@@ -26,6 +26,17 @@ namespace ACIC.AMS.DataStore
             return this.ExecuteQuery<SPRowCountResult>("[dbo].[DeleteDriver]", parameters).FirstOrDefault();
         }
 
+        public bool DriverExists(string firstName, string lastName, string cdlNumber, string state)
+        {
+            var dbDriver = _context.Driver.Where(d => (d.FirstName != null && d.FirstName.ToLower().Trim() == firstName.ToLower().Trim()) &&
+                                                      (d.LastName != null && d.LastName.ToLower().Trim() == lastName.ToLower().Trim()) &&
+                                                      (d.Cdlnumber != null && d.Cdlnumber.ToLower().Trim() == cdlNumber.ToLower().Trim()) &&
+                                                      (d.State != null && d.State.ToLower().Trim() == state.ToLower().Trim())
+                                                ).FirstOrDefault();
+
+            return dbDriver != null;
+        }
+
         public List<DriverHistory> GetDriverHistories(int driverId)
         {
             var parameters = new Dictionary<string, object>();

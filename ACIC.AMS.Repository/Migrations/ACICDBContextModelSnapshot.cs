@@ -128,23 +128,11 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LoginId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("AgentId");
 
@@ -881,6 +869,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Vin")
                         .HasColumnType("nvarchar(max)");
 
@@ -1097,6 +1088,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<double?>("OtherFees")
                         .HasColumnType("float");
 
+                    b.Property<double?>("PDNonOwnedTrailerRate")
+                        .HasColumnType("float");
+
                     b.Property<double?>("Pdrate")
                         .HasColumnType("float");
 
@@ -1151,9 +1145,6 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("AgentId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -1163,7 +1154,13 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -1202,11 +1199,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDriverOwner")
+                        .HasColumnType("bit");
+
                     b.Property<float?>("Make")
                         .HasColumnType("real");
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NotOnLien")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");

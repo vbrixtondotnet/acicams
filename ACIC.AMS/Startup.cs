@@ -61,10 +61,10 @@ namespace ACIC.AMS
               );
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddDbContext<ACICDBContext>(o =>
+            services.AddDbContextPool<ACICDBContext>(o =>
             {
                 o.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
-            }, ServiceLifetime.Transient);
+            });
 
             services.AddTransient<IUserDataStore, UserDataStore>();
             services.AddTransient<IAccountDataStore, AccountDataStore>();
@@ -74,9 +74,9 @@ namespace ACIC.AMS
             services.AddTransient<IDriverDataStore, DriverDataStore>();
             services.AddTransient<IEndorsementDataStore, EndorsementDataStore>();
             services.AddTransient<IPolicyDataStore, PolicyDataStore>();
+            services.AddTransient<IVehicleDataStore, VehicleDataStore>();
+            services.AddTransient<IBankDataStore, BankDataStore>();
             services.AddScoped<IMapper, Mapper>();
-
-
 
         }
 

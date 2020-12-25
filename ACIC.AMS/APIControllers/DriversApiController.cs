@@ -75,10 +75,17 @@ namespace ACIC.AMS.Web.APIControllers
         {
             try
             {
-                DriverEndorsement driverEndorsementResponse = driverDataStore.Save(driverEndorsement);
+                if(!driverDataStore.DriverExists(driverEndorsement.FirstName, driverEndorsement.LastName, driverEndorsement.Cdlnumber, driverEndorsement.State))
+                {
+                    DriverEndorsement driverEndorsementResponse = driverDataStore.Save(driverEndorsement);
 
-                if(driverEndorsementResponse != null)
-                    return Ok(driverEndorsementResponse);
+                    if (driverEndorsementResponse != null)
+                        return Ok(driverEndorsementResponse);
+                }
+                else
+                {
+                    return BadRequest($"The Driver {driverEndorsement.FirstName} {driverEndorsement.LastName} with license number {driverEndorsement.Cdlnumber}, State: {driverEndorsement.State} already exist!");
+                }
 
                 return BadRequest();
             }

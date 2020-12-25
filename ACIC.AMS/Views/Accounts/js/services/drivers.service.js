@@ -26,7 +26,7 @@
             }
         });
     },
-    saveNewDriver: function (driverEndorsementModel, callback) {
+    saveNewDriver: function (driverEndorsementModel, successCallback, errorCallback) {
         $.ajax({
             type: "POST",
             url: "/api/accounts/" + driverEndorsementModel.accountId + "/drivers",
@@ -34,7 +34,10 @@
             dataType: "json",
             contentType: "application/json",
             success: function (data) {
-                if (callback) callback(data);
+                if (successCallback) successCallback(data);
+            },
+            error: function (data) {
+                if (errorCallback) errorCallback(data);
             }
         });
     },

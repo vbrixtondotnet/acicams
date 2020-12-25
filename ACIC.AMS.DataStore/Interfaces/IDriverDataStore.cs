@@ -15,5 +15,6 @@ namespace ACIC.AMS.DataStore.Interfaces
         List<DriverHistory> GetDriverHistories(int driverId);
 
         SPRowCountResult DeleteDriver(int driverId);
+        bool DriverExists(string firstName, string lastName, string cdlNumber, string state);
     }
 }
