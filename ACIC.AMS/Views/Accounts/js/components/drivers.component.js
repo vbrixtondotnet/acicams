@@ -135,7 +135,7 @@
         });
     },
     showDriverDetails: function (id) {
-        var driver = Drivers.drivers.find((d) => { return d["driverId"] === id });
+        var driver = $.extend({}, Drivers.drivers.find((d) => { return d["driverId"] === id }));
         Drivers.driver = driver;
         driver.company = CurrentAccount.legalName;
         $("#mdlDriverDetails").modal('show');

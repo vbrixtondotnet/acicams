@@ -12,6 +12,7 @@ namespace ACIC.AMS.DataStore.Interfaces
 
         VehicleEndorsement Save(VehicleEndorsement vehicleEndorsement);
         List<VehicleHistory> GetVehicleHistory(int vehicleId);
-        Vehicle UpdateVehicle(Vehicle vehicle);
+        Vehicle UpdateVehicle(Vehicle vehicle); 
+        SPRowCountResult DeleteVehicle(int vehicleId);
     }
 }

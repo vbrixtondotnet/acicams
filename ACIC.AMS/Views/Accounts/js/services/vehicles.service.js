@@ -65,4 +65,13 @@
             }
         });
     },
+    deleteVehicle: function (id, callback) {
+        $.ajax({
+            type: "DELETE",
+            url: "/api/vehicles/" + id,
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
 }

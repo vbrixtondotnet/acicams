@@ -23,7 +23,7 @@
         BindingService.bindModelToForm("frmVehicle", Vehicles.vehicleEndorsement);
     },
     calculateCoverageTotal: function (coverageTypeId, coverageType) {
-
+        debugger;
         coverageTypeId = parseInt(coverageTypeId);
 
         var policy = Policy.availableCoverageTypes.find((c) => { return c["id"] === coverageTypeId});
@@ -31,33 +31,42 @@
         var premium = null;
         var tax = null;
         var brokerFee = null;
+        var makeId = parseInt($("#sclVehicleMakes").val());
+
+        // Auto Liability and Motor Truck Cargo
         if (coverageTypeId != 3) {
             switch (typeId) {
+                // Tractor and Truck
                 case 1:
                 case 3:
                     premium = policy.basePerUnit == null ? null : policy.basePerUnit.toFixed(2);
                     tax = (premium == null || policy.strate == null) ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
                     brokerFee = (policy.basePerUnit == null || policy.bfrate == null) ? null : policy.bfrate.toFixed(2);
                     break;
+                // Trailer
                 case 2:
                     premium = policy.trailerRate == null ? null : policy.trailerRate.toFixed(2);
-                    tax = policy.trailerRate == null || policy.strate == null ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
+                    tax = premium == null || policy.strate == null ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2); 
                     break;
             }
         }
+        // Physical Damage
         else {
             var pdValue = $("#txtPdValue").val() == '' ? 0 : parseFloat($("#txtPdValue").val());
             switch (typeId) {
+               // Tractor and Truck
                 case 1:
                 case 3:
                     premium = pdValue == null ? null : parseFloat(pdValue * (policy.pdrate / 100)).toFixed(2);
                     tax = (premium == null || policy.strate == null) ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
                     brokerFee = (premium == null || policy.bfrate == null) ? null : policy.bfrate.toFixed(2);
                     break;
+                // Trailer
                 case 2:
                     var rate = policy.trailerRate == null ? policy.pdrate : policy.trailerRate;
-                    premium = (rate == null || pdValue == 0) ? null : parseFloat(pdValue * (rate / 100)).toFixed(2);
-                    tax = policy.trailerRate == null || policy.strate == null ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
+                    var nonOwnedRate = makeId != 14 ? rate : policy.pdNonOwnedTrailerRate; //  check pdNonOwnedTrailerRate 
+                    premium = (nonOwnedRate == null || pdValue == 0) ? null : parseFloat(pdValue * (nonOwnedRate / 100)).toFixed(2);
+                    tax = premium == null || policy.strate == null ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
                     break;
             }
         }
@@ -227,7 +236,7 @@
         });
     },
     viewDetails: function (id) {
-        Vehicles.vehicle = Vehicles.vehicles.find((c) => { return c["id"] === id });
+        Vehicles.vehicle = $.extend({}, Vehicles.vehicles.find((c) => { return c["id"] === id }));
         Vehicles.vehicle.company = CurrentAccount.legalName;
         BindingService.bindModelToLabels("vehicleDetailsContent", Vehicles.vehicle);
 
@@ -301,7 +310,7 @@
             "searching": false,
             "bLengthChange": false, "bInfo": false,
             "columnDefs": [{
-                "targets": 6,
+                "targets": 7,
                 "orderable": false
             }]
         })
@@ -340,6 +349,15 @@
             }
         );
     },
+    deleteVehicle: function () {
+        $("#btnProceedDeleteVehicle").attr("disabled", true);
+        VehicleService.deleteVehicle(Vehicles.vehicle.id, function (data) {
+            $("#btnProceedDeleteVehicle").removeAttr("disabled");
+            $("#mdlDeleteVehicleConfirmation").modal('hide');
+            $("#mdlVehicleDetails").modal('hide');
+            Vehicles.getVehicles(CurrentAccount.accountId);
+        });
+    },
     initEventHandlers: function () {
         $("#btnAddVehicle").click(function () {
             Vehicles.addVehicle();
@@ -363,6 +381,17 @@
             $("#btnEditVehicle").removeClass('hide'); 
         });
 
+        $("#btnDeleteVehicle").click(function () {
+            $("#mdlDeleteVehicleConfirmation").modal({
+                backdrop: 'static'
+            });
+        });
+
+        $("#btnProceedDeleteVehicle").click(function () {
+            Vehicles.deleteVehicle();
+            return false;
+        });
+
         $("#slcVehicleType").bind("change", function () {
             var val = $(this).val();
             $("#frmGroupUnitNumber").addClass('hide');
@@ -373,6 +402,15 @@
             for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
                 var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
                 Vehicles.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
+            }
+        });
+
+        $("#sclVehicleMakes").bind("change", function () {
+            if (Vehicles.vehicleEndorsement.vehicleCoverages.length > 0) {
+                for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
+                    var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
+                    Vehicles.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
+                }
             }
         });
 

@@ -89,6 +89,15 @@ namespace ACIC.AMS.Web.APIControllers
             }
         }
 
+        [Route("vehicles/{id}")]
+        [HttpDelete]
+        public IActionResult DeleteDriver(int id)
+        {
+            SPRowCountResult deleteDriverResult = vehicleDataStore.DeleteVehicle(id);
+
+            return Ok(deleteDriverResult);
+        }
+
 
 
 

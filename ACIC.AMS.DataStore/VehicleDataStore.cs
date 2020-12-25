@@ -18,12 +18,12 @@ namespace ACIC.AMS.DataStore
             this.endorsementDataStore = endorsementDataStore;
         }
 
-        public SPRowCountResult DeleteDriver(int driverId)
+        public SPRowCountResult DeleteVehicle(int vehicleId)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.Add("@DriverId", driverId);
+            parameters.Add("@Vehicle", vehicleId);
 
-            return this.ExecuteQuery<SPRowCountResult>("[dbo].[DeleteDriver]", parameters).FirstOrDefault();
+            return this.ExecuteQuery<SPRowCountResult>("[dbo].[DeleteVehicle]", parameters).FirstOrDefault();
         }
     
 

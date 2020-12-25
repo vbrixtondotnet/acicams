@@ -67,12 +67,12 @@ namespace ACIC.AMS.DataStore
                         Effective = policy.Effective,
                         CoverageTypes = coverage.CoverageTypeId,
                         Description = "Initial Binding",
-                        DriverId = vehicleId,
                         Premium = coverage.Premium,
                         SurplusTax = coverage.PremiumTax,
                         BrokerFees = coverage.BrokerFee,
                         TotalPremium = coverage.TotalAmount,
                         Status = "Reconciled",
+                        VehicleId = vehicleId,
                         DateCreated = DateTime.Now
                     };
 
