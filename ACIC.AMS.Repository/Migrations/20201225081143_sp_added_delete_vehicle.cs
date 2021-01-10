@@ -6,7 +6,7 @@ namespace ACIC.AMS.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"CREATE   PROCEDURE [dbo].DeleteVehicle (  
+            migrationBuilder.Sql(@"CREATE  OR ALTER PROCEDURE [dbo].DeleteVehicle (  
                                     @VehicleId int  
                                 )  
                                 AS  

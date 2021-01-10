@@ -8,5 +8,7 @@ namespace ACIC.AMS.DataStore.Interfaces
     public interface IPolicyDataStore
     {
         List<CoverageType> GetAvailableCoverageTypes(int accountId);
+        List<Policy> GetPolicies(int accountId);
+        Policy SavePolicy(Policy policy);
     }
 }

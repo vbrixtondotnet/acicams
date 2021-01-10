@@ -11,7 +11,7 @@
         $("#btnSaveNewDriver").attr("disabled", true);
         Drivers.driver = DriverEndorsementModel.new();
         Drivers.driver.accountId = CurrentAccount.accountId;
-        Drivers.availableCoverageTypes = Policy.availableCoverageTypes;
+        Drivers.availableCoverageTypes = PolicyComponent.availableCoverageTypes;
         var data = Drivers.availableCoverageTypes;
         if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
@@ -27,13 +27,13 @@
                                                     `+ coverageType.name + `
                                                 </td>
                                                 <td>
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/>
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled data-type="decimal" data-id="`+ coverageType.id + `"/>
                                                 </td>
                                                 <td class="center">  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled data-type="decimal" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled data-type="decimal" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>
                                                     <input type="text" placeholder="0.00" class="form-control coverage-type-total totals" data-coverage-field="totalAmount" disabled data-id="`+ coverageType.id + `"/>
@@ -128,7 +128,7 @@
         $("#driversPreloader").removeClass('hide');
         $(".driver-list-content").addClass('hide');
         $("#tblDrivers").html('');
-        DriverService.getDrivers(id, function (data) {
+        DriverService.getDriversByAccount(id, function (data) {
             $(".driver-list-content").removeClass('hide');
             $("#driversPreloader").addClass('hide');
             Drivers.renderDriversTable(data);

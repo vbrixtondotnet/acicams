@@ -35,6 +35,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -58,6 +61,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("LegalName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -100,6 +106,39 @@ namespace ACIC.AMS.Repository.Migrations
                     b.ToTable("Account");
                 });
 
+            modelBuilder.Entity("ACIC.AMS.Domain.Models.AccountDriver", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountDriver");
+                });
+
             modelBuilder.Entity("ACIC.AMS.Domain.Models.Agent", b =>
                 {
                     b.Property<int>("AgentId")
@@ -122,11 +161,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<double?>("CommSplitRenew")
                         .HasColumnType("float");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -155,11 +200,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -206,11 +257,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -257,6 +314,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("ContactId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -277,6 +337,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<float?>("LossType")
                         .HasColumnType("real");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -314,6 +377,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<double?>("Commissions")
                         .HasColumnType("float");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -328,6 +394,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<double?>("Incentives")
                         .HasColumnType("float");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<double?>("NetAmount")
                         .HasColumnType("float");
@@ -362,6 +431,9 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -392,6 +464,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
@@ -416,11 +491,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("RadiusName")
                         .HasColumnType("nvarchar(max)");
@@ -440,11 +521,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("AccSource")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -461,11 +548,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("AccStatus")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -482,11 +575,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("AccTypes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -500,11 +599,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
@@ -521,11 +626,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("TitleName")
                         .HasColumnType("nvarchar(max)");
@@ -548,11 +659,17 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("CoverageTypes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -584,6 +701,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("CountyNameAll")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -604,6 +724,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("Military")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<double?>("Population")
                         .HasColumnType("float");
@@ -638,11 +761,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("VehMakeName")
                         .HasColumnType("nvarchar(max)");
@@ -659,11 +788,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("VehTypeName")
                         .HasColumnType("nvarchar(max)");
@@ -692,6 +827,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("CdlyearLic")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -718,6 +856,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("Middle")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -770,6 +911,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<int?>("CoverageTypes")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -811,6 +955,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<double?>("Mgafees")
                         .HasColumnType("float");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<double?>("NonTaxedRateUnit")
                         .HasColumnType("float");
@@ -896,6 +1043,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<double?>("BrokerFees")
                         .HasColumnType("float");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -913,6 +1063,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<double?>("Mgafees")
                         .HasColumnType("float");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<double?>("NonTaxedRateUnit")
                         .HasColumnType("float");
@@ -968,6 +1121,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -985,6 +1141,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("Mgaphone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -1055,6 +1214,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<float?>("CoverageTypes")
                         .HasColumnType("real");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -1077,6 +1239,9 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("float");
 
                     b.Property<int?>("Mgaid")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<double?>("NonTaxedRateUnit")
@@ -1127,6 +1292,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("TrackId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double?>("TrailerInterchangeRate")
+                        .HasColumnType("float");
+
                     b.Property<double?>("TrailerRate")
                         .HasColumnType("float");
 
@@ -1145,6 +1313,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -1162,6 +1333,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -1190,6 +1364,9 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<int?>("BankId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -1207,6 +1384,9 @@ namespace ACIC.AMS.Repository.Migrations
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<bool>("NotOnLien")
                         .HasColumnType("bit");

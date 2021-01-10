@@ -39,8 +39,9 @@ var AccountListMenu = {
         });
         Contacts.getContacts(id)
         Drivers.getDrivers(id);
-        Vehicles.getVehicles(id);
-        Policy.getAvailableCoverageTypes(id);
+        VehiclesComponent.getVehicles(id);
+        PolicyComponent.getAvailableCoverageTypes(id);
+        PolicyComponent.getPolicies(id);
     },
     getAccounts: function (id = 0) {
         AccountService.getAccounts(function (data) {

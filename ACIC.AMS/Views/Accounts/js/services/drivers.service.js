@@ -1,8 +1,17 @@
 ﻿var DriverService = {
-    getDrivers: function (id, callback) {
+    getDriversByAccount: function (id, callback) {
         $.ajax({
             type: "GET",
             url: "/api/accounts/" + id + "/drivers",
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
+    getDrivers: function (callback) {
+        $.ajax({
+            type: "GET",
+            url: "/api/drivers",
             success: function (data) {
                 if (callback) callback(data);
             }

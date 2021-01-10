@@ -79,14 +79,7 @@ namespace ACIC.AMS.Web.APIControllers
 
         }
 
-        [Route("accounts/{id}/coveragetypes")]
-        [HttpGet]
-        public IActionResult GetAvailableCoverageTypes(int id)
-        {
-            List<CoverageType> coverageTypes = policyDataStore.GetAvailableCoverageTypes(id);
-            return Ok(coverageTypes);
-
-        }
+      
 
         [Route("accounts")]
         [HttpPost]

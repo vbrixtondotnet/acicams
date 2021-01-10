@@ -45,15 +45,22 @@ namespace ACIC.AMS.DataStore
             return this.ExecuteQuery<DriverHistory>("[dbo].[GetDriverHistory]", parameters);
         }
 
-        public List<Driver> GetDrivers(int accountId)
+        public List<Driver> GetDrivers()
         {
-            List<Driver> retval = new List<Driver>();
-            var dbDrivers = _context.Driver.Where(s => s.AccountId == accountId).ToList();
+            List<Driver> drivers = new List<Driver>();
+            var dbDrivers = _context.Driver.Where(d => d.Active).ToList();
             dbDrivers.ForEach(d => {
-                retval.Add(_mapper.Map<Dto.Driver>(d));
+                drivers.Add(_mapper.Map<Driver>(d));
             });
+            return drivers;
+        }
 
-            return retval;
+        public List<Driver> GetDriversByAccount(int accountId)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@AccountId", accountId);
+
+            return this.ExecuteQuery<Driver>("[dbo].[GetDrivers]", parameters);
         }
 
         public DriverEndorsement Save(DriverEndorsement driverEndorsement)
@@ -81,6 +88,18 @@ namespace ACIC.AMS.DataStore
                 };
 
                 _context.Driver.Add(dbDriver);
+                _context.SaveChanges();
+
+                Domain.Models.AccountDriver dbAccountDriver = new Domain.Models.AccountDriver
+                {
+                    AccountId = (int)driverEndorsement.AccountId,
+                    DriverId = dbDriver.DriverId,
+                    Active = true,
+                    DateCreated = DateTime.Now
+                };
+
+                // process accountDriver
+                _context.AccountDriver.Add(dbAccountDriver);
                 _context.SaveChanges();
 
                 //process endorsement

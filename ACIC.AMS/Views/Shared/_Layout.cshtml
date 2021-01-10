@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -11,14 +14,14 @@
 
     <partial name="_PageStyleSheets" />
     <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="/scripts/js/login/authentication.js" type="text/javascript"></script>
-    <script src="/scripts/services/shared/bindings.service.js" type="text/javascript"></script>
+    <script src="/scripts/js/login/authentication.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
+    <script src="/scripts/services/shared/bindings.service.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
 
-    <script src="/scripts/components/shared/account.list.menu.component.js" type="text/javascript"></script>
-    <script src="/scripts/services/accounts/account.service.js" type="text/javascript"></script>
-    <script src="/scripts/services/shared/states.service.js" type="text/javascript"></script>
-    <script src="/scripts/services/shared/validation.service.js" type="text/javascript"></script>
-    <script src="/scripts/services/shared/utility.service.js" type="text/javascript"></script>
+    <script src="/scripts/components/shared/account.list.menu.component.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
+    <script src="/scripts/services/accounts/account.service.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
+    <script src="/scripts/services/shared/states.service.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
+    <script src="/scripts/services/shared/validation.service.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
+    <script src="/scripts/services/shared/utility.service.js?v=@Configuration["Release:Version"]" type="text/javascript"></script>
 
     <script>
         Authentication.checkToken();

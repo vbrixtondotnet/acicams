@@ -32,10 +32,20 @@
                 }
             }
         });
+    },
+    bindDecimalValidation: function () {
+        $("html").on("keypress", "input[type='text'][data-type='decimal']", function (e) {
+            var txt = $(this);
+            return ValidationService.isNumberKey(txt, e);
+        });
+    },
+    formatDate: function (date) {
+        return date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
     }
 }
 
 $(document).ready(function () {
     ValidationService.maskPhoneNumber();
     ValidationService.bindEmailAddressValidation();
+    ValidationService.bindDecimalValidation();
 });

@@ -1,68 +1,59 @@
-﻿<div class="modal fade" id="mdlPolicy" tabindex="-1" role="basic" aria-hidden="true">
+﻿
+<div class="modal fade" id="mdlPolicy" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">New Policy</h4>
             </div>
-            <div class="modal-body">
-                <div class="portlet light bordered">
-                    <div class="portlet-body form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-body">
+
+            <form class="form-horizontal" role="form" id="frmPolicy">
+                <div class="modal-body" style="padding-bottom:0; padding-top:0;">
+                    <div class="portlet light bordered">
+                        <div class="portlet-body form policy-form">
+                            <div class="row">
+                                <div class="form-body" style="padding-top:0; padding-bottom:0">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Account</label>
                                             <div class="col-md-9">
-                                                <select class="form-control">
-                                                    <option>Anytime Transport</option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                    <option>Option 5</option>
+                                                <select class="form-control" disabled id="slcPolicyAccountName">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Carrier</label>
                                             <div class="col-md-9">
-                                                <select class="form-control">
+                                                <select id="slcCarriers" class="form-control select-search">
                                                     <option></option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                    <option>Option 5</option>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">MGA</label>
                                             <div class="col-md-9">
-                                                <select class="form-control">
+                                                <select class="form-control" id="slcMgas">
                                                     <option></option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                    <option>Option 5</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Policy Number</label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="3"></textarea>
+                                               <input type="text" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Coverage</label>
                                             <div class="col-md-9">
-                                                <select class="form-control">
-                                                    <option>Auto Liability</option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                    <option>Option 5</option>
+                                                <select class="form-control" id="slcPolicyCoverageType">
+                                                    <option value=""></option>
+                                                    <option value="1">Auto Liability</option>
+                                                    <option value="2">Motor Truck Cargo</option>
+                                                    <option value="3">Physical Damage</option>
+                                                    <option value="4">General Liability</option>
+                                                    <option value="5">Excess Liability</option>
+                                                    <option value="6">Other</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -74,54 +65,30 @@
                                         </div>
 
                                     </div>
-
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-body">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Bind Date</label>
                                             <div class="col-md-9">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="mm/dd/yyy">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </div>
+                                                <input type="date" class="form-control" id="" placeholder="mm/dd/yyy">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Effective</label>
                                             <div class="col-md-9">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="mm/dd/yyy">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </div>
+                                                <input type="date" class="form-control" id="txtPolicyEffectiveDate" placeholder="mm/dd/yyy">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Expiration</label>
                                             <div class="col-md-9">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="mm/dd/yyy">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </div>
+                                                <input type="date" class="form-control" id="txtPolicyExpirationDate" placeholder="mm/dd/yyy">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Premium Finance</label>
                                             <div class="col-md-9">
-                                                <select class="form-control">
+                                                <select class="form-control" id="slcPolicyPremiumFinancers">
                                                     <option></option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                    <option>Option 5</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -131,71 +98,168 @@
                                                 <input type="text" class="form-control" placeholder="" value="">
                                             </div>
                                         </div>
-
                                     </div>
-
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-body">
+                            <div class="row">
+                                <div class="form-body" style="padding-bottom:0;padding-top:0;">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><strong>Basic Rates</strong></label>
+                                            <div class="col-md-9 coverage-rates" style="padding-left:63px;padding-top:8px;" data-coverage-types="1,2,3">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox"> Gross Receipt
+                                                    <span></span>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group coverage-rates" data-coverage-types="1">
                                             <label class="col-md-4 control-label">AL Rate</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="100.00">
-                                                    <span class="input-group-addon">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="bfrate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('ALRATE');">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group coverage-rates" data-coverage-types="1">
                                             <label class="col-md-4 control-label">AL Trailer Rate</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="100.00">
-                                                    <span class="input-group-addon">
+                                                    <input type="text" class="form-control" id="" onkeypress="return false;" placeholder="" data-model="trailerRate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('ALTRAILERRATE');">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group coverage-rates" data-coverage-types="2">
+                                            <label class="col-md-4 control-label">MTC Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="bfrate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('MTCRATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="2">
+                                            <label class="col-md-4 control-label">MTC Trailer Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" data-model="trailerRate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('MTCTRAILERRATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="3">
+                                            <label class="col-md-4 control-label">PD Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="pdrate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('PDRATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="3">
+                                            <label class="col-md-4 control-label">PD Trailer Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="trailerRate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('PDTRAILERRATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="3">
+                                            <label class="col-md-4 control-label">NO Trailer Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="pdNonOwnedTrailerRate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('NOTRAILERRATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="3">
+                                            <label class="col-md-4 control-label">Interchange Rate</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="trailerInterchangeRate">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('INTERCHANGERATE');">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="1,2">
                                             <label class="col-md-4 control-label">Non-Taxable Fees</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="100.00">
-                                                    <span class="input-group-addon">
+                                                    <input type="text" class="form-control" id="" placeholder="" onkeypress="return false;" data-model="nonTaxedRateUnit">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('NTF');">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group coverage-rates" data-coverage-types="4">
+                                            <label class="col-md-4 control-label">GL Premium</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="5">
+                                            <label class="col-md-4 control-label">EL Premium</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="6">
+                                            <label class="col-md-4 control-label">Premium Amount</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="4,5">
+                                            <label class="col-md-4 control-label">Broker Fees</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group coverage-rates" data-coverage-types="1,2,6">
                                             <label class="col-md-4 control-label">BF Per Unit</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="100.00">
-                                                    <span class="input-group-addon">
+                                                    <input type="text" class="form-control" id="" placeholder="" onkeypress="return false;" data-model="basePerUnit">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('BFPERUNIT');">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group coverage-rates" data-coverage-types="1,2,3,4,5,6">
                                             <label class="col-md-4 control-label">Surplus Tax Rate</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="100.00">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calculator"></i>
-                                                    </span>
+                                                    <input type="text" data-type="decimal" class="form-control" id="" placeholder="" data-model="surplusTax">
                                                 </div>
                                             </div>
                                         </div>
@@ -205,29 +269,21 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Comm. Rate</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="commRate">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Unearn. Commissions</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
                                             </div>
                                         </div>
 
                                     </div>
-
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-body">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><strong>Taxes and Fees</strong></label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">&nbsp;</label>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9" style="padding-left:63px;padding-top:8px;">
                                                 <label class="mt-checkbox mt-checkbox-outline">
                                                     <input type="checkbox"> Direct Bill?
                                                     <span></span>
@@ -237,52 +293,62 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Surcharge</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Surplus Tax</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Policy Fees</label>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                            </div>
+                                            <div class="col-md-2" style="padding-top:8px;padding-left:0;">
+                                                <label class="mt-checkbox mt-checkbox-outline" style="margin-bottom:0;" data-type="decimal">
+                                                    <input type="checkbox"> Taxed?
+                                                    <span></span>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">MGA Fees</label>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                            </div>
+                                            <div class="col-md-2" style="padding-top:8px;padding-left:0;">
+                                                <label class="mt-checkbox mt-checkbox-outline" style="margin-bottom:0;">
+                                                    <input type="checkbox"> Taxed?
+                                                    <span></span>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Other Fees</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><strong>TOTAL</strong></label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" onkeypress="return false;">
                                             </div>
                                         </div>
-
                                     </div>
-
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn green">Save</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green">Save</button>
+                </div>
+            </form>
         </div>
         <!-- /.modal-content -->
     </div>

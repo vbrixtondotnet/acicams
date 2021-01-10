@@ -8,5 +8,6 @@ namespace ACIC.AMS.DataStore.Interfaces
     public interface IBankDataStore
     {
         List<Bank> GetLienHolders();
+        List<Bank> GetPremiumFinancers();
     }
 }

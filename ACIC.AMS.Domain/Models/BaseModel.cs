@@ -10,5 +10,7 @@ namespace ACIC.AMS.Domain.Models
     {
         public DateTime? DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
+        public int? CreatedBy { get; set; }
+        public int? ModifiedBy { get; set; }
     }
 }

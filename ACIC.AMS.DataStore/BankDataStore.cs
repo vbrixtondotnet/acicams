@@ -27,5 +27,17 @@ namespace ACIC.AMS.DataStore
 
             return retval;
         }
+
+        public List<Bank> GetPremiumFinancers()
+        {
+            List<Bank> retval = new List<Bank>();
+            var dbBanks = _context.Bank.Where(b => b.Type == "Premium Financer").ToList();
+            dbBanks.ForEach(b =>
+            {
+                retval.Add(_mapper.Map<Bank>(b));
+            });
+
+            return retval;
+        }
     }
 }

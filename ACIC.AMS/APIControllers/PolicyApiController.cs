@@ -25,6 +25,38 @@ namespace ACIC.AMS.Web.APIControllers
             this.policyDataStore = policyDataStore;
         }
 
+        [Route("accounts/{id}/policy")]
+        [HttpGet]
+        public IActionResult GetPolicies(int id)
+        {
+            List<Policy> policies = policyDataStore.GetPolicies(id);
+            return Ok(policies);
+
+        }
+
+        [Route("accounts/{id}/coveragetypes")]
+        [HttpGet]
+        public IActionResult GetAvailableCoverageTypes(int id)
+        {
+            List<CoverageType> coverageTypes = policyDataStore.GetAvailableCoverageTypes(id);
+            return Ok(coverageTypes);
+
+        }
+
+        [Route("accounts/{id}/policy")]
+        [HttpPost]
+        public IActionResult SavePolicy([FromBody] Policy policy)
+        {
+            try
+            {
+                var retval = policyDataStore.SavePolicy(policy);
+                return Ok(retval);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

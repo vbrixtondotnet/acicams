@@ -25,11 +25,20 @@ namespace ACIC.AMS.Web.APIControllers
             this.driverDataStore = driverDataStore;
         }
 
-        [Route("accounts/{id}/drivers")]
+        [Route("drivers")]
         [HttpGet]
         public IActionResult GetDrivers(int id)
         {
-            List<Driver> drivers = driverDataStore.GetDrivers(id);
+            List<Driver> drivers = driverDataStore.GetDrivers();
+
+            return Ok(drivers);
+        }
+
+        [Route("accounts/{id}/drivers")]
+        [HttpGet]
+        public IActionResult GetDriversByAccount(int id)
+        {
+            List<Driver> drivers = driverDataStore.GetDriversByAccount(id);
 
             return Ok(drivers);
         }

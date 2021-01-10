@@ -29,6 +29,7 @@ namespace ACIC.AMS.Domain.Models
         public double? Strate { get; set; }
         public double? Pdrate { get; set; }
         public double? TrailerRate { get; set; }
+        public double? TrailerInterchangeRate { get; set; }
         public double? PDNonOwnedTrailerRate { get; set; }
         public double? Premium { get; set; }
         public double? Surcharge { get; set; }

@@ -7,7 +7,8 @@ namespace ACIC.AMS.DataStore.Interfaces
 {
     public interface IDriverDataStore
     {
-        List<Driver> GetDrivers(int accountId);
+        List<Driver> GetDriversByAccount(int accountId);
+        List<Driver> GetDrivers();
 
         DriverEndorsement Save(DriverEndorsement driverEndorsement);
         Driver Update(Driver driver);

@@ -1,32 +1,34 @@
-﻿var Vehicles = {
+﻿var VehiclesComponent = {
     dTable: null,
     vehicles: null,
     vehicleMakes: null,
     vehicle: null,
     lienHolders: null,
     vehicleEndorsement: null,
+    drivers: null,
     init: function () {
         this.initEventHandlers();
         this.getLienHolders();
         this.getVehicleMakes();
+        this.getDrivers();
     },
     addVehicle: function () {
-        Vehicles.populateDrivers();
-        Vehicles.populateCoverageTypes();
-        Vehicles.vehicleEndorsement = VehicleEndorsementModel.new();
-        Vehicles.vehicleEndorsement.accountId = CurrentAccount.accountId;
+        VehiclesComponent.populateDrivers();
+        VehiclesComponent.populateCoverageTypes();
+        VehiclesComponent.vehicleEndorsement = VehicleEndorsementModel.new();
+        VehiclesComponent.vehicleEndorsement.accountId = CurrentAccount.accountId;
 
         $("#mdlVehicle").modal({
             backdrop: 'static'
         });
 
-        BindingService.bindModelToForm("frmVehicle", Vehicles.vehicleEndorsement);
+        BindingService.bindModelToForm("frmVehicle", VehiclesComponent.vehicleEndorsement);
     },
     calculateCoverageTotal: function (coverageTypeId, coverageType) {
         debugger;
         coverageTypeId = parseInt(coverageTypeId);
 
-        var policy = Policy.availableCoverageTypes.find((c) => { return c["id"] === coverageTypeId});
+        var policy = PolicyComponent.availableCoverageTypes.find((c) => { return c["id"] === coverageTypeId});
         var typeId = parseInt($("#slcVehicleType").val());
         var premium = null;
         var tax = null;
@@ -41,7 +43,8 @@
                 case 3:
                     premium = policy.basePerUnit == null ? null : policy.basePerUnit.toFixed(2);
                     tax = (premium == null || policy.strate == null) ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
-                    brokerFee = (policy.basePerUnit == null || policy.bfrate == null) ? null : policy.bfrate.toFixed(2);
+                    // calculate broker fee even basePerUnit is null or 0
+                    brokerFee = (policy.bfrate == null) ? null : policy.bfrate.toFixed(2);
                     break;
                 // Trailer
                 case 2:
@@ -65,6 +68,7 @@
                 case 2:
                     var rate = policy.trailerRate == null ? policy.pdrate : policy.trailerRate;
                     var nonOwnedRate = makeId != 14 ? rate : policy.pdNonOwnedTrailerRate; //  check pdNonOwnedTrailerRate 
+                    // new scenario: 22 
                     premium = (nonOwnedRate == null || pdValue == 0) ? null : parseFloat(pdValue * (nonOwnedRate / 100)).toFixed(2);
                     tax = premium == null || policy.strate == null ? null : parseFloat(premium * (policy.strate / 100)).toFixed(2);
                     break;
@@ -88,15 +92,15 @@
         //coverageType.totalAmount = premium + premiumTax + brokerFee;
         //$("input[type='text'][data-coverage-field='totalAmount'][data-id='" + coverageTypeId + "']").val(coverageType.totalAmount);
 
-        Vehicles.calculateTotalPremium();
+        VehiclesComponent.calculateTotalPremium();
     },
     calculateTotalPremium: function () {
         var totalPremium = 0;
         var totalPremiumTax = 0;
         var totalBrokerFee = 0;
         var totalAmount = 0;
-        for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
-            var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
+        for (var i = 0; i < VehiclesComponent.vehicleEndorsement.vehicleCoverages.length; i++) {
+            var coverageType = VehiclesComponent.vehicleEndorsement.vehicleCoverages[i];
 
             var premium = parseFloat(coverageType.premium == null ? 0 : coverageType.premium);
             var premiumTax = parseFloat(coverageType.premiumTax == null ? 0 : coverageType.premiumTax);
@@ -121,24 +125,30 @@
         VehicleService.getVehicles(id, function (data) {
             $(".vehicle-list-content").removeClass('hide');
             $("#vehiclesPreloader").addClass('hide');
-            Vehicles.renderVehiclesTable(data);
+            VehiclesComponent.renderVehiclesTable(data);
         });
     },
     getVehicleMakes: function () {
         VehicleService.getVehicleMakes(function (data) {
-            Vehicles.vehicleMakes = data;
-            Vehicles.populateVehicleMakes();
+            VehiclesComponent.vehicleMakes = data;
+            VehiclesComponent.populateVehicleMakes();
+        });
+    },
+    getDrivers: function () {
+        DriverService.getDrivers(function (data) {
+            VehiclesComponent.drivers = data;
+            VehiclesComponent.populateDrivers();
         });
     },
     populateDrivers: function () {
         $(".vehicle-drivers").html('');
         $(".vehicle-drivers").append('<option value=""></option>');
-        for (var i = 0; i < Drivers.drivers.length; i++) {
-            $(".vehicle-drivers").append('<option value="' + Drivers.drivers[i].driverId + '">' + Drivers.drivers[i].fullName + '</option>');
+        for (var i = 0; i < VehiclesComponent.drivers.length; i++) {
+            $(".vehicle-drivers").append('<option value="' + VehiclesComponent.drivers[i].driverId + '">' + VehiclesComponent.drivers[i].fullName + '</option>');
         }
     },
     populateLienHolders: function () {
-        var data = Vehicles.lienHolders
+        var data = VehiclesComponent.lienHolders
         $(".vehicle-banks").html('');
         $(".vehicle-banks").html('<option value =""> </option >');
         for (var i = 0; i < data.length; i++) {
@@ -147,7 +157,7 @@
     },
     populateActivePoliciesTable: function () {
         $("#tblVehicleActivePolicies").html('');
-        var activePolicies = Policy.availableCoverageTypes;
+        var activePolicies = PolicyComponent.availableCoverageTypes;
         if (activePolicies.length > 0) {
             for (var i = 0; i < activePolicies.length; i++) {
                 var policy = activePolicies[i];
@@ -162,7 +172,7 @@
     populateCoverageTypes: function () {
 
         $("#availableVehicleCoverageTypes").html('');
-        var data = Policy.availableCoverageTypes;
+        var data = PolicyComponent.availableCoverageTypes;
         if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
                 var coverageType = data[i];
@@ -177,13 +187,13 @@
                                                     `+ coverageType.name + `
                                                 </td>
                                                 <td>
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/>
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premium" disabled data-type="decimal" data-id="`+ coverageType.id + `"/>
                                                 </td>
                                                 <td class="center">  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="premiumTax" disabled data-type="decimal" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>  
-                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled onkeypress="return ValidationService.isNumberKey(this, event);" data-id="`+ coverageType.id + `"/> 
+                                                    <input type="text" placeholder="0.00" class="form-control coverage-type" data-coverage-field="brokerFee" disabled data-type="decimal" data-id="`+ coverageType.id + `"/> 
                                                 </td>
                                                 <td>
                                                     <input type="text" placeholder="0.00" class="form-control coverage-type-total totals" data-coverage-field="totalAmount" disabled data-id="`+ coverageType.id + `"/>
@@ -225,20 +235,20 @@
     populateVehicleMakes: function () {
         $(".vehicle-makes").html('');
         $(".vehicle-makes").append('<option value=""></option>');
-        for (var i = 0; i < Vehicles.vehicleMakes.length; i++) {
-            $(".vehicle-makes").append('<option value="' + Vehicles.vehicleMakes[i].vmid + '">' + Vehicles.vehicleMakes[i].vehMakeName + '</option>');
+        for (var i = 0; i < VehiclesComponent.vehicleMakes.length; i++) {
+            $(".vehicle-makes").append('<option value="' + VehiclesComponent.vehicleMakes[i].vmid + '">' + VehiclesComponent.vehicleMakes[i].vehMakeName + '</option>');
         }
     },
     getLienHolders: function () {
         VehicleService.getLienHolders(function (data) {
-            Vehicles.lienHolders = data;
-            Vehicles.populateLienHolders();
+            VehiclesComponent.lienHolders = data;
+            VehiclesComponent.populateLienHolders();
         });
     },
     viewDetails: function (id) {
-        Vehicles.vehicle = $.extend({}, Vehicles.vehicles.find((c) => { return c["id"] === id }));
-        Vehicles.vehicle.company = CurrentAccount.legalName;
-        BindingService.bindModelToLabels("vehicleDetailsContent", Vehicles.vehicle);
+        VehiclesComponent.vehicle = $.extend({}, VehiclesComponent.VehiclesComponent.find((c) => { return c["id"] === id }));
+        VehiclesComponent.vehicle.company = CurrentAccount.legalName;
+        BindingService.bindModelToLabels("vehicleDetailsContent", VehiclesComponent.vehicle);
 
         $("#mdlVehicleDetails").modal({
             backdrop: "static"
@@ -251,20 +261,20 @@
         $("#btnDeleteVehicle").removeClass('hide');
         $("#btnEditVehicle").removeClass('hide'); 
 
-        Vehicles.populateActivePoliciesTable();
-        Vehicles.getVehicleHistory(id);
-        Vehicles.populateVehicleMakes();
-        Vehicles.populateDrivers();
-        Vehicles.populateLienHolders();
-        BindingService.bindModelToForm("frmVehicleEditForm", Vehicles.vehicle);
+        VehiclesComponent.populateActivePoliciesTable();
+        VehiclesComponent.getVehicleHistory(id);
+        VehiclesComponent.populateVehicleMakes();
+        VehiclesComponent.populateDrivers();
+        VehiclesComponent.populateLienHolders();
+        BindingService.bindModelToForm("frmVehicleEditForm", VehiclesComponent.vehicle);
 
         $("#driverOwnerDetailsContainer").removeClass('hide');
         $("#vehicleOnLienDetailsContainer").removeClass('hide');
 
-        if (Vehicles.vehicle.isDriverOwner)
+        if (VehiclesComponent.vehicle.isDriverOwner)
             $("#driverOwnerDetailsContainer").addClass('hide')
 
-        if (Vehicles.vehicle.notOnLien)
+        if (VehiclesComponent.vehicle.notOnLien)
             $("#vehicleOnLienDetailsContainer").addClass('hide')
     },
     getVehicleHistory: function (id) {
@@ -282,15 +292,15 @@
         });
     },
     renderVehiclesTable: function (data) {
-        Vehicles.vehicles = data;
+        VehiclesComponent.vehicles = data;
         if ($.fn.dataTable.isDataTable('#dTableVehicles')) {
-            Vehicles.dTable.destroy();
+            VehiclesComponent.dTable.destroy();
             $("#tblVehicles").html('');
         }
 
-        if (Vehicles.vehicles.length > 0) {
-            for (var i = 0; i < Vehicles.vehicles.length; i++) {
-                var vehicle = Vehicles.vehicles[i];
+        if (VehiclesComponent.vehicles.length > 0) {
+            for (var i = 0; i < VehiclesComponent.vehicles.length; i++) {
+                var vehicle = VehiclesComponent.vehicles[i];
                 var vehicleRow = `<tr>
                                     <td> `+ vehicle.vYear + ` </td>
                                     <td> `+ vehicle.vehMakeName +` </td>
@@ -305,7 +315,7 @@
             }
         }
 
-        Vehicles.dTable = $("#dTableVehicles").DataTable({
+        VehiclesComponent.dTable = $("#dTableVehicles").DataTable({
             "pageLength": 5,
             "searching": false,
             "bLengthChange": false, "bInfo": false,
@@ -320,11 +330,11 @@
             target: "#frmVehicle",
             blockerOnly: true
         });
-        VehicleService.saveVehicle(Vehicles.vehicleEndorsement,
+        VehicleService.saveVehicle(VehiclesComponent.vehicleEndorsement,
             function (data) {
                 App.unblockUI("#frmVehicle");
                 $("#mdlVehicle").modal('hide');
-                Vehicles.getVehicles(CurrentAccount.accountId);
+                VehiclesComponent.getVehicles(CurrentAccount.accountId);
             },
             function (data) {
                 App.unblockUI("#frmNewDriver");
@@ -337,11 +347,11 @@
             target: "#frmVehicleEditForm",
             blockerOnly: true
         });
-        VehicleService.updateVehicle(Vehicles.vehicle,
+        VehicleService.updateVehicle(VehiclesComponent.vehicle,
             function (data) {
                 App.unblockUI("#frmVehicleEditForm");
                 $("#mdlVehicleDetails").modal('hide');
-                Vehicles.getVehicles(CurrentAccount.accountId);
+                VehiclesComponent.getVehicles(CurrentAccount.accountId);
             },
             function (data) {
                 App.unblockUI("#frmVehicleEditForm");
@@ -351,16 +361,16 @@
     },
     deleteVehicle: function () {
         $("#btnProceedDeleteVehicle").attr("disabled", true);
-        VehicleService.deleteVehicle(Vehicles.vehicle.id, function (data) {
+        VehicleService.deleteVehicle(VehiclesComponent.vehicle.id, function (data) {
             $("#btnProceedDeleteVehicle").removeAttr("disabled");
             $("#mdlDeleteVehicleConfirmation").modal('hide');
             $("#mdlVehicleDetails").modal('hide');
-            Vehicles.getVehicles(CurrentAccount.accountId);
+            VehiclesComponent.getVehicles(CurrentAccount.accountId);
         });
     },
     initEventHandlers: function () {
         $("#btnAddVehicle").click(function () {
-            Vehicles.addVehicle();
+            VehiclesComponent.addVehicle();
         });
 
         $("#btnEditVehicle").click(function () {
@@ -388,7 +398,7 @@
         });
 
         $("#btnProceedDeleteVehicle").click(function () {
-            Vehicles.deleteVehicle();
+            VehiclesComponent.deleteVehicle();
             return false;
         });
 
@@ -398,27 +408,27 @@
             if (parseInt(val) == 1 || parseInt(val) == 3 )
                 $("#frmGroupUnitNumber").removeClass('hide');
 
-            if (Vehicles.vehicleEndorsement.vehicleCoverages.length > 0)
-            for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
-                var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
-                Vehicles.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
+            if (VehiclesComponent.vehicleEndorsement.vehicleCoverages.length > 0)
+            for (var i = 0; i < VehiclesComponent.vehicleEndorsement.vehicleCoverages.length; i++) {
+                var coverageType = VehiclesComponent.vehicleEndorsement.vehicleCoverages[i];
+                VehiclesComponent.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
             }
         });
 
         $("#sclVehicleMakes").bind("change", function () {
-            if (Vehicles.vehicleEndorsement.vehicleCoverages.length > 0) {
-                for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
-                    var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
-                    Vehicles.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
+            if (VehiclesComponent.vehicleEndorsement.vehicleCoverages.length > 0) {
+                for (var i = 0; i < VehiclesComponent.vehicleEndorsement.vehicleCoverages.length; i++) {
+                    var coverageType = VehiclesComponent.vehicleEndorsement.vehicleCoverages[i];
+                    VehiclesComponent.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
                 }
             }
         });
 
         $("#txtPdValue").bind("keyup", function () {
-            if (Vehicles.vehicleEndorsement.vehicleCoverages.length > 0) {
-                for (var i = 0; i < Vehicles.vehicleEndorsement.vehicleCoverages.length; i++) {
-                    var coverageType = Vehicles.vehicleEndorsement.vehicleCoverages[i];
-                    Vehicles.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
+            if (VehiclesComponent.vehicleEndorsement.vehicleCoverages.length > 0) {
+                for (var i = 0; i < VehiclesComponent.vehicleEndorsement.vehicleCoverages.length; i++) {
+                    var coverageType = VehiclesComponent.vehicleEndorsement.vehicleCoverages[i];
+                    VehiclesComponent.calculateCoverageTotal(coverageType.coverageTypeId, coverageType);
                 }
             }
         });
@@ -458,8 +468,8 @@
         $("#frmVehicle").on("submit", function () {
             $("#vehicle-policy-validator").addClass('hide');
 
-            if (Vehicles.vehicleEndorsement.vehicleCoverages.length > 0)
-                Vehicles.saveVehicle();
+            if (VehiclesComponent.vehicleEndorsement.vehicleCoverages.length > 0)
+                VehiclesComponent.saveVehicle();
             else
                 $("#vehicle-policy-validator").removeClass('hide');
 
@@ -467,13 +477,13 @@
         });
 
         $("#frmVehicleEditForm").on("submit", function () {
-            Vehicles.updateVehicle();
+            VehiclesComponent.updateVehicle();
             return false;
         });
 
         $("html").on("click", ".btn-vehicle-details", function () {
             var id = parseInt($(this).attr("data-id"));
-            Vehicles.viewDetails(id);
+            VehiclesComponent.viewDetails(id);
         });
 
         $("html").on("change", "#availableVehicleCoverageTypes  input.checkboxes.coverage-type", function () {
@@ -484,17 +494,17 @@
 
                 var vehicleCoverage = jQuery.extend({}, VehicleCoverageModel.new());
                 vehicleCoverage.coverageTypeId = parseInt(coverageTypeId);
-                Vehicles.vehicleEndorsement.vehicleCoverages.push(vehicleCoverage);
-                Vehicles.calculateCoverageTotal(coverageTypeId, vehicleCoverage);
+                VehiclesComponent.vehicleEndorsement.vehicleCoverages.push(vehicleCoverage);
+                VehiclesComponent.calculateCoverageTotal(coverageTypeId, vehicleCoverage);
             }
             else {
-                var vehicleCoverages = $.grep(Vehicles.vehicleEndorsement.vehicleCoverages, function (e) { return e.coverageTypeId != parseInt(coverageTypeId); });
-                Vehicles.vehicleEndorsement.vehicleCoverages = vehicleCoverages;
+                var vehicleCoverages = $.grep(VehiclesComponent.vehicleEndorsement.vehicleCoverages, function (e) { return e.coverageTypeId != parseInt(coverageTypeId); });
+                VehiclesComponent.vehicleEndorsement.vehicleCoverages = vehicleCoverages;
 
                 $(this).parents('tr').find('input[type="text"]').attr("disabled", true);
                 $(this).parents('tr').find('input[type="text"]').val("");
                 $(this).parents('tr').find('input[type="text"]').val("");
-                Vehicles.calculateTotalPremium();
+                VehiclesComponent.calculateTotalPremium();
             }
         });
 
@@ -503,10 +513,10 @@
             var coverageTypeId = parseInt($(this).attr('data-id'));
             var field = $(this).attr('data-coverage-field');
             var val = $(this).val() == '' ? 0 : $(this).val();
-            var vehicleCoverage = Vehicles.vehicleEndorsement.vehicleCoverages.find((c) => { return c["coverageTypeId"] === coverageTypeId });
+            var vehicleCoverage = VehiclesComponent.vehicleEndorsement.vehicleCoverages.find((c) => { return c["coverageTypeId"] === coverageTypeId });
             vehicleCoverage[field] = val;
 
-            Vehicles.calculateCoverageTotal(coverageTypeId, vehicleCoverage);
+            VehiclesComponent.calculateCoverageTotal(coverageTypeId, vehicleCoverage);
         });
     }
 }

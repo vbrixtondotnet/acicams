@@ -9,10 +9,12 @@
     <None Remove="Views\Accounts\js\components\account.details.component.js" />
     <None Remove="Views\Accounts\js\components\contacts.component.js" />
     <None Remove="Views\Accounts\js\components\drivers.component.js" />
+    <None Remove="Views\Accounts\js\components\policy.component.js" />
     <None Remove="Views\Accounts\js\components\vehicles.component.js" />
     <None Remove="Views\Accounts\js\models\account.model.js" />
     <None Remove="Views\Accounts\js\models\contact.model.js" />
     <None Remove="Views\Accounts\js\models\driver.endorsement.model.js" />
+    <None Remove="Views\Accounts\js\models\policy.model.js" />
     <None Remove="Views\Accounts\js\models\vehicle.endorsement.model.js" />
     <None Remove="Views\Accounts\js\services\account.service.js" />
     <None Remove="Views\Accounts\js\services\agents.service.js" />
@@ -35,10 +37,16 @@
     <Content Include="Views\Accounts\js\components\contacts.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Accounts\js\components\policy.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Accounts\js\components\vehicles.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\components\drivers.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\models\policy.model.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\models\contact.model.js">

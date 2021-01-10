@@ -27,14 +27,22 @@ namespace ACIC.AMS.Web.APIControllers
 
         [Route("banks/lien-holders")]
         [HttpGet]
-        public IActionResult GetVehicles(int id)
+        public IActionResult GetVehicles()
         {
             List<Bank> banks = bankDataStore.GetLienHolders();
 
             return Ok(banks);
         }
+        [Route("banks/premium-financers")]
+        [HttpGet]
+        public IActionResult GetPremiumFinancers()
+        {
+            List<Bank> banks = bankDataStore.GetPremiumFinancers();
 
-      
+            return Ok(banks);
+        }
+
+
 
 
 

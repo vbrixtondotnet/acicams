@@ -45,7 +45,7 @@ namespace ACIC.AMS.Repository
         public virtual DbSet<Policy> Policy { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vehicle> Vehicle { get; set; }
-        public virtual DbFunctions func { get; set; }
+        public virtual DbSet<AccountDriver> AccountDriver { get; set; }
 
     }
 }
