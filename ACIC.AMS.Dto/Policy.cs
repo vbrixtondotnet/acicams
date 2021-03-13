@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ACIC.AMS.Dto
 {
     public class Policy
     {
-        double? premium;
-        double? totalPremium;
+        decimal? premium;
+        decimal? totalPremium;
         public int PolicyId { get; set; }
         public string PolicyNumber { get; set; }
         public int? AccountId { get; set; }
@@ -18,47 +19,48 @@ namespace ACIC.AMS.Dto
         public float? CoverageTypeId { get; set; }
         public string CoverageType { get; set; }
         public DateTime? BindDate { get; set; }
-        public DateTime? Effective {get;set;}
-        public string EffectiveString
+        public DateTime? Effective {get;set; }
+        public DateTime? Expiration { get; set; }
+        public string EffectiveDateText
         {
             get
             {
-                return this.Effective != null ? ((DateTime)this.Effective).ToString("yyyy/mm/dd") : string.Empty;
+                return Effective != null ? Convert.ToDateTime(Effective).ToShortDateString() : string.Empty;
             }
         }
-        public DateTime? Expiration { get; set; }
-        public string ExpirationString
+        public string ExpirationDateText
         {
             get
             {
-                return this.Expiration != null ? ((DateTime)this.Expiration).ToString("yyyy/mm/dd") : string.Empty;
+                return Expiration != null ? Convert.ToDateTime(Expiration).ToShortDateString() : string.Empty;
             }
         }
         public bool DirectBill { get; set; }
-        public double? TotalFactor { get; set; }
-        public double? BasePerUnit { get; set; }
-        public double? NonTaxedRateUnit { get; set; }
-        public double? Bfrate { get; set; }
-        public double? Strate { get; set; }
-        public double? Pdrate { get; set; }
-        public double? TrailerRate { get; set; }
-        public double? PDNonOwnedTrailerRate { get; set; }
-        public double? TrailerInterchangeRate { get; set; }
-        public double? Premium { get { return this.premium == null ? 0 : this.premium; } set { this.premium = value; } }
-        public double? Surcharge { get; set; }
-        public double? PolicyFees { get; set; }
-        public double? Mgafees { get; set; }
-        public double? SurplusTax { get; set; }
-        public double? BrokerFees { get; set; }
-        public double? OtherFees { get; set; }
-        public double? TotalPremium { get { return this.totalPremium == null ? 0 : this.totalPremium; } set { this.totalPremium = value; } }
-        public double? CommRate { get; set; }
-        public double? Commission { get; set; }
+        public decimal? TotalFactor { get; set; }
+        public decimal? BasePerUnit { get; set; }
+        public decimal? NonTaxedRateUnit { get; set; }
+        public decimal? Bfrate { get; set; }
+        public decimal? Strate { get; set; }
+        public decimal? Pdrate { get; set; }
+        public decimal? TrailerRate { get; set; }
+        public decimal? PDNonOwnedTrailerRate { get; set; }
+        public decimal? TrailerInterchangeRate { get; set; }
+        public decimal? Premium { get { return this.premium == null ? 0 : this.premium; } set { this.premium = value; } }
+        public decimal? Surcharge { get; set; }
+        public decimal? PolicyFees { get; set; }
+        public decimal? Mgafees { get; set; }
+        public decimal? SurplusTax { get; set; }
+        public decimal? BrokerFees { get; set; }
+        public decimal? OtherFees { get; set; }
+        public decimal? TotalPremium { get { return this.totalPremium == null ? 0 : this.totalPremium; } set { this.totalPremium = value; } }
+        public decimal? CommRate { get; set; }
+        public decimal? Commission { get; set; }
         public string AgentSplit { get; set; }
-        public double? AgentComm { get; set; }
-        public double? AgentBfshare { get; set; }
+        public decimal? AgentComm { get; set; }
+        public decimal? AgentBfshare { get; set; }
         public string PolicyType { get; set; }
         public int? BankId { get; set; }
+        public string BankName { get; set; }
         public string AccountNo { get; set; }
         public string Notes { get; set; }
         public string Source { get; set; }

@@ -9,6 +9,7 @@
     <None Remove="Views\Accounts\js\components\account.details.component.js" />
     <None Remove="Views\Accounts\js\components\contacts.component.js" />
     <None Remove="Views\Accounts\js\components\drivers.component.js" />
+    <None Remove="Views\Accounts\js\components\endorsements.component.js" />
     <None Remove="Views\Accounts\js\components\policy.component.js" />
     <None Remove="Views\Accounts\js\components\vehicles.component.js" />
     <None Remove="Views\Accounts\js\models\account.model.js" />
@@ -20,9 +21,14 @@
     <None Remove="Views\Accounts\js\services\agents.service.js" />
     <None Remove="Views\Accounts\js\services\contacts.service.js" />
     <None Remove="Views\Accounts\js\services\drivers.service.js" />
+    <None Remove="Views\Accounts\js\services\endorsements.service.js" />
     <None Remove="Views\Accounts\js\services\policy.service.js" />
     <None Remove="Views\Accounts\js\services\vehicles.service.js" />
     <None Remove="Views\Admin\js\services\users.service.js" />
+    <None Remove="Views\Reports\js\components\endorsement-payable-report.component.js" />
+    <None Remove="Views\Reports\js\components\endorsement-pending-report.component.js" />
+    <None Remove="Views\Reports\js\components\endorsement-received-report.component.js" />
+    <None Remove="Views\Reports\js\services\reports.service.js" />
     <None Remove="Views\Shared\js\components\account.list.menu.component.js" />
     <None Remove="Views\Shared\js\services\bindings.service.js" />
     <None Remove="Views\Shared\js\services\states.service.js" />
@@ -35,6 +41,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\components\contacts.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\components\endorsements.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\components\policy.component.js">
@@ -59,6 +68,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\models\driver.endorsement.model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Accounts\js\services\endorsements.service.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Accounts\js\services\vehicles.service.js">
@@ -88,6 +100,18 @@
     <Content Include="Views\Login\js\authentication.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Reports\js\components\endorsement-pending-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Reports\js\components\endorsement-payable-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Reports\js\components\endorsement-received-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Reports\js\services\reports.service.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Shared\js\components\account.list.menu.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -108,6 +132,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
@@ -127,7 +152,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Reports\js\models\" />
     <Folder Include="Views\Shared\js\models\" />
+    <Folder Include="wwwroot\assets\global\plugins\math\" />
   </ItemGroup>
 
 </Project>

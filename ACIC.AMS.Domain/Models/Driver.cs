@@ -16,13 +16,16 @@ namespace ACIC.AMS.Domain.Models
         public string LastName { get; set; }
         public string Middle { get; set; }
         public string FirstName { get; set; }
+        [Column(TypeName = "Date")]
         public DateTime? Dob { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string State { get; set; }
         public string Cdlnumber { get; set; }
         public string CdlyearLic { get; set; }
+        [Column(TypeName = "Date")]
         public DateTime? DateHired { get; set; }
+        [Column(TypeName = "Date")]
         public DateTime? Terminated { get; set; }
         public bool OwnerOperator { get; set; }
         public int? AccountId { get; set; }

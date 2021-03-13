@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using ACIC.AMS.Domain.Models;
+using Policy = ACIC.AMS.Dto.Policy;
 
 namespace ACIC.AMS.DataStore
 {
@@ -33,15 +36,74 @@ namespace ACIC.AMS.DataStore
             return this.ExecuteQuery<Policy>("[dbo].[GetPolicies]", parameters);
         }
 
+        public List<PolicyEndorsementUnitStats> GetPolicyEndorsementUnitStats(int accountId, int policyId)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@AccountId", accountId);
+            parameters.Add("@PolicyId", policyId);
+
+            return this.ExecuteQuery<PolicyEndorsementUnitStats>("[dbo].[GetPolicyEndorsementUnitStats]", parameters);
+        }
+
         public Policy SavePolicy(Policy policy)
         {
-            Domain.Models.Policy dbPolicy = _mapper.Map<Domain.Models.Policy>(policy);
-            dbPolicy.DateCreated = DateTime.Now;
-            _context.Policy.Add(dbPolicy);
+
+            if(policy.PolicyId == 0)
+            {
+                Domain.Models.Policy dbPolicy = _mapper.Map<Domain.Models.Policy>(policy);
+                dbPolicy.DateCreated = DateTime.Now;
+                dbPolicy.CoverageTypes = policy.CoverageTypeId;
+                _context.Policy.Add(dbPolicy);
+            }
+            else
+            {
+                var dbPolicy = _context.Policy.Where(a => a.PolicyId == policy.PolicyId).AsNoTracking().FirstOrDefault();
+                var updatedPolicy = _mapper.Map<Domain.Models.Policy>(policy);
+                updatedPolicy.DateModified = DateTime.Now;
+                updatedPolicy.DateCreated = dbPolicy.DateCreated;
+                updatedPolicy.CreatedBy = dbPolicy.CreatedBy;
+                updatedPolicy.CoverageTypes = policy.CoverageTypeId;
+                _context.Policy.Update(updatedPolicy);
+            }
+
             _context.SaveChanges();
 
-            policy.PolicyId = dbPolicy.PolicyId;
             return policy;
+        }
+
+        public List<ActivePolicyVehicle> GetActivePolicyVehicles(int policyId)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@PolicyId", policyId);
+
+            return this.ExecuteQuery<ActivePolicyVehicle>("[dbo].[GetActivePolicyVehicles]", parameters);
+        }
+
+        public AgentCommissions GetPolicyAgentCommissions(int policyId)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@PolicyId", policyId);
+
+            return this.ExecuteQuery<AgentCommissions>("[dbo].[GetPolicyAgentCommissions]", parameters).FirstOrDefault();
+        }
+
+        public bool SetInceptionStage(int policyId, bool isInceptionStage)
+        {
+            var policy = _context.Policy.Where(p => p.PolicyId == policyId).FirstOrDefault();
+            if (policy != null)
+            {
+                policy.InceptionStage = isInceptionStage;
+                _context.Policy.Update(policy);
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public DdCoverageType GetCoverageType(int coverageTypeId)
+        {
+            return _context.DdCoverageType.Where(c => c.Id == coverageTypeId).FirstOrDefault();
         }
     }
 }

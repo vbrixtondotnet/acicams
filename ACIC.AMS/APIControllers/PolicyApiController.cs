@@ -25,24 +25,7 @@ namespace ACIC.AMS.Web.APIControllers
             this.policyDataStore = policyDataStore;
         }
 
-        [Route("accounts/{id}/policy")]
-        [HttpGet]
-        public IActionResult GetPolicies(int id)
-        {
-            List<Policy> policies = policyDataStore.GetPolicies(id);
-            return Ok(policies);
-
-        }
-
-        [Route("accounts/{id}/coveragetypes")]
-        [HttpGet]
-        public IActionResult GetAvailableCoverageTypes(int id)
-        {
-            List<CoverageType> coverageTypes = policyDataStore.GetAvailableCoverageTypes(id);
-            return Ok(coverageTypes);
-
-        }
-
+       
         [Route("accounts/{id}/policy")]
         [HttpPost]
         public IActionResult SavePolicy([FromBody] Policy policy)
@@ -51,6 +34,66 @@ namespace ACIC.AMS.Web.APIControllers
             {
                 var retval = policyDataStore.SavePolicy(policy);
                 return Ok(retval);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("accounts/{id}/policy/{policyId}/policy-endorsement-unit-stats")]
+        [HttpGet]
+        public IActionResult GetPolicyEndorsementUnitStats(int id, int policyId)
+        {
+            try
+            {
+                var retval = policyDataStore.GetPolicyEndorsementUnitStats(id, policyId);
+                return Ok(retval);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("policy/{id}/active-vehicles")]
+        [HttpGet]
+        public IActionResult GetActivePolicyVehicles(int id)
+        {
+            try
+            {
+                var retval = policyDataStore.GetActivePolicyVehicles(id);
+                return Ok(retval);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("policy/{id}/agent-comissions")]
+        [HttpGet]
+        public IActionResult GetPolicyAgentCommissions(int id)
+        {
+            try
+            {
+                var retval = policyDataStore.GetPolicyAgentCommissions(id);
+                return Ok(retval);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("policy/{id}/inception/{inception}")]
+        [HttpPost]
+        public IActionResult SetInceptionStage(int id, bool inception)
+        {
+            try
+            {
+                policyDataStore.SetInceptionStage(id, inception);
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -1,4 +1,6 @@
-﻿var PolicyComponent = {
+﻿
+
+var PolicyComponent = {
     availableCoverageTypes: null,
     dTable: null,
     policies: null,
@@ -7,6 +9,7 @@
     mgas: null,
     premiumFinancers: null,
     rateCalculator: null,
+    agentCommissions: null,
     init: function () {
         this.initEventHandlers();
         this.getCarriers();
@@ -71,7 +74,7 @@
 
                 $("#slcPolicyPremiumFinancers").select2({
                     allowClear: true,
-                    placeholder: "Select Financer",
+                    placeholder: "Select Company",
                     width: null,
                     dropdownParent: $("#mdlPolicy")
                 });
@@ -90,29 +93,67 @@
             $(".policy-list-content").removeClass('hide');
         });
     },
-    onCoverageTypeChange: function () {
+    onCoverageTypeChange: function (checkGross) {
         var selectedCoverageType = $("#slcPolicyCoverageType").val();
-
         $(".coverage-rates").addClass('hide');
+
         $(".coverage-rates").each(function (ind, obj) {
             var coverageTypes = $(obj).attr("data-coverage-types").split(',');
             if (coverageTypes.length > 0) {
                 var included = coverageTypes.find((c) => { return c === selectedCoverageType }) != null;
-
                 if (included) $(obj).removeClass('hide');
             }
         });
+        PolicyComponent.isGross();
+
     },
     addPolicy: function () {
         PolicyComponent.policy = $.extend({}, PolicyModel.new());
-
-        $("#slcPolicyAccountName").html("<option>" + CurrentAccount.legalName + "</option>");
+        $("#slcPolicyAccountName").html("<option value='" + CurrentAccount.accountId + "' selected>" + CurrentAccount.legalName + "</option>");
         $("#mdlPolicy").modal({
             backdrop: 'static'
         });
-
+        PolicyComponent.policy.accountId = CurrentAccount.accountId;
         BindingService.bindModelToForm("frmPolicy", PolicyComponent.policy);
         $("#slcPolicyCoverageType").val('').trigger('change');
+    },
+    editPolicy: function () {
+
+        $("#mdlPolicyDetails").modal('hide');
+       
+        $("#slcPolicyAccountName").html("<option value='" + CurrentAccount.accountId + "' selected>" + CurrentAccount.legalName + "</option>");
+        $("#mdlPolicy").modal({
+            backdrop: 'static'
+        });
+        PolicyComponent.policy.accountId = CurrentAccount.accountId;
+        BindingService.bindModelToForm("frmPolicy", PolicyComponent.policy);
+    },
+    viewPolicy: function (policyId) {
+        PolicyComponent.policy = $.extend({}, PolicyModel.new());
+        var policy = $.extend(PolicyComponent.policy, PolicyComponent.policies.find((p) => { return p["policyId"] === parseInt(policyId) }));
+        PolicyComponent.policy = policy;
+        var inceptionStage = PolicyComponent.policy.inceptionStage;
+        if (inceptionStage) {
+            $("#btnPolicyDetailsInceptionStage").html("Servicing Stage");
+        }
+        else {
+            $("#btnPolicyDetailsInceptionStage").html("Inception Stage");
+        }
+
+        $("#tbPolicyDetailsEndorsements").html('');
+        $("#tbodyPolicyDetailsActiveVehicles").html('');
+        $("#tbodyPolicyDetailsActiveVehiclesCounter").html('[0]');
+
+        $("#mdlPolicyDetails").modal({
+            backdrop: 'static'
+        });
+
+        PolicyComponent.getEndorsementStats();
+        PolicyComponent.getActiveVehicles();
+        PolicyComponent.getAgentCommissions();
+        BindingService.bindModelToLabels("policyDetailsContent", PolicyComponent.policy);
+        $("#txtPolicyDetailsNotes").val(PolicyComponent.policy.notes);
+        PolicyComponent.displayCurrentDate();
     },
     renderPolicyTable: function () {
         if ($.fn.dataTable.isDataTable('#dTablePolicies')) {
@@ -123,15 +164,20 @@
         if (PolicyComponent.policies.length > 0) {
             for (var i = 0; i < PolicyComponent.policies.length; i++) {
                 var policy = PolicyComponent.policies[i];
+                var carrier = policy.carrierName == null ? '' : policy.carrierName;
+                var mganame = policy.mganame == null ? '' : policy.mganame;
+                var policyNumber = policy.policyNumber == null ? '' : policy.policyNumber;
+                var premium = policy.premium == null ? '' : policy.premium;
+                var totalPremium = policy.totalPremium == 0 ? '' : policy.totalPremium;
                 var row = `<tr><td> `+policy.coverageType+` </td>
-                            <td> `+ policy.effectiveString +` </td>
-                            <td> `+ policy.expirationString +`  </td>
-                            <td> `+ policy.carrierName +` </td>
-                            <td> `+ policy.mganame +` </td>
-                            <td> `+ policy.policyNumber +` </td>
-                            <td> `+ policy.premium +` </td>
-                            <td> `+ policy.totalPremium +` </td>
-                            <td class="action"> <button class="btn btn-success btn-sm" title="View Details" data-id=`+policy.policyId+`><i class="fa fa-search"></i></button>  </td></tr>`;
+                            <td> `+ policy.effectiveDateText +` </td>
+                            <td> `+ policy.expirationDateText +`  </td>
+                            <td> `+ carrier +` </td>
+                            <td> `+ mganame +` </td>
+                            <td> `+ policyNumber +` </td>
+                            <td> `+ premium +` </td>
+                            <td> `+ totalPremium +` </td>
+                            <td class="action"> <button class="btn btn-success btn-sm btn-view-policy" title="View Details" data-id=`+policy.policyId+`><i class="fa fa-search"></i></button>  </td></tr>`;
                 $("#tblPolicyList").append(row);
             }
         }
@@ -155,7 +201,7 @@
         var day = effectivityDate.getDate();
         var expiryDate = new Date(year + 1, month, day);
         var expiryDateString = ValidationService.formatDate(expiryDate);
-        $("#txtPolicyExpirationDate").val(expiryDateString);
+        $("#txtPolicyExpirationDate").val(expiryDateString).trigger('change');
 
     },
     openRateCalculator: function (rate) {
@@ -165,7 +211,7 @@
 
         $(".rate-calc-field").addClass('hide');
         $(".rate-calc-field").find('input[type="text"]').val('');
-
+        $("#txtRateCalculatorPremium").removeAttr('data-formula');
         switch (rate) {
             case 'ALRATE':
             case 'MTCRATE':
@@ -220,7 +266,7 @@
         $("#txtRateCalculatorUnits").val('');
         PolicyComponent.rateCalculator = rate;
     },
-    calculateRate: function () {
+    assignRate: function () {
         var rate = parseFloat($("#txtRateCalculatorRate").val());
         switch (PolicyComponent.rateCalculator) {
             case 'ALTRAILERRATE':
@@ -230,13 +276,13 @@
                 break;
             case 'ALRATE':
             case 'MTCRATE':
-                PolicyComponent.policy.bfrate = rate;
+                PolicyComponent.policy.basePerUnit = rate;
                 break;
             case 'NTF':
                 PolicyComponent.policy.nonTaxedRateUnit = rate;
                 break;
             case 'BFPERUNIT':
-                PolicyComponent.policy.basePerUnit = rate;
+                PolicyComponent.policy.bfrate = rate;
                 break;
             case 'PDRATE':
                 PolicyComponent.policy.pdrate = rate;
@@ -251,7 +297,7 @@
         BindingService.bindModelToForm("frmPolicy", PolicyComponent.policy);
         $("#mdlPolicyRateCalculator").modal('hide');
     },
-    computeRate: function () {
+    calculateRate: function () {
 
         var premium = $("#txtRateCalculatorPremium").val();
         var units = $("#txtRateCalculatorUnits").val();
@@ -271,13 +317,290 @@
 
         $("#txtRateCalculatorRate").val(rate);
     },
+    onGrossReceiptChange: function () {
+        PolicyComponent.onCoverageTypeChange(false);
+        PolicyComponent.isGross();
+    },
+    isGross: function () {
+        var isGross = $("#chkGrossReceipt").is(":checked");
+        var selectedCoverageType = $("#slcPolicyCoverageType").val();
+        $(".coverage-premium").addClass('hide');
+        if (isGross) {
+            $(".coverage-premium").removeClass('hide');
+            $(".coverage-rates").addClass('hide');
+            switch (selectedCoverageType) {
+                case '1':
+                    $("#lblPremiumLabel").html('AL Gross Premium');
+                    break;
+                case '2':
+                    $("#lblPremiumLabel").html('MTC Gross Premium');
+                    break;
+                case '3':
+                    $("#lblPremiumLabel").html('PD Gross Premium');
+                    break;
+            }
+
+            
+            PolicyComponent.toggleGrossRate();
+        }
+
+        switch (selectedCoverageType) {
+            case '4':
+                $(".coverage-premium").removeClass('hide');
+                $("#lblPremiumLabel").html('GL Premium');
+                break;
+            case '5':
+                $(".coverage-premium").removeClass('hide');
+                $("#lblPremiumLabel").html('EL Premium');
+                break;
+            case '6':
+                $(".coverage-premium").removeClass('hide');
+                $("#lblPremiumLabel").html('Premium Amount');
+                break;
+        }
+        //BindingService.bindModelToForm("frmPolicy", PolicyComponent.policy);
+    },
+    toggleGrossRate: function (coverageType) {
+
+        var selectedCoverageType = $("#slcPolicyCoverageType").val();
+        $(".gross-rate").addClass('hide');
+        $(".gross-rate").each(function (ind, obj) {
+            var coverageTypes = $(obj).attr("data-coverage-types").split(',');
+            if (coverageTypes.length > 0) {
+                var included = coverageTypes.find((c) => { return c === selectedCoverageType }) != null;
+                if (included) $(obj).removeClass('hide');
+            }
+        });
+    },
+    computeSurplusTax: function () {
+        debugger;
+        var surplusTax = null;
+        var premium = $("input[type='text'][data-model='premium']").val();
+        var surcharge = $("input[type='text'][data-model='surcharge']").val();
+        var surplusTaxRate = $("input[type='text'][data-model='surplusTaxRate']").val();
+        var mgaFees = $("input[type='text'][data-model='mgafees']").val();
+        var policyFees = $("input[type='text'][data-model='policyFees']").val();
+
+        var isMgaTaxed = $("#chkTaxedMgaFees").is(":checked");
+        var isPolicyFeesTaxed = $("#chkTaxedPolicyFees").is(":checked");
+
+        if (surplusTaxRate != '') {
+            surcharge = surcharge == '' ? 0 : parseFloat(surcharge);
+            surplusTaxRate = parseFloat(surplusTaxRate);
+            var premiumVal = premium == '' ? 0 : parseFloat(premium);
+
+            surplusTax = (parseFloat(premiumVal) + parseFloat(surcharge)) * (surplusTaxRate / 100);
+            if (mgaFees != '') {
+                var isMgaTaxed = $("#chkTaxedMgaFees").is(":checked");
+                var mgaFeesRaw = (parseFloat(mgaFees)) * (surplusTaxRate / 100);
+                surplusTax = surplusTax + mgaFeesRaw;
+                if (!isMgaTaxed) {
+                    surplusTax = surplusTax - mgaFeesRaw;
+                }
+            }
+            if (policyFees != '') {
+                var policyFeesRaw = (parseFloat(policyFees)) * (surplusTaxRate / 100);
+                surplusTax = surplusTax + policyFeesRaw;
+                if (!isPolicyFeesTaxed) {
+                    surplusTax = surplusTax - policyFeesRaw;
+                }
+            }
+
+        }
+        surplusTax = surplusTax.toFixed(2);
+
+        $("input[type='text'][data-model='surplusTax']").val(surplusTax).trigger('change');
+        PolicyComponent.policy.surplusTax = parseFloat(surplusTax);
+        PolicyComponent.computeTotal();
+        PolicyComponent.computeCommission();
+    },
+    computeTotal: function () {
+        var isGross = $("#chkGrossReceipt").is(":checked");
+        var surcharge = $("input[type='text'][data-model='surcharge']").val();
+        var surplusTax = $("input[type='text'][data-model='surplusTax']").val();
+        var policyFees = $("input[type='text'][data-model='policyFees']").val();
+        var mgafees = $("input[type='text'][data-model='mgafees']").val();
+        var otherFees = $("input[type='text'][data-model='otherFees']").val();
+        var premium = 0;
+        var brokerFees = 0;
+
+        surcharge = surcharge == '' ? 0 : parseFloat(surcharge);
+        surplusTax = surplusTax == '' ? 0 : parseFloat(surplusTax);
+        policyFees = policyFees == '' ? 0 : parseFloat(policyFees);
+        mgafees = mgafees == '' ? 0 : parseFloat(mgafees);
+        otherFees = otherFees == '' ? 0 : parseFloat(otherFees);
+
+        if (isGross) {
+            premium = $("input[type='text'][data-model='premium']").val();
+            premium = premium == '' ? 0 : parseFloat(premium);
+        }
+
+        var coverageType = PolicyComponent.policy.coverageTypeId;
+
+        if (coverageType == "4" || coverageType == "5" || coverageType == "6") {
+            brokerFees = $("input[type='text'][data-model='brokerFees']").val();
+            brokerFees = brokerFees == '' ? 0 : parseFloat(brokerFees);
+
+        }
+
+        $("#txtTaxesTotal").val((surcharge + surplusTax + policyFees + mgafees + otherFees + premium + brokerFees).toFixed(2));
+
+    },
+    computeCommission: function () {
+        var isGross = $("#chkGrossReceipt").is(":checked");
+        if (isGross) {
+            var premium = $("input[type='text'][data-model='premium']").val();
+            var commRate = $("input[type='text'][data-model='commRate']").val();
+
+            if (premium != '' && commRate != '') {
+                premium = parseFloat(premium);
+                commRate = parseFloat(commRate);
+                $("input[type='text'][data-model='commission']").val((premium * (commRate / 100)).toFixed(2));
+            }
+            else {
+                $("input[type='text'][data-model='commission']").val('');
+            }
+
+            $("input[type='text'][data-model='commission']").trigger('change');
+        }
+    },
+    savePolicy: function () {
+        var isGross = $("#chkGrossReceipt").is(":checked");
+        if (isGross) {
+            var bfRate = $("input[type='text'][data-model='basePerUnit']").val();
+            var strate = $("input[type='text'][data-model='surplusTaxRate']").val();
+
+            bfRate = bfRate == '' ? null : parseFloat(bfRate);
+            strate = strate == '' ? null : parseFloat(strate);
+
+            PolicyComponent.policy.bfRate = bfRate;
+            PolicyComponent.policy.strate = strate;
+        }
+
+        App.blockUI({
+            target: "#frmPolicy",
+            blockerOnly: true
+        });
+
+        PolicyService.savePolicy(PolicyComponent.policy,
+           function (data) {
+               $("#mdlPolicy").modal('hide');
+               PolicyComponent.getPolicies(CurrentAccount.accountId);
+               App.unblockUI("#frmPolicy");
+
+        }, function (data) {
+
+        });
+    },
+    getEndorsementStats: function () {
+        PolicyService.getEndorsementStats(CurrentAccount.accountId, PolicyComponent.policy.policyId, function (data) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length - 1; i++) {
+                    var policyEndorsement = data[i];
+                    var initial = policyEndorsement.initial == 0 ? '' : ValidationService.formatMoney(policyEndorsement.initial);
+                    var endorsements = policyEndorsement.endorsements == 0 ? '' : ValidationService.formatMoney(policyEndorsement.endorsements);
+                    var current = policyEndorsement.current == 0 ? '' : ValidationService.formatMoney(policyEndorsement.current);
+                    var row = `<tr>
+                                    <td>`+ policyEndorsement.unit+`</td>
+                                    <td style="text-align:center;">`+ initial +`</td>
+                                    <td style="text-align:center;">`+ endorsements +`</td>
+                                    <td style="text-align:center;">`+ current +`</td>
+                                </tr>`;
+
+                    $("#tbPolicyDetailsEndorsements").append(row);
+                }
+                var policyEndorsement = data[data.length - 1];
+                var initial = policyEndorsement.initial == 0 ? '' : ValidationService.formatMoney(policyEndorsement.initial);
+                var endorsements = policyEndorsement.endorsements == 0 ? '' : ValidationService.formatMoney(policyEndorsement.endorsements);
+                var current = policyEndorsement.current == 0 ? '' : ValidationService.formatMoney(policyEndorsement.current);
+                var row = `<tr>
+                                    <td><strong style="font-size:16px;">`+ policyEndorsement.unit + `</strong></td>
+                                    <td style="text-align:center;"><strong style="font-size:16px;">`+ initial + `</strong></td>
+                                    <td style="text-align:center;"><strong style="font-size:16px;">`+ endorsements + `</strong></td>
+                                    <td style="text-align:center;"><strong style="font-size:16px;">`+ current + `</strong></td>
+                                </tr>`;
+
+                $("#tbPolicyDetailsEndorsements").append(row);
+            }
+          
+        });
+    },
+    getActiveVehicles: function () {
+        PolicyService.getActiveVehicles(PolicyComponent.policy.policyId, function (data) {
+
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    var vehicle = data[i];
+                    var year = vehicle.year == null ? '' : vehicle.year;
+                    var unit = vehicle.unit == null ? '' : vehicle.unit;
+                    var row = `<tr>
+                                    <td>`+ year+`</td>
+                                    <td>`+ vehicle.make +`</td>
+                                    <td>`+ vehicle.vin +`</td>
+                                    <td>`+ unit +`</td>
+                                    <td>`+ vehicle.type + `</td>
+                                    <td>`+ ValidationService.formatMoney(vehicle.pdValue) +`</td>
+                                    <td>`+ vehicle.driver +`</td>
+                                </tr>`;
+
+
+                    $("#tbodyPolicyDetailsActiveVehicles").append(row);
+                }
+
+                $("#tbodyPolicyDetailsActiveVehiclesCounter").html('[' + data.length+']');
+            }
+
+        });
+    },
+    getAgentCommissions: function () {
+        PolicyService.getPolicyAgentCommissions(PolicyComponent.policy.policyId, function (data) {
+            PolicyComponent.agentCommissions = data;
+            BindingService.bindModelToLabels("policyDetailsAgentCommissions", PolicyComponent.agentCommissions);
+        });
+    },
+    displayCurrentDate: function () {
+        const date = new Date();  // 2009-11-10
+        const month = date.toLocaleString('default', { month: 'long' });
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var dayName = days[date.getDay()];
+
+        var dateString = month + ' ' + date.getDate() + ',' + date.getFullYear() + ', ' + dayName;
+        $("#lblPolicyDetailsCurrentDate").html(dateString);
+    },
+    setInceptionStage: function () {
+        var policyId = PolicyComponent.policy.policyId;
+        var inceptionStage = !PolicyComponent.policy.inceptionStage;
+
+        PolicyService.setInceptionStage(policyId, inceptionStage, function (data) {
+            PolicyComponent.policy.inceptionStage = inceptionStage;
+            var policy = PolicyComponent.policies.find((p) => { return p["policyId"] === parseInt(policyId) });
+            policy.inceptionStage = inceptionStage;
+
+            if (inceptionStage) {
+                $("#btnPolicyDetailsInceptionStage").html("Servicing Stage");
+                $("#btnAddDriver").hide();
+                $("#btnAddVehicle").hide();
+            }
+            else {
+                $("#btnPolicyDetailsInceptionStage").html("Inception Stage");
+                $("#btnAddDriver").show();
+                $("#btnAddVehicle").show();
+            }
+            
+        });
+    },
     initEventHandlers: function () {
         $("#btnAddPolicy").click(function () {
             PolicyComponent.addPolicy();
         });
 
+        $("html").on("click", '.btn-view-policy', function () {
+            var policyId = $(this).attr('data-id');
+            PolicyComponent.viewPolicy(policyId);
+        })
+
         $("#slcPolicyCoverageType").bind("change", function () {
-            PolicyComponent.onCoverageTypeChange();
+            PolicyComponent.onCoverageTypeChange(true);
         });
 
         $("#txtPolicyEffectiveDate").bind("change", function () {
@@ -285,11 +608,55 @@
         });
 
         $("#btnRateCalculatorConfirm").click(function () {
+            PolicyComponent.assignRate();
+        });
+
+        $("#txtRateCalculatorUnits").on("keyup", function () {
             PolicyComponent.calculateRate();
         });
 
-        $("#txtRateCalculatorPremium, #txtRateCalculatorUnits").on("keyup", function () {
-            PolicyComponent.computeRate();
+        $("#txtRateCalculatorUnits").on("focus", function () {
+            PolicyComponent.calculateRate();
         });
+
+        $("#chkGrossReceipt").on("change", function () {
+            PolicyComponent.onGrossReceiptChange();
+        });
+
+        $("input[type='text'][data-model='premium'], input[type='text'][data-model='surplusTaxRate'], input[type='text'][data-model='surcharge'], input[type='text'][data-model='policyFees'], input[type='text'][data-model='mgafees']").bind("keyup", function () {
+            PolicyComponent.computeSurplusTax();
+        });
+
+        $("input[type='text'][data-model='commRate']").bind("keyup", function () {
+            PolicyComponent.computeCommission();
+        });
+
+        $("#chkTaxedPolicyFees").on("change", function () {
+            PolicyComponent.computeSurplusTax();
+        });
+
+        $("#chkTaxedMgaFees").on("change", function () {
+            PolicyComponent.computeSurplusTax();
+        });
+
+        $("input[type='text'][data-model='otherFees']").on("keyup", function () {
+            PolicyComponent.computeTotal();
+        });
+
+        $("#frmPolicy").on("submit", function () {
+            
+            PolicyComponent.savePolicy();
+            return false;
+        })
+
+        $("#btnPolicyDetailsInceptionStage").on("click", function () {
+            PolicyComponent.setInceptionStage();
+        });
+
+        $("#btnEditPolicy").on("click", function () {
+            PolicyComponent.editPolicy();
+        });
+
+        BindingService.bindFormulaInput();
     }
 }

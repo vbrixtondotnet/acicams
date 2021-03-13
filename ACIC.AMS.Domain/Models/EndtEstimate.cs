@@ -13,6 +13,9 @@ namespace ACIC.AMS.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EstEndtId { get; set; }
+        public int EndtId { get; set; }
+
+        [Column(TypeName = "Date")]
         public DateTime? Effective { get; set; }
         public double? ProRate { get; set; }
         public double? Pdvalue { get; set; }

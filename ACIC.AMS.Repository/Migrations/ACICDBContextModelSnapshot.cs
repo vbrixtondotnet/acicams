@@ -834,13 +834,13 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateHired")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Dob")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -873,7 +873,7 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Terminated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.HasKey("DriverId");
 
@@ -930,7 +930,7 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Effective")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<double?>("EndtFee")
                         .HasColumnType("float");
@@ -951,7 +951,7 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InvoiceRef")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<double?>("Mgafees")
                         .HasColumnType("float");
@@ -1053,10 +1053,13 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Effective")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<double?>("EndtFee")
                         .HasColumnType("float");
+
+                    b.Property<int>("EndtId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EndtTrackId")
                         .HasColumnType("nvarchar(max)");
@@ -1178,11 +1181,13 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("AccountNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("AgentBfshare")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("AgentBfshare")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("AgentComm")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("AgentComm")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("AgentSplit")
                         .HasColumnType("nvarchar(max)");
@@ -1190,26 +1195,31 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<int?>("BankId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("BasePerUnit")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("BasePerUnit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("Bfrate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Bfrate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("BindDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
-                    b.Property<double?>("BrokerFees")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("BrokerFees")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("CarrierId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("CommRate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("CommRate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("Commission")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Commission")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<float?>("CoverageTypes")
                         .HasColumnType("real");
@@ -1227,16 +1237,17 @@ namespace ACIC.AMS.Repository.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Effective")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime?>("Expiration")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<bool>("InceptionStage")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("Mgafees")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Mgafees")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Mgaid")
                         .HasColumnType("int");
@@ -1244,23 +1255,28 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<double?>("NonTaxedRateUnit")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("NonTaxedRateUnit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("OtherFees")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("OtherFees")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("PDNonOwnedTrailerRate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("PDNonOwnedTrailerRate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("Pdrate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Pdrate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("PolicyFees")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("PolicyFees")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PolicyNumber")
                         .HasColumnType("nvarchar(max)");
@@ -1268,35 +1284,43 @@ namespace ACIC.AMS.Repository.Migrations
                     b.Property<string>("PolicyType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Premium")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Premium")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Strate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Strate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("Surcharge")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Surcharge")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("SurplusTax")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("SurplusTax")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("TotalFactor")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("TotalFactor")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("TotalPremium")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("TotalPremium")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TrackId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("TrailerInterchangeRate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("TrailerInterchangeRate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("TrailerRate")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("TrailerRate")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PolicyId");
 

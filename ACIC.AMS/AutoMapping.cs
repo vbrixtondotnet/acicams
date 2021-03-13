@@ -29,6 +29,7 @@ namespace ACIC.AMS.Web
             CreateMap<Dto.Policy, Domain.Models.Policy>();
             CreateMap<Domain.Models.Carrier, Dto.Carrier>();
             CreateMap<Domain.Models.Mga, Dto.Mga>();
+            CreateMap<Domain.Models.DdCoverageType, Dto.CoverageType>();
         }
     }
 }

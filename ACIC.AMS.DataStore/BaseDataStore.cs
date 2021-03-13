@@ -48,7 +48,7 @@ namespace ACIC.AMS.DataStore
             throw new NotImplementedException();
         }
 
-        protected List<T> ExecuteQuery<T>(string query, Dictionary<string, object> Params)
+        protected List<T> ExecuteQuery<T>(string query, Dictionary<string, object> Params = null)
         {
             var currentType = typeof(T);
             var retval = new List<T>();
@@ -62,8 +62,10 @@ namespace ACIC.AMS.DataStore
                 {
                     foreach (KeyValuePair<string, object> p in Params)
                     {
-                        cmd.CommandText += $" {p.Value}";
+                        cmd.CommandText += $" {p.Value}, ";
                     }
+
+                    cmd.CommandText = cmd.CommandText.Substring(0, cmd.CommandText.LastIndexOf(","));
                 }
 
                 using (var dataReader = cmd.ExecuteReader())
@@ -81,7 +83,7 @@ namespace ACIC.AMS.DataStore
 
                         foreach (var prop in props)
                         {
-                            try { prop.SetValue(obj, row[prop.Name]);} catch { prop.SetValue(obj, null);}
+                            try { prop.SetValue(obj, row[prop.Name]);} catch(Exception e) { prop.SetValue(obj, null);}
                         }
 
                         retval.Add((T)Convert.ChangeType(obj, currentType));

@@ -25,14 +25,6 @@ namespace ACIC.AMS.Web.APIControllers
             this.vehicleDataStore = vehicleDataStore;
         }
 
-        [Route("accounts/{id}/vehicles")]
-        [HttpGet]
-        public IActionResult GetVehicles(int id)
-        {
-            List<Vehicle> vehicles = vehicleDataStore.GetVehicles(id);
-
-            return Ok(vehicles);
-        }
 
         [Route("accounts/{id}/vehicles")]
         [HttpPost]

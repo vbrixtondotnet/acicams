@@ -34,14 +34,6 @@ namespace ACIC.AMS.Web.APIControllers
             return Ok(drivers);
         }
 
-        [Route("accounts/{id}/drivers")]
-        [HttpGet]
-        public IActionResult GetDriversByAccount(int id)
-        {
-            List<Driver> drivers = driverDataStore.GetDriversByAccount(id);
-
-            return Ok(drivers);
-        }
 
         [Route("drivers/{id}/history")]
         [HttpGet]

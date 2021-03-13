@@ -1,5 +1,29 @@
 ﻿ValidationService = {
-    isNumberKey: function(txt, evt) {
+    isNumberKey: function (txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46) {
+            //Check if the text already contains the . character
+            if (txt.val().indexOf('.') === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if (charCode == 45) {
+            if (txt.val() === "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else {
+            if (charCode > 31 &&
+                (charCode < 48 || charCode > 57))
+                return false;
+        }
+        return true;
+    },
+    isFomulaKey: function (txt, evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode == 46) {
             //Check if the text already contains the . character
@@ -8,7 +32,11 @@
             } else {
                 return false;
             }
-        } else {
+        }
+        if (charCode == 61 || charCode == 43 || charCode == 45 || charCode == 42 || charCode == 47) {
+            return true;
+        }
+        else {
             if (charCode > 31 &&
                 (charCode < 48 || charCode > 57))
                 return false;
@@ -39,8 +67,28 @@
             return ValidationService.isNumberKey(txt, e);
         });
     },
+    bindFormulaValidation: function () {
+        $("html").on("keypress", "input[type='text'][data-type='formula']", function (e) {
+            var txt = $(this);
+            return ValidationService.isFomulaKey(txt, e);
+        });
+    },
     formatDate: function (date) {
-        return date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+        var formattedDateStr = '';
+        var formattedDate = date.replace('/', '-').replace('/', '-');
+        if (formattedDate != '') {
+            formattedDate = formattedDate.substr(0, 10);
+            var date = new Date(formattedDate);
+            var month = date.getMonth() + 1;
+            var monthStr = month.toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            formattedDateStr = date.getFullYear() + '-' + monthStr + '-' + day;
+        }
+
+        return formattedDateStr;
+    },
+    formatMoney: function (x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }
 
@@ -48,4 +96,5 @@ $(document).ready(function () {
     ValidationService.maskPhoneNumber();
     ValidationService.bindEmailAddressValidation();
     ValidationService.bindDecimalValidation();
+    ValidationService.bindFormulaValidation();
 });

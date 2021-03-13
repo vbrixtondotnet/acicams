@@ -17,26 +17,26 @@ namespace ACIC.AMS.Dto
         public string InsuredAddress { get; set; }
         public int? DriverId { get; set; }
         public string Vin { get; set; }
-        public double? ProRate { get; set; }
-        public double? Pdvalue { get; set; }
+        public decimal? ProRate { get; set; }
+        public decimal? Pdvalue { get; set; }
         public int? CoverageTypes { get; set; }
-        public double? BasePerUnit { get; set; }
-        public double? NonTaxedRateUnit { get; set; }
-        public double? Pdrate { get; set; }
-        public double? TrailerRate { get; set; }
-        public double? Bfrate { get; set; }
-        public double? Strate { get; set; }
-        public double? Premium { get; set; }
-        public double? Surcharge { get; set; }
+        public decimal? BasePerUnit { get; set; }
+        public decimal? NonTaxedRateUnit { get; set; }
+        public decimal? Pdrate { get; set; }
+        public decimal? TrailerRate { get; set; }
+        public decimal? Bfrate { get; set; }
+        public decimal? Strate { get; set; }
+        public decimal? Premium { get; set; }
+        public decimal? Surcharge { get; set; }
         public string SurDesc { get; set; }
-        public double? PolicyFees { get; set; }
-        public double? Mgafees { get; set; }
-        public double? SurplusTax { get; set; }
-        public double? BrokerFees { get; set; }
-        public double? EndtFee { get; set; }
-        public double? OtherFees { get; set; }
-        public double? TotalPremium { get; set; }
-        public double? Commission { get; set; }
+        public decimal? PolicyFees { get; set; }
+        public decimal? Mgafees { get; set; }
+        public decimal? SurplusTax { get; set; }
+        public decimal? BrokerFees { get; set; }
+        public decimal? EndtFee { get; set; }
+        public decimal? OtherFees { get; set; }
+        public decimal? TotalPremium { get; set; }
+        public decimal? Commission { get; set; }
         public DateTime? InvoiceRef { get; set; }
         public string FinanceRef { get; set; }
         public bool Dpreceived { get; set; }

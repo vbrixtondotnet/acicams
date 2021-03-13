@@ -16,57 +16,21 @@ namespace ACIC.AMS.Dto
         public string Email { get; set; }
         public string State { get; set; }
         public string Cdlnumber { get; set; }
-        public string CdlnumberFormatted
-        {
-            get
-            {
-                if (this.Cdlnumber != null) return Cdlnumber;
-
-                else return string.Empty;
-            }
-        }
         public string CdlyearLic { get; set; }
-        public string CdlyearLicFormatted
-        {
-            get
-            {
-                if (this.CdlyearLic != null) return CdlyearLic;
-
-                else return string.Empty;
-            }
-        }
         public DateTime? DateHired { get; set; }
-        public string DateHiredFormatted
+        public string DateHiredText
         {
             get
             {
-                if (this.DateHired != null) return Convert.ToDateTime(DateHired).ToString("yyyy/MM/dd");
-
-                else return string.Empty;
-            }
-            set
-            {
-                if (value != string.Empty)
-                {
-                    this.DateHired = Convert.ToDateTime(value);
-                }
+                return DateHired != null ? Convert.ToDateTime(DateHired).ToShortDateString() : string.Empty;
             }
         }
         public DateTime? Terminated { get; set; }
-        public string TerminatedFormatted
+        public string TerminatedDateText
         {
             get
             {
-                if (this.Terminated != null) return Convert.ToDateTime(Terminated).ToString("yyyy/MM/dd");
-
-                else return string.Empty;
-            }
-            set
-            {
-                if (value != string.Empty)
-                {
-                    this.Terminated = Convert.ToDateTime(value);
-                }
+                return Terminated != null ? Convert.ToDateTime(Terminated).ToShortDateString() : string.Empty;
             }
         }
         public bool OwnerOperator { get; set; }
@@ -76,20 +40,11 @@ namespace ACIC.AMS.Dto
 
         public string Status { get { return Active ? "Active" : "InActive"; } set { this.Active = value == "Active"; } }
         public string FullName { get { return $"{FirstName} {Middle} {LastName}"; } }
-        public string DobFormatted
+        public string DobText
         {
             get
             {
-                if (this.Dob != null) return Convert.ToDateTime(Dob).ToString("yyyy/MM/dd");
-
-                else return string.Empty;
-            }
-            set
-            {
-                if(value != string.Empty)
-                {
-                    this.Dob = Convert.ToDateTime(value);
-                }
+                return Dob != null ? Convert.ToDateTime(Dob).ToShortDateString() : string.Empty;
             }
         }
     }

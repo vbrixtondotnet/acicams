@@ -263,3 +263,11 @@ table.dataTable tbody th, table.dataTable tbody td {
 .portlet.box.white{
     border:none !important;
 }
+
+.no-padding{
+    padding:0 !important;
+}
+
+.lp-10 {
+    padding-left: 10px !important;
+}

@@ -1,0 +1,38 @@
+﻿
+<script src="/scripts/components/reports/endorsement-received-report.component.js" type="text/javascript"></script>
+<script src="/scripts/components/reports/endorsement-pending-report.component.js" type="text/javascript"></script>
+<script src="/scripts/components/reports/endorsement-payable-report.component.js" type="text/javascript"></script>
+<script src="/scripts/services/reports/reports.service.js" type="text/javascript"></script>
+<div class="col-md-12" style="padding-left:0px;">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tbReceived" data-toggle="tab">Received</a>
+        </li>
+        <li>
+            <a href="#tbPending" data-toggle="tab">Pending</a>
+        </li>
+        <li>
+            <a href="#tbPayable" data-toggle="tab">Payable</a>
+        </li>
+
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tbReceived">
+            <partial name="_Received.cshtml" />
+        </div>
+        <div class="tab-pane" id="tbPending">
+            <partial name="_Pending.cshtml" />
+        </div>
+        <div class="tab-pane" id="tbPayable">
+            <partial name="_Payable.cshtml" />
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        EndorsementReceivedReportComponent.init();
+        EndorsementReceivedReportComponent.getReceivedReport();
+    });
+</script>

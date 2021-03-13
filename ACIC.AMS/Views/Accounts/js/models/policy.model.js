@@ -38,11 +38,13 @@
     strate: null,
     surcharge: null,
     surplusTax: null,
+    surplusTaxRate: null,
     totalFactor: null,
     totalPremium: null,
     trackId: null,
     trailerInterchangeRate: null,
     trailerRate: null,
+    otherFees: null,
     new: function () {
         this.accountId = null;
         this.accountNo = null;
@@ -82,12 +84,14 @@
         this.source = null;
         this.strate = null;
         this.surcharge = null;
-        this.surplusTax = 3.25;
+        this.surplusTax = null;
+        this.surplusTaxRate = 3.25;
         this.totalFactor = null;
         this.totalPremium = null;
         this.trackId = null;
         this.trailerInterchangeRate = null;
         this.trailerRate = null;
+        this.otherFees = null;
         return this;
     }
 }

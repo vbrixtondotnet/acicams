@@ -38,10 +38,11 @@ var AccountListMenu = {
             AccountDetails.displayDetails();
         });
         Contacts.getContacts(id)
-        Drivers.getDrivers(id);
+        DriversComponent.getDrivers(id);
         VehiclesComponent.getVehicles(id);
         PolicyComponent.getAvailableCoverageTypes(id);
         PolicyComponent.getPolicies(id);
+        EndorsementComponent.getEndorsements(id, 'all');
     },
     getAccounts: function (id = 0) {
         AccountService.getAccounts(function (data) {

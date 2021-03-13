@@ -17,14 +17,14 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Account</label>
                                             <div class="col-md-9">
-                                                <select class="form-control" disabled id="slcPolicyAccountName">
+                                                <select class="form-control" disabled id="slcPolicyAccountName"  data-model="accountId">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Carrier</label>
                                             <div class="col-md-9">
-                                                <select id="slcCarriers" class="form-control select-search">
+                                                <select id="slcCarriers" class="form-control select-search" data-model="carrierId">
                                                     <option></option>
                                                 </select>
                                                 </div>
@@ -32,7 +32,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">MGA</label>
                                             <div class="col-md-9">
-                                                <select class="form-control" id="slcMgas">
+                                                <select class="form-control" id="slcMgas" data-model="mgaid">
                                                     <option></option>
                                                 </select>
                                             </div>
@@ -40,13 +40,13 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Policy Number</label>
                                             <div class="col-md-9">
-                                               <input type="text" class="form-control" />
+                                               <input type="text" class="form-control" data-model="policyNumber"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Coverage</label>
                                             <div class="col-md-9">
-                                                <select class="form-control" id="slcPolicyCoverageType">
+                                                <select class="form-control" id="slcPolicyCoverageType" data-model="coverageTypeId" required>
                                                     <option value=""></option>
                                                     <option value="1">Auto Liability</option>
                                                     <option value="2">Motor Truck Cargo</option>
@@ -60,7 +60,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Notes</label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea class="form-control" rows="3"  data-model="notes"></textarea>
                                             </div>
                                         </div>
 
@@ -69,33 +69,33 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Bind Date</label>
                                             <div class="col-md-9">
-                                                <input type="date" class="form-control" id="" placeholder="mm/dd/yyy">
+                                                <input type="date" class="form-control" id="" placeholder="mm/dd/yyy" data-model="bindDate">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Effective</label>
                                             <div class="col-md-9">
-                                                <input type="date" class="form-control" id="txtPolicyEffectiveDate" placeholder="mm/dd/yyy">
+                                                <input type="date" class="form-control" id="txtPolicyEffectiveDate" placeholder="mm/dd/yyy" data-model="effective" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Expiration</label>
                                             <div class="col-md-9">
-                                                <input type="date" class="form-control" id="txtPolicyExpirationDate" placeholder="mm/dd/yyy">
+                                                <input type="date" class="form-control" id="txtPolicyExpirationDate" placeholder="mm/dd/yyy" data-model="expiration">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Premium Finance</label>
                                             <div class="col-md-9">
-                                                <select class="form-control" id="slcPolicyPremiumFinancers">
+                                                <select class="form-control" id="slcPolicyPremiumFinancers" data-model="bankId">
                                                     <option></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Account No</label>
+                                            <label class="col-md-3 control-label">Account Number</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="">
+                                                <input type="text" class="form-control" placeholder="" value="" data-model="accountNo">
                                             </div>
                                         </div>
                                     </div>
@@ -106,21 +106,29 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><strong>Basic Rates</strong></label>
-                                            <div class="col-md-9 coverage-rates" style="padding-left:63px;padding-top:8px;" data-coverage-types="1,2,3">
+                                            <div class="col-md-9 coverage-rates gross-rate" style="padding-left:63px;padding-top:8px;" data-coverage-types="1,2,3">
                                                 <label class="mt-checkbox mt-checkbox-outline">
-                                                    <input type="checkbox"> Gross Receipt
+                                                    <input type="checkbox" id="chkGrossReceipt"> Gross Receipt
                                                     <span></span>
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="1">
+                                        <div class="form-group coverage-rates" data-coverage-types="1" data-coverage-gross="">
                                             <label class="col-md-4 control-label">AL Rate</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="bfrate">
-                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('ALRATE');">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('ALRATE');" id="txtPolicyALRate">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hide coverage-premium">
+                                            <label class="col-md-4 control-label" id="lblPremiumLabel">Premium</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="" data-model="premium" data-type="decimal">
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +148,7 @@
                                             <div class="col-md-8">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="" onkeypress="return false;" data-model="bfrate">
-                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('MTCRATE');">
+                                                    <span class="input-group-addon" style="cursor:pointer;" onclick="javascript: PolicyComponent.openRateCalculator('MTCRATE');" id="txtPolicyMTCRate">
                                                         <i class="fa fa-calculator"></i>
                                                     </span>
                                                 </div>
@@ -201,7 +209,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="1,2">
+                                        <div class="form-group coverage-rates gross-rate" data-coverage-types="1,2">
                                             <label class="col-md-4 control-label">Non-Taxable Fees</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
@@ -212,39 +220,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="4">
-                                            <label class="col-md-4 control-label">GL Premium</label>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="5">
-                                            <label class="col-md-4 control-label">EL Premium</label>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="6">
-                                            <label class="col-md-4 control-label">Premium Amount</label>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="4,5">
+                                       
+                                        <div class="form-group coverage-rates gross-rate" data-coverage-types="4,5,6">
                                             <label class="col-md-4 control-label">Broker Fees</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                    <input type="text" class="form-control" id="" placeholder="" data-model="brokerFees">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="1,2,6">
+                                        <div class="form-group coverage-rates gross-rate" data-coverage-types="1,2">
                                             <label class="col-md-4 control-label">BF Per Unit</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
@@ -255,11 +240,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group coverage-rates" data-coverage-types="1,2,3,4,5,6">
+                                        <div class="form-group coverage-rates gross-rate" data-coverage-types="1,2,3,4,5,6">
                                             <label class="col-md-4 control-label">Surplus Tax Rate</label>
                                             <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="text" data-type="decimal" class="form-control" id="" placeholder="" data-model="surplusTax">
+                                                    <input type="text" data-type="decimal" class="form-control" id="" placeholder="" data-model="surplusTaxRate">
                                                 </div>
                                             </div>
                                         </div>
@@ -267,15 +252,15 @@
                                             <label class="col-md-3 control-label"><strong>Commissions</strong></label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Comm. Rate</label>
+                                            <label class="col-md-4 control-label">Commission Rate</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="commRate">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Unearn. Commissions</label>
+                                            <label class="col-md-4 control-label">Unearned Commissions</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="commission" required>
                                             </div>
                                         </div>
 
@@ -285,7 +270,7 @@
                                             <label class="col-md-3 control-label"><strong>Taxes and Fees</strong></label>
                                             <div class="col-md-9" style="padding-left:63px;padding-top:8px;">
                                                 <label class="mt-checkbox mt-checkbox-outline">
-                                                    <input type="checkbox"> Direct Bill?
+                                                    <input type="checkbox" data-model="directBill"> Direct Bill?
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -293,23 +278,23 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Surcharge</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="surcharge" >
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Surplus Tax</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="surplusTax">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Policy Fees</label>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="policyFees">
                                             </div>
                                             <div class="col-md-2" style="padding-top:8px;padding-left:0;">
                                                 <label class="mt-checkbox mt-checkbox-outline" style="margin-bottom:0;" data-type="decimal">
-                                                    <input type="checkbox"> Taxed?
+                                                    <input type="checkbox" id="chkTaxedPolicyFees"> Taxed?
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -317,11 +302,11 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">MGA Fees</label>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="mgafees">
                                             </div>
                                             <div class="col-md-2" style="padding-top:8px;padding-left:0;">
                                                 <label class="mt-checkbox mt-checkbox-outline" style="margin-bottom:0;">
-                                                    <input type="checkbox"> Taxed?
+                                                    <input type="checkbox" id="chkTaxedMgaFees"> Taxed?
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -329,13 +314,13 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Other Fees</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal">
+                                                <input type="text" class="form-control" placeholder="" value="" data-type="decimal" data-model="otherFees">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><strong>TOTAL</strong></label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="" onkeypress="return false;">
+                                                <input type="text" class="form-control" id="txtTaxesTotal" data-model="totalPremium" placeholder="" value="" onkeypress="return false;">
                                             </div>
                                         </div>
                                     </div>
@@ -346,7 +331,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn green">Save</button>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>&nbsp;Save</button>
                 </div>
             </form>
         </div>

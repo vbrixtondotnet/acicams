@@ -19,6 +19,8 @@ namespace ACIC.AMS.Dto
         public string CdlyearLic { get; set; }
         public DateTime? DateHired { get; set; }
         public DateTime? Terminated { get; set; }
+        public string DateHiredText { get; set; }
+        public string TerminatedDateText { get; set; }
         public bool OwnerOperator { get; set; }
         public int? AccountId { get; set; }
         public string Notes { get; set; }
@@ -29,9 +31,9 @@ namespace ACIC.AMS.Dto
     public class DriverCoverage
     {
         public int CoverageTypeId { get; set; }
-        public double? Premium { get; set; }
-        public double? PremiumTax { get; set; }
-        public double? BrokerFee { get; set; }
-        public double? TotalAmount { get; set; }
+        public decimal? Premium { get; set; }
+        public decimal? PremiumTax { get; set; }
+        public decimal? BrokerFee { get; set; }
+        public decimal? TotalAmount { get; set; }
     }
 }

@@ -61,7 +61,7 @@
                             <a href="index.html"><strong>LINKS</strong></a>
                         </li>
                         <li>
-                            <a href="index.html"><strong>REPORTS</strong></a>
+                            <a href="/Reports"><strong>REPORTS</strong></a>
                         </li>
                         <li>
                             <a href="index.html"><strong>COMMISSIONS</strong></a>
@@ -99,24 +99,7 @@
         </div>
         <div class="clearfix"> </div>
         <div class="page-container">
-            <div class="page-sidebar-wrapper">
-                <div class="page-sidebar navbar-collapse collapse">
-                    <partial name="AccountList.cshtml" />
-                    <partial name="ExpiringAccounts.cshtml" />
-                </div>
-            </div>
-            <div class="page-content-wrapper">
-                <div class="page-content">
-                    <div class="row" style="border-left:5px solid #edf0f4;padding-top:5px;">
-                        <div class="col-md-12" style="padding-left:0px;">
-                            @RenderBody()
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="javascript:;" class="page-quick-sidebar-toggler">
-                <i class="icon-login"></i>
-            </a>
+            @RenderBody()
         </div>
         <div class="page-footer text-center">
             <div class="page-footer-inner" style="width:100%;">
@@ -128,7 +111,7 @@
         </div>
     </div>
     <script>
-        AccountListMenu.init();
+       
         $("#loggedInUserName").html(Authentication.userInfo().emailAddress);
         $("#userProfileLink").attr('href', '/User/Profile/' + Authentication.userInfo().id);
     </script>

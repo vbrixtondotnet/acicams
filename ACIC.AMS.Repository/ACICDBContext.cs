@@ -16,7 +16,48 @@ namespace ACIC.AMS.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Policy>().Property(e => e.Bfrate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.AgentComm).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.BasePerUnit).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.BrokerFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.CommRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Commission).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Mgafees).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.NonTaxedRateUnit).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.OtherFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.PDNonOwnedTrailerRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Pdrate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.PolicyFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Premium).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Strate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.Surcharge).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.SurplusTax).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.TotalFactor).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.TotalPremium).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.TrailerInterchangeRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.TrailerRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Policy>().Property(e => e.AgentBfshare).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.ProRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Pdvalue).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.BasePerUnit).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.NonTaxedRateUnit).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Pdrate).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.TrailerRate).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Bfrate).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Strate).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Premium).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Surcharge).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.PolicyFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Mgafees).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.SurplusTax).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.BrokerFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.EndtFee).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.OtherFees).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.TotalPremium).HasPrecision(18, 2);
+            modelBuilder.Entity<Endorsement>().Property(e => e.Commission).HasPrecision(18, 2);
+
             base.OnModelCreating(modelBuilder);
+
         }
 
 

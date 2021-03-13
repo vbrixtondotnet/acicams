@@ -246,7 +246,7 @@
         });
     },
     viewDetails: function (id) {
-        VehiclesComponent.vehicle = $.extend({}, VehiclesComponent.VehiclesComponent.find((c) => { return c["id"] === id }));
+        VehiclesComponent.vehicle = $.extend({}, VehiclesComponent.vehicles.find((c) => { return c["id"] === id }));
         VehiclesComponent.vehicle.company = CurrentAccount.legalName;
         BindingService.bindModelToLabels("vehicleDetailsContent", VehiclesComponent.vehicle);
 

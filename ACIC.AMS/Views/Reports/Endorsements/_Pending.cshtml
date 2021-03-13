@@ -1,0 +1,93 @@
+﻿
+<style>
+    .table-row-pending div {
+        padding: 5px 0px 5px 0px;
+        border-bottom: 1px solid gray;
+        height: 50px;
+        font-size:13px;
+    } 
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2"><label>Account</label></div>
+        <div class="col-md-2"><label>Type of Coverage</label></div>
+        <div class="col-md-2"><label>Item Search</label></div>
+        <div class="col-md-2"><label>Item Type</label></div>
+        <div class="col-md-2"><label>Carrier</label></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <select class="form-control" id="slcPendingAccount">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcPendingCoverageTypes">
+                <option value="">&nbsp</option>
+                <option value="1">Auto Liability</option>
+                <option value="2">Motor Truck Cargo</option>
+                <option value="3">Physical Damage</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="text" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcPendingItemType">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcPendingCarrier">
+                <option value="">All Policies</option>
+                <option value="1">Auto Liability</option>
+                <option value="2">Motor Truck Cargo</option>
+                <option value="3">Physical Damage</option>
+            </select>
+        </div>
+        <div class="col-md-2"><button class="btn btn-danger" id="btnClearFilters">Clear Filters</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-header">
+        <div class="col-md-1" style="width:8%; text-align:center"><label>Date Effective</label></div>
+        <div class="col-md-1" style="width:6%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:12%; text-align:center"><label>Description</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Type</label></div>
+        <div class="col-md-1" style="width:10%; text-align:center"><label>Insured Item</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Type of Coverage</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Amount</label></div>
+        <div class="col-md-1" style="width:12%; text-align:left"><label>Account</label></div>
+        <div class="col-md-1" style="width:17%; text-align:left"><label>Carrier</label></div>
+        <div class="col-md-1" style="width:7%; text-align:left"><label>Status</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><button class="btn btn-success" id="btnExportPendingReport" style="padding:2px;">Export (.xlsx)</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-sub-header">
+        <div class="col-md-1" style="width:8%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:6%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:12%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:10%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="lblTotalPendingAmount"></label></div>
+        <div class="col-md-1" style="width:12%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:17%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label></label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"></div>
+    </div>
+</div>
+
+
+<div class="row" style="height:680px; overflow-y:scroll;" id="pendingReportTable">
+    <div class="row" id="driversPreloader">
+        <div class="col-md-12 text-center" style="padding-top:75px;">
+            <img src="~/assets/images/preloader.gif" />
+        </div>
+    </div>
+    
+
+</div>

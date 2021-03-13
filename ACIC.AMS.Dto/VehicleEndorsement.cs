@@ -34,9 +34,9 @@ namespace ACIC.AMS.Dto
     public class VehicleCoverage
     {
         public int CoverageTypeId { get; set; }
-        public double? Premium { get; set; }
-        public double? PremiumTax { get; set; }
-        public double? BrokerFee { get; set; }
-        public double? TotalAmount { get; set; }
+        public decimal? Premium { get; set; }
+        public decimal? PremiumTax { get; set; }
+        public decimal? BrokerFee { get; set; }
+        public decimal? TotalAmount { get; set; }
     }
 }

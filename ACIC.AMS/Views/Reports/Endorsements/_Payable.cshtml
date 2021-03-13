@@ -1,0 +1,112 @@
+﻿
+<style>
+    button.action-button-payable {
+        margin-left: 10px;
+        padding: 2px;
+        border: 1px dashed gray;
+        width: 75px;
+        float: left;
+        height: 45px;
+        font-size: 12px;
+    }
+
+    button.action-button-payable.mark-as-paid  {
+        background-color:#0b294e;
+    }
+
+</style>
+
+<div class="row">
+    <div class="col-md-12 table-header" style="margin-top:0 !important;">
+        <div class="col-md-1" style="width:15%; text-align:center"><label>Account</label></div>
+        <div class="col-md-1" style="width:18%; text-align:center"><label>Carrier<br />MGA</label></div>
+        <div class="col-md-1" style="width:4%; text-align:center"><label>Endt <br /> No</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Premium</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>SL Taxes</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Fees</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Commission</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Payable Amount</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Due Date</label></div>
+        <div class="col-md-1" style="width:13%; text-align:left"><label>Remarks</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><button class="btn btn-success" id="btnExportPayableEndReport" style="padding:2px;">Export (.xlsx)</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-sub-header">
+        <div class="col-md-1" style="width:15%; text-align:center">&nbsp</div>
+        <div class="col-md-1" style="width:18%; text-align:center">&nbsp</div>
+        <div class="col-md-1" style="width:4%; text-align:center">&nbsp</div>
+        <div class="col-md-1" style="width:7%; text-align:right"><label id="subhTotalPremiumPayable">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalSLTaxesPayable">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalFeesPayable">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalCommissionPayable">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalPayableAmountPayable">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
+        <div class="col-md-1" style="width:13%; text-align:left">&nbsp</div>
+        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
+    </div>
+</div>
+
+
+<div class="row" style="height:750px; overflow-y:scroll;" id="payableReportTable">
+    <div class="row" id="preloaderPayable">
+        <div class="col-md-12 text-center" style="padding-top:75px;">
+            <img src="~/assets/images/preloader.gif" />
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="mdlUpdateDueDate" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-450">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Update Due Date</h4>
+            </div>
+
+            <form class="form-horizontal" role="form">
+                <div class="modal-body" style="padding-bottom:0; padding-top:0;">
+                    <div class="portlet light bordered">
+                        <div class="portlet-body form policy-form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label class="control-label col-md-5">Account</label>
+                                        <div class="col-md-7">
+                                            <input type="text" id="txtPayableAccountName" class="form-control" disabled style="background:white;border:none;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label class="control-label col-md-5">Type of Coverage</label>
+                                        <div class="col-md-7">
+                                            <input type="text" id="txtPayableTypeOfCoverage"  class="form-control" disabled style="background:white;border:none;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label class="control-label col-md-5">Endt Number</label>
+                                        <div class="col-md-7">
+                                            <input type="text" id="txtPayableEndtNumber"  class="form-control" disabled style="background:white;border:none;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label class="control-label col-md-5">Due Date</label>
+                                        <div class="col-md-7">
+                                            <input type="date" id="txtPayableDueDate"  class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn green" id="btnSaveDueDate">Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

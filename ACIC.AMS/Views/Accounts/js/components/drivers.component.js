@@ -1,4 +1,4 @@
-﻿var Drivers = {
+﻿var DriversComponent = {
     drivers: [],
     driver: null,
     dTable: null,
@@ -9,10 +9,10 @@
     onAddDriver: function () {
         $("#availableCoverageTypes").html('');
         $("#btnSaveNewDriver").attr("disabled", true);
-        Drivers.driver = DriverEndorsementModel.new();
-        Drivers.driver.accountId = CurrentAccount.accountId;
-        Drivers.availableCoverageTypes = PolicyComponent.availableCoverageTypes;
-        var data = Drivers.availableCoverageTypes;
+        DriversComponent.driver = DriverEndorsementModel.new();
+        DriversComponent.driver.accountId = CurrentAccount.accountId;
+        DriversComponent.availableCoverageTypes = PolicyComponent.availableCoverageTypes;
+        var data = DriversComponent.availableCoverageTypes;
         if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
                 var coverageType = data[i];
@@ -72,18 +72,21 @@
             $("#availableCoverageTypes").append(coverageTypeRow);
         }
 
-        BindingService.bindModelToForm("frmNewDriver", Drivers.driver);
+        BindingService.bindModelToForm("frmNewDriver", DriversComponent.driver);
     },
     saveNewDriver: function () {
         App.blockUI({
             target: "#frmNewDriver",
             blockerOnly: true
         });
-        DriverService.saveNewDriver(Drivers.driver,
+
+        DriversComponent.driver.terminated = DriversComponent.driver.terminatedDateText;
+        DriversComponent.driver.dateHired = DriversComponent.driver.dateHiredText;
+        DriverService.saveNewDriver(DriversComponent.driver,
             function (data) {
                 App.unblockUI("#frmNewDriver");
                 $("#mdlDriver").modal('hide');
-                Drivers.getDrivers(CurrentAccount.accountId);
+                DriversComponent.getDrivers(CurrentAccount.accountId);
             },
             function (data) {
                 App.unblockUI("#frmNewDriver");
@@ -99,15 +102,15 @@
         coverageType.totalAmount = premium + premiumTax + brokerFee;
         $("input[type='text'][data-coverage-field='totalAmount'][data-id='" + coverageTypeId + "']").val(coverageType.totalAmount);
 
-        Drivers.calculateTotalPremium();
+        DriversComponent.calculateTotalPremium();
     },
     calculateTotalPremium: function () {
         var totalPremium = 0;
         var totalPremiumTax = 0;
         var totalBrokerFee = 0;
         var totalAmount = 0;
-        for (var i = 0; i < Drivers.driver.driverCoverages.length; i++) {
-            var coverageType = Drivers.driver.driverCoverages[i];
+        for (var i = 0; i < DriversComponent.driver.driverCoverages.length; i++) {
+            var coverageType = DriversComponent.driver.driverCoverages[i];
             var premium = parseFloat(coverageType.premium);
             var premiumTax = parseFloat(coverageType.premiumTax);
             var brokerFee = parseFloat(coverageType.brokerFee);
@@ -131,12 +134,12 @@
         DriverService.getDriversByAccount(id, function (data) {
             $(".driver-list-content").removeClass('hide');
             $("#driversPreloader").addClass('hide');
-            Drivers.renderDriversTable(data);
+            DriversComponent.renderDriversTable(data);
         });
     },
     showDriverDetails: function (id) {
-        var driver = $.extend({}, Drivers.drivers.find((d) => { return d["driverId"] === id }));
-        Drivers.driver = driver;
+        var driver = $.extend({}, DriversComponent.drivers.find((d) => { return d["driverId"] === id }));
+        DriversComponent.driver = driver;
         driver.company = CurrentAccount.legalName;
         $("#mdlDriverDetails").modal('show');
         BindingService.bindModelToLabels("driverDetailsContent", driver);
@@ -171,50 +174,54 @@
 
     },
     confirmDeleteDriver: function () {
-        $("#deleteUserName").html(Drivers.driver.fullName);
+        $("#deleteUserName").html(DriversComponent.driver.fullName);
         $("#mdlDeleteDriverConfirmation").modal('show');
     },
     deleteDriver: function () {
         $("#btnProceedDeleteDriver").attr("disabled", true);
-        DriverService.deleteDriver(Drivers.driver.driverId, function (data) {
+        DriverService.deleteDriver(DriversComponent.driver.driverId, function (data) {
             $("#btnProceedDeleteDriver").removeAttr("disabled");
             $("#mdlDeleteDriverConfirmation").modal('hide');
             $("#mdlDriverDetails").modal('hide');
-            Drivers.getDrivers(CurrentAccount.accountId);
+            DriversComponent.getDrivers(CurrentAccount.accountId);
         });
     },
     updateDriver: function () {
         $("#btnSaveDriverChanges").attr("disabled", true);
-        DriverService.updateDriver(Drivers.driver, function (data) {
+
+        DriversComponent.driver.terminated = DriversComponent.driver.terminatedDateText;
+        DriversComponent.driver.dateHired = DriversComponent.driver.dateHiredText;
+
+        DriverService.updateDriver(DriversComponent.driver, function (data) {
             $("#btnSaveDriverChanges").removeAttr("disabled");
             $("#mdlDriverDetails").modal('hide');
-            Drivers.getDrivers(CurrentAccount.accountId);
+            DriversComponent.getDrivers(CurrentAccount.accountId);
         });
     },
     renderDriversTable: function (driversList) {
-        Drivers.drivers = driversList;
+        DriversComponent.drivers = driversList;
         if ($.fn.dataTable.isDataTable('#dTableDrivers')) {
-            Drivers.dTable.destroy();
+            DriversComponent.dTable.destroy();
             $("#tblDrivers").html('');
         }
-
-        if (Drivers.drivers.length > 0) {
-            for (var i = 0; i < Drivers.drivers.length; i++) {
-                var driver = Drivers.drivers[i];
+        if (DriversComponent.drivers.length > 0) {
+            for (var i = 0; i < DriversComponent.drivers.length; i++) {
+                var driver = DriversComponent.drivers[i];
+                var cdlyearLic = driver.cdlyearLic == null ? '' : driver.cdlyearLic;
                 var driverRow = ` <tr>
                                 <td> `+ driver.fullName + ` </td>
                                 <td> `+ driver.state + ` </td>
-                                <td> `+ driver.cdlnumberFormatted + `  </td>
-                                <td> `+ driver.cdlyearLicFormatted + ` </td>
-                                <td> `+ driver.dateHiredFormatted + ` </td>
-                                <td> `+ driver.terminatedFormatted + `</td>
+                                <td> `+ driver.cdlnumber + `  </td>
+                                <td> `+ cdlyearLic + ` </td>
+                                <td> `+ driver.dateHiredText + ` </td>
+                                <td> `+ driver.terminatedDateText + `</td>
                                 <td class="action text-right"><button class="btn btn-success btn-sm btn-driver-details" data-id=`+ driver.driverId +` title="View Details"><i class="fa fa-search"></i></button>  </td>
                             </tr>`;
                 $("#tblDrivers").append(driverRow);
             }
         }
 
-        Drivers.dTable = $("#dTableDrivers").DataTable({
+        DriversComponent.dTable = $("#dTableDrivers").DataTable({
             "pageLength": 5,
             "searching": false,
             "bLengthChange": false, "bInfo": false,
@@ -227,7 +234,7 @@
     initEventHandlers: function () {
         $("#btnAddDriver").click(function () {
             $("#mdlDriver").modal('show');
-            Drivers.onAddDriver();
+            DriversComponent.onAddDriver();
         });
 
         $("html").on("change", "#availableCoverageTypes  input.checkboxes.coverage-type", function () {
@@ -238,16 +245,16 @@
             
                 var driverCoverage = jQuery.extend({}, DriverCoverageModel.new());
                 driverCoverage.coverageTypeId = parseInt(coverageTypeId);
-                Drivers.driver.driverCoverages.push(driverCoverage);
+                DriversComponent.driver.driverCoverages.push(driverCoverage);
             }
             else {
-                var driverCoverages = $.grep(Drivers.driver.driverCoverages, function (e) { return e.coverageTypeId != parseInt(coverageTypeId);});
-                Drivers.driver.driverCoverages = driverCoverages;
+                var driverCoverages = $.grep(DriversComponent.driver.driverCoverages, function (e) { return e.coverageTypeId != parseInt(coverageTypeId);});
+                DriversComponent.driver.driverCoverages = driverCoverages;
 
                 $(this).parents('tr').find('input[type="text"]').attr("disabled", true);
                 $(this).parents('tr').find('input[type="text"]').val("");
                 $(this).parents('tr').find('input[type="text"]').val("");
-                Drivers.calculateTotalPremium();
+                DriversComponent.calculateTotalPremium();
             }
         });
 
@@ -255,23 +262,23 @@
             var coverageTypeId = parseInt($(this).attr('data-id'));
             var field = $(this).attr('data-coverage-field');
             var val = $(this).val() == '' ? 0 : $(this).val();
-            var driverCoverage = Drivers.driver.driverCoverages.find((c) => { return c["coverageTypeId"] === coverageTypeId });
+            var driverCoverage = DriversComponent.driver.driverCoverages.find((c) => { return c["coverageTypeId"] === coverageTypeId });
             driverCoverage[field] = val;
 
-            Drivers.calculateCoverageTotal(coverageTypeId, driverCoverage);
+            DriversComponent.calculateCoverageTotal(coverageTypeId, driverCoverage);
         });
 
         $("html").on("click", ".btn-driver-details", function () {
             var driverId = parseInt($(this).attr('data-id'));
-            Drivers.showDriverDetails(driverId);
+            DriversComponent.showDriverDetails(driverId);
         });
 
         $("#btnDeleteDriver").click(function () {
-            Drivers.confirmDeleteDriver();
+            DriversComponent.confirmDeleteDriver();
         });
 
         $("#btnProceedDeleteDriver").click(function () {
-            Drivers.deleteDriver();
+            DriversComponent.deleteDriver();
             return false;
         });
 
@@ -294,7 +301,7 @@
         });
 
         $("#frmDriverEditForm").on("submit", function () {
-            Drivers.updateDriver();
+            DriversComponent.updateDriver();
             return false;
         });
 
@@ -302,8 +309,8 @@
 
             $("#policy-validator").addClass('hide');
 
-            if (Drivers.driver.driverCoverages.length > 0)
-                Drivers.saveNewDriver();
+            if (DriversComponent.driver.driverCoverages.length > 0)
+                DriversComponent.saveNewDriver();
             else
                 $("#policy-validator").removeClass('hide');
 

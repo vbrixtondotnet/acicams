@@ -71,7 +71,6 @@ namespace ACIC.AMS.DataStore
                 {
                     AccountId = driverEndorsement.AccountId,
                     Cdlnumber = driverEndorsement.Cdlnumber,
-                    DateHired = driverEndorsement.DateHired,
                     CdlyearLic = driverEndorsement.CdlyearLic,
                     Dob = driverEndorsement.Dob,
                     Email = driverEndorsement.Email,
@@ -83,6 +82,7 @@ namespace ACIC.AMS.DataStore
                     OwnerOperator = driverEndorsement.OwnerOperator,
                     Phone = driverEndorsement.Phone,
                     Terminated = driverEndorsement.Terminated,
+                    DateHired = driverEndorsement.DateHired,
                     Active = true,
                     DateCreated = DateTime.Now
                 };
@@ -118,6 +118,7 @@ namespace ACIC.AMS.DataStore
             var updatedDriver = _mapper.Map<Domain.Models.Driver>(driver);
             updatedDriver.DateModified = DateTime.Now;
             updatedDriver.DateCreated = dbDriver.DateCreated;
+
             _context.Update(updatedDriver);
             _context.SaveChanges();
 
