@@ -2,6 +2,7 @@
     contacts: [],
     contact: null,
     dTable: null,
+    updateNoteTimeout: null,
     init: function () {
         this.initEventHandlers();
     },
@@ -74,14 +75,21 @@
             }]
         })
     },
+    updateContactNotes: function () {
+        Contacts.contact.notes = $("#txtContactNotes").val();
+        debugger;
+        ContactService.updateNotes(Contacts.contact,  function (data) {
+            debugger;
+        });
+    },
     initEventHandlers: function () {
         $("html").on("click", "#tblContacts tr", function () {
             var contactId = parseInt($(this).attr("data-id"));
             $("#tblContacts tr").removeClass('active');
             $(this).addClass('active');
 
-            var contact = Contacts.contacts.find((c) => { return c["contactId"] === parseInt(contactId) });
-            $("#txtContactNotes").val(contact.notes);
+            Contacts.contact = Contacts.contacts.find((c) => { return c["contactId"] === parseInt(contactId) });
+            $("#txtContactNotes").val(Contacts.contact.notes);
         });
 
         $("html").on("click", ".btn-contact-details", function () {
@@ -112,6 +120,17 @@
         $("#frmContact").on('submit', function () {
             Contacts.saveContact();
             return false;
+        });
+
+        $("#txtContactNotes").on("keyup", function () {
+            if (Contacts.contact != null) {
+                clearTimeout(Contacts.updateNoteTimeout);
+                Contacts.updateNoteTimeout = setTimeout(function () { Contacts.updateContactNotes(); }, 1000);
+            }
+        });
+
+        $("#txtContactNotes").on("keydown", function () {
+            clearTimeout(Contacts.updateNoteTimeout);
         });
     }
 }

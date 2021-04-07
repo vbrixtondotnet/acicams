@@ -28,5 +28,17 @@
                 if (callback) callback(data);
             }
         });
+    },
+    updateNotes: function (contact, callback) {
+        $.ajax({
+            type: "PATCH",
+            url: "/api/contacts/" + contact.contactId+"/notes",
+            data: JSON.stringify(contact),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
     }
 }

@@ -50,5 +50,20 @@ namespace ACIC.AMS.Web.APIControllers
            
         }
 
+        [Route("contacts/{id}/notes")]
+        [HttpPatch]
+        public IActionResult UpdateNote([FromBody] Contact contact)
+        {
+            try
+            {
+                return Ok(contactDataStore.UpdateContactNotes(contact.ContactId, contact.Notes));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }

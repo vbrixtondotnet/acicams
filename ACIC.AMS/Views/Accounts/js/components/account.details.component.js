@@ -41,7 +41,7 @@ var AccountDetails = {
                 var zip = zips[i];
                 $("#slcMailingZip").append('<option value="' + zip + '">' + zip + '</option>');
             }
-            $("#slcMailingZip").val(CurrentAccount.zip);
+            $("#slcMailingZip").val(CurrentAccount.zip).trigger('change');
         }
     },
     populateGaragingZip: function () {
@@ -54,7 +54,7 @@ var AccountDetails = {
                 var zip = zips[i];
                 $("#slcGaragingZip").append('<option value="' + zip + '">' + zip + '</option>');
             }
-            $("#slcGaragingZip").val(CurrentAccount.garageZip);
+            $("#slcGaragingZip").val(CurrentAccount.garageZip).trigger('change');
         }
     },
     getCitiesByMailingState: function () {
@@ -96,6 +96,7 @@ var AccountDetails = {
         });
     },
     saveAccount: function () {
+        debugger;
         App.blockUI({
             target: "#detailsFormContainer",
             blockerOnly: true

@@ -10,5 +10,6 @@ namespace ACIC.AMS.DataStore.Interfaces
 
         List<Dto.Contact> GetByAccountId(int accountId);
         Dto.Contact Save(Dto.Contact contact);
+        bool UpdateContactNotes(int contactId, string notes);
     }
 }

@@ -64,5 +64,15 @@ namespace ACIC.AMS.DataStore
                 return contact;
             }
         }
+
+        public bool UpdateContactNotes(int contactId, string notes)
+        {
+            var dbContact = _context.Contact.Where(a => a.ContactId == contactId).AsNoTracking().FirstOrDefault();
+            dbContact.DateModified = DateTime.Now;
+            dbContact.Notes = notes;
+            _context.Update(dbContact);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }
