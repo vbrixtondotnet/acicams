@@ -308,11 +308,13 @@ var PolicyComponent = {
         premium = parseFloat(premium);
         units = parseFloat(units);
 
+        // changed the number of decimal points to 6
+
         if (PolicyComponent.rateCalculator == 'PDRATE' || PolicyComponent.rateCalculator == 'NOTRAILERRATE' || PolicyComponent.rateCalculator == 'PDTRAILERRATE' || PolicyComponent.rateCalculator == 'INTERCHANGERATE') {
-            rate = (premium / parseFloat(units) * (100)).toFixed(2);
+            rate = (premium / parseFloat(units) * (100)).toFixed(6);
         }
         else {
-            rate = (premium / parseFloat(units)).toFixed(2);
+            rate = (premium / parseFloat(units)).toFixed(6);
         }
 
         $("#txtRateCalculatorRate").val(rate);
@@ -384,30 +386,31 @@ var PolicyComponent = {
         var isMgaTaxed = $("#chkTaxedMgaFees").is(":checked");
         var isPolicyFeesTaxed = $("#chkTaxedPolicyFees").is(":checked");
 
-        if (surplusTaxRate != '') {
-            surcharge = surcharge == '' ? 0 : parseFloat(surcharge);
-            surplusTaxRate = parseFloat(surplusTaxRate);
-            var premiumVal = premium == '' ? 0 : parseFloat(premium);
+        surplusTaxRate = surplusTaxRate == '' ? 0 : parseFloat(surplusTaxRate);
+        surcharge = surcharge == '' ? 0 : parseFloat(surcharge);
+        surplusTaxRate = parseFloat(surplusTaxRate);
+        var premiumVal = premium == '' ? 0 : parseFloat(premium);
 
-            surplusTax = (parseFloat(premiumVal) + parseFloat(surcharge)) * (surplusTaxRate / 100);
-            if (mgaFees != '') {
-                var isMgaTaxed = $("#chkTaxedMgaFees").is(":checked");
-                var mgaFeesRaw = (parseFloat(mgaFees)) * (surplusTaxRate / 100);
-                surplusTax = surplusTax + mgaFeesRaw;
-                if (!isMgaTaxed) {
-                    surplusTax = surplusTax - mgaFeesRaw;
-                }
+        surplusTax = (parseFloat(premiumVal) + parseFloat(surcharge)) * (surplusTaxRate / 100);
+        if (mgaFees != '') {
+            var isMgaTaxed = $("#chkTaxedMgaFees").is(":checked");
+            var mgaFeesRaw = (parseFloat(mgaFees)) * (surplusTaxRate / 100);
+            surplusTax = surplusTax + mgaFeesRaw;
+            if (!isMgaTaxed) {
+                surplusTax = surplusTax - mgaFeesRaw;
             }
-            if (policyFees != '') {
-                var policyFeesRaw = (parseFloat(policyFees)) * (surplusTaxRate / 100);
-                surplusTax = surplusTax + policyFeesRaw;
-                if (!isPolicyFeesTaxed) {
-                    surplusTax = surplusTax - policyFeesRaw;
-                }
-            }
-
         }
-        surplusTax = surplusTax.toFixed(2);
+        if (policyFees != '') {
+            var policyFeesRaw = (parseFloat(policyFees)) * (surplusTaxRate / 100);
+            surplusTax = surplusTax + policyFeesRaw;
+            if (!isPolicyFeesTaxed) {
+                surplusTax = surplusTax - policyFeesRaw;
+            }
+        }
+
+        surplusTax = surplusTax == 0 ? '' : surplusTax = surplusTax.toFixed(2); 
+
+        //surplusTax = surplusTax.toFixed(2);
 
         $("input[type='text'][data-model='surplusTax']").val(surplusTax).trigger('change');
         PolicyComponent.policy.surplusTax = parseFloat(surplusTax);
