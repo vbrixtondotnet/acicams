@@ -40,9 +40,9 @@
         this.source = "";
         this.state = "";
         this.statePermit = "";
-        this.status = "";
+        this.status = 1;
         this.taxId = "";
-        this.type = "";
+        this.type = 1;
         this.usdot = "";
         this.yearClient = "";
         this.zip = "";

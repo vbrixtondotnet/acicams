@@ -25,6 +25,7 @@ var AccountListMenu = {
             var newAccount = AccountModel.new();
             AccountDetails.populateAccountForm(newAccount);
 
+            $("#slcType").val = 1;
         });
         $("#txtAccountListFilter").on("keyup", function () {
             AccountListMenu.filterList();
