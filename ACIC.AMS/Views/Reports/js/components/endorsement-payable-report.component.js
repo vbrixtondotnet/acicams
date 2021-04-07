@@ -113,7 +113,7 @@
                 
                 var reportId = report.accountId + '-' + report.ern + '-' + report.coverageTypes + '-' + report.policyId;
 
-                var reportRow = `<div class="col-md-12 table-row">
+                var reportRow = `<div class="col-md-12 table-row payable">
                                     <div class="col-md-1" style="width:15%; text-align:left; font-size:13px;padding-left:5px;"><span>`+ report.legalName +`</span><br /><span>`+report.coverageTypeDesc+`</span></div>
                                     <div class="col-md-1" style="width:18%; text-align:left; font-size:13px;"><span>`+report.carrierName+`</span><br /><span>`+report.mganame+`</span></div>
                                     <div class="col-md-1" style="width:4%; text-align:center;font-size:13px;"><span>`+ report.ern + `</span></div>
@@ -124,7 +124,7 @@
                                     <div class="col-md-1" style="width:8%; text-align:center;font-size:13px;"><span>`+ ValidationService.formatMoney(payableAmount) + `</span></div>
                                     <div class="col-md-1" style="width:7%; text-align:center;font-size:13px;color:`+ color+`;"><span>`+ dueDate + `</span></div>
                                     <div class="col-md-1" style="width:9%; text-align:left;font-size:13px;;color:`+ color +`;"><span>`+ remarks + `</span></div>
-                                    <div class="col-md-1" style="width:11%; text-align:center">
+                                    <div class="col-md-1" style="width:11%; text-align:center;padding:0;">
                                         <button data-account="`+ report.legalName+`" data-coverage-type="`+ report.coverageTypeDesc + `" data-endtno="` + report.ern +`" data-due-date="`+ dueDate+`" data-id="`+ reportId + `" class="update-duedate btn btn-info action-button-payable">Update <br/>Due Date</button>
                                         <button data-id="`+ reportId + `" class="mark-as-paid btn btn-info action-button-payable">Mark as <br/>Paid</button>
                                     </div>

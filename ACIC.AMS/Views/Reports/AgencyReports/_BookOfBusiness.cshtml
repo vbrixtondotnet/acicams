@@ -1,0 +1,111 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2"><label>Carrier</label></div>
+        <div class="col-md-2"><label>Account</label></div>
+        <div class="col-md-2"><label>Policy Number</label></div>
+        <div class="col-md-2"><label>Status</label></div>
+        <div class="col-md-2"><label>From</label></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyCarrier">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyAccount">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2"><input type="text" class="form-control" id="txtAgencyPolicyNumber" /></div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyStatus">
+                <option value="">&nbsp</option>
+                <option value="1">All Policies</option>
+                <option value="2">Active</option>
+                <option value="3">Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-2"><input type="date" class="form-control" id="txtAgencyFrom" /></div>
+        <div class="col-md-2"><button class="btn btn-danger" id="btnClearAgencyFilters">Clear Filters</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2"><label>MGA</label></div>
+        <div class="col-md-2"><label>Agent</label></div>
+        <div class="col-md-2"><label>Type of Coverage</label></div>
+        <div class="col-md-2"><label>&nbsp;</label></div>
+        <div class="col-md-2"><label>To</label></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyMGA">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyAgent">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcAgencyCoverageType">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-2"><input type="date" class="form-control" id="txtAgencyTo" /></div>
+        <div class="col-md-2">&nbsp;</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-header">
+        <div class="col-md-1" style="width:15%; text-align:center; padding-left:0; padding-right:0;"><label>Carrier / MGA</label></div>
+        <div class="col-md-1" style="width:15%; text-align:left; padding-left:10px; padding-right:0;"><label>Account / DBA</label></div>
+        <div class="col-md-1" style="width:10%; text-align:left; padding-left:0; padding-right:0;"><label>Policy No <br/> Type of Coverage</label></div>
+        <div class="col-md-1" style="width:7%; text-align:left; padding-left:0; padding-right:0;"><label>Effective <br /> Expiration</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label>Initial Premium</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label>Commulative Premium</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label>Initial Commission</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label>Commulative Commission</label></div>
+        <div class="col-md-1" style="width:14%; text-align:center; padding-left:0; padding-right:0;"><label>Agent</label></div>
+        <div class="col-md-1" style="width:7%; text-align:left; padding-left:0; padding-right:0;"><button class="btn btn-success" id="btnExportAgencyReport" style="padding:2px;">Export (.xlsx)</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-sub-header">
+        <div class="col-md-1" style="width:15%; text-align:left; padding-left:0; padding-right:0;">&nbsp;</div>
+        <div class="col-md-1" style="width:15%; text-align:left; padding-left:0; padding-right:0;">&nbsp;</div>
+        <div class="col-md-1" style="width:10%; text-align:left; padding-left:0; padding-right:0;">&nbsp;</div>
+        <div class="col-md-1" style="width:7%; text-align:left; padding-left:0; padding-right:0;">&nbsp;</div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label id="thAgencyInitialPremium">100</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label id="thAgencyComPremium">100</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label id="thAgencyInitialCommission">100</label></div>
+        <div class="col-md-1" style="width:8%; text-align:left; padding-left:0; padding-right:0;"><label id="thAgencyComCommission">100</label></div>
+        <div class="col-md-1" style="width:14%; text-align:left; padding-left:0; padding-right:0;">&nbsp;</div>
+        <div class="col-md-1" style="width:7%; text-align:center; padding-left:0; padding-right:0;">&nbsp;</div>
+    </div>
+</div>
+
+
+<div class="row" style="height:600px; overflow-y:scroll;" id="agencyReportTable">
+    <div class="row" id="agencyPreloader">
+        <div class="col-md-12 text-center" style="padding-top:75px;">
+            <img src="~/assets/images/preloader.gif" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12 table-footer">
+            <label><span id="totalRecordsAgencyReports">0</span> Records</label>
+        </div>
+    </div>
+</div>
+

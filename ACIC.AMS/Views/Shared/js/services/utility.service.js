@@ -13,6 +13,12 @@
             case "ACCOUNTS":
                 $("li.main-nav-accounts").addClass('active');
                 break;
+            case "ENDORSEMENTS":
+                $("li.main-nav-reports").addClass('active');
+                break;
+            case "AGENTCOMMISSIONS":
+                $("li.main-nav-commissions").addClass('active');
+                break;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACIC.AMS.Dto
 {
-    public class AgentCommissions
+    public class PolicyAgentCommissions
     {
         public string CommissionRate { get; set; }
         public decimal TotalCommission { get; set; }

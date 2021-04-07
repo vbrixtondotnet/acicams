@@ -1,0 +1,29 @@
+﻿
+<script src="/scripts/components/reports/unearned-commissions-report.component.js" type="text/javascript"></script>
+<script src="/scripts/components/reports/unearned-brokerfees-report.component.js" type="text/javascript"></script>
+<script src="/scripts/services/reports/reports.service.js" type="text/javascript"></script>
+<div class="col-md-12" style="padding-left:0px;">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tbCommissions" class="commission" data-toggle="tab">Unearned Commissions</a>
+        </li>
+        <li>
+            <a href="#tbBrokerFees" class="commission" data-toggle="tab">Unearned Broker Fees</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tbCommissions">
+            <partial name="_Unearned.cshtml" />
+        </div>
+        <div class="tab-pane" id="tbBrokerFees">
+            <partial name="_BrokerFees.cshtml" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        UnearnedCommissionsReportComponent.init();
+        //EndorsementReceivedReportComponent.getReceivedReport();
+    });
+</script>

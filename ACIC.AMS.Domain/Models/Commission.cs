@@ -14,6 +14,7 @@ namespace ACIC.AMS.Domain.Models
         public int CommId { get; set; }
         public int? AccoutId { get; set; }
         public int? AgentId { get; set; }
+        public int? PolicyId { get; set; }
         public string TrackId { get; set; }
         public short? SchedIndex { get; set; }
         public string Period { get; set; }

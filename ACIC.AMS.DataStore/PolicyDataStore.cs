@@ -79,12 +79,12 @@ namespace ACIC.AMS.DataStore
             return this.ExecuteQuery<ActivePolicyVehicle>("[dbo].[GetActivePolicyVehicles]", parameters);
         }
 
-        public AgentCommissions GetPolicyAgentCommissions(int policyId)
+        public PolicyAgentCommissions GetPolicyAgentCommissions(int policyId)
         {
             var parameters = new Dictionary<string, object>();
             parameters.Add("@PolicyId", policyId);
 
-            return this.ExecuteQuery<AgentCommissions>("[dbo].[GetPolicyAgentCommissions]", parameters).FirstOrDefault();
+            return this.ExecuteQuery<PolicyAgentCommissions>("[dbo].[GetPolicyAgentCommissions]", parameters).FirstOrDefault();
         }
 
         public bool SetInceptionStage(int policyId, bool isInceptionStage)

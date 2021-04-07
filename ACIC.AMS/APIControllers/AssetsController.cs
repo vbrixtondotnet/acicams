@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ACIC.AMS.Web.APIControllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("scripts")]
     [ApiController]
     public class JsAssetsController : ControllerBase
@@ -103,6 +104,7 @@ namespace ACIC.AMS.Web.APIControllers
 
     }
 
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("css")]
     [ApiController]
     public class CssAssetsController : ControllerBase

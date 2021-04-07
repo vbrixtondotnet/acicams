@@ -114,7 +114,7 @@
                 
                 var reportId = report.accountId + '-' + report.ern + '-' + report.coverageTypes + '-' + report.policyId;
 
-                var reportRow = `<div class="col-md-12 table-row">
+                var reportRow = `<div class="col-md-12 table-row received">
                                     <div class="col-md-1" style="width:15%; text-align:left; font-size:13px;padding-left:5px;"><span>`+ report.legalName +`</span><br /><span>`+report.coverageTypeDesc+`</span></div>
                                     <div class="col-md-1" style="width:18%; text-align:left; font-size:13px;"><span>`+report.carrierName+`</span><br /><span>`+report.mganame+`</span></div>
                                     <div class="col-md-1" style="width:4%; text-align:center"><span>`+ report.ern + `</span></div>
@@ -331,7 +331,7 @@
             EndorsementReceivedReportComponent.updateEndorsementAmount(id, field, amount);
         });
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('a.endorsement[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
             if (target == "#tbPending") {
                 EndorsementPendingReportComponent.init();

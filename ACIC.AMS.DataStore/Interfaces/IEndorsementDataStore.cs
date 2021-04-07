@@ -22,6 +22,11 @@ namespace ACIC.AMS.DataStore.Interfaces
         List<ReceivedEndorsementReport> GetReceivedEndorsementReport();
         List<PendingEndorsementReport> GetPendingEndorsementReports();
         List<PayableEndorsementReport> GetPayableEndorsementReports();
+        List<UnearnedCommissionsReport> GetUnearnedCommissionsReport(DateTime asOf);
+        List<UnearnedBrokerFeesReport> GetUnearnedBrokerFeesReport(DateTime asOf);
+        List<UnearnedCommissionsDetail> GetUnearnedCommissionsDetail(int policyId, int coverageType, DateTime asOf);
+        List<UnearnedBrokerFeesDetail> GetUnearnedBrokerFeesDetail(int policyId, int coverageType, DateTime asOf);
+        List<AgencyReport> GetAgencyReport(DateTime? from, DateTime? to);
         void UpdateDueDate(int accountId, string ern, int coverageType, int policyId, string dueDate);
         void MarkAsPaid(int accountId, string ern, int coverageType, int policyId);
 

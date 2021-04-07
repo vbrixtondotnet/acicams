@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ACIC.AMS.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

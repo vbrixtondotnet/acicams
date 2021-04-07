@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ACIC.AMS.DataStore;
 using ACIC.AMS.DataStore.Interfaces;
 using ACIC.AMS.Repository;
@@ -10,11 +7,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ACIC.AMS
@@ -78,7 +73,15 @@ namespace ACIC.AMS
             services.AddTransient<IBankDataStore, BankDataStore>();
             services.AddTransient<ICarrierDataStore, CarrierDataStore>();
             services.AddTransient<IMgaDataStore, MgaDataStore>();
+            services.AddTransient<ICommissionsDataStore, CommissionsDataStore>();
             services.AddScoped<IMapper, Mapper>();
+
+            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
+            });
+
 
         }
 
@@ -94,6 +97,8 @@ namespace ACIC.AMS
             app.UseAuthorization();
 
             app.UseCors("AllowAll");
+            app.UseDeveloperExceptionPage();
+
 
 
             app.UseEndpoints(endpoints =>
@@ -106,6 +111,14 @@ namespace ACIC.AMS
                    name: "user",
                    pattern: "{controller=User}/{action=Profile}/{id?}");
 
+            });
+
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ACIC API");
             });
 
 

@@ -144,7 +144,7 @@
                 var typeOfCoverage = report.typeOfCoverage == null ? '' : report.typeOfCoverage;
                 totalAmount += report.totalAmount;
 
-                var reportRow = `<div class="col-md-12 table-row-pending">
+                var reportRow = `<div class="col-md-12 table-row pending">
                                     <div class="col-md-1" style="width:8%; text-align:center"><span>12/01/2020</span></div>
                                     <div class="col-md-1" style="width:6%; text-align:left"><span>`+report.action+`</span></div>
                                     <div class="col-md-1" style="width:12%; text-align:left"><span>`+ description +`</span></div>

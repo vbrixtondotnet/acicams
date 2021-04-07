@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>2dde3036-ffef-456a-a30e-e1a8ba9aded6</UserSecretsId>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +26,12 @@
     <None Remove="Views\Accounts\js\services\policy.service.js" />
     <None Remove="Views\Accounts\js\services\vehicles.service.js" />
     <None Remove="Views\Admin\js\services\users.service.js" />
+    <None Remove="Views\Reports\js\components\agency-report.component.js" />
     <None Remove="Views\Reports\js\components\endorsement-payable-report.component.js" />
     <None Remove="Views\Reports\js\components\endorsement-pending-report.component.js" />
     <None Remove="Views\Reports\js\components\endorsement-received-report.component.js" />
+    <None Remove="Views\Reports\js\components\unearned-brokerfees-report.component.js" />
+    <None Remove="Views\Reports\js\components\unearned-commissions-report.component.js" />
     <None Remove="Views\Reports\js\services\reports.service.js" />
     <None Remove="Views\Shared\js\components\account.list.menu.component.js" />
     <None Remove="Views\Shared\js\services\bindings.service.js" />
@@ -100,10 +104,19 @@
     <Content Include="Views\Login\js\authentication.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Reports\js\components\agency-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Reports\js\components\endorsement-pending-report.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Reports\js\components\endorsement-payable-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Reports\js\components\unearned-brokerfees-report.component.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Reports\js\components\unearned-commissions-report.component.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Reports\js\components\endorsement-received-report.component.js">
@@ -142,6 +155,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -152,6 +166,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Commissions\js\" />
     <Folder Include="Views\Reports\js\models\" />
     <Folder Include="Views\Shared\js\models\" />
     <Folder Include="wwwroot\assets\global\plugins\math\" />

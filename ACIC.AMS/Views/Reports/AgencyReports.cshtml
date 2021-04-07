@@ -3,34 +3,40 @@
     li.nav-item.reports.active {
         background: #508edb;
     }
-    li.nav-item.reports.active a {
-        color: white;
+
+        li.nav-item.reports.active a {
+            color: white;
+        }
+
+    .nav > li > a {
+        padding: 7px !important;
     }
-    .nav > li > a{
-        padding:7px !important;
-    }
+
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
         background: #508edb;
         color: white;
     }
-    .nav-tabs > li.active > a:hover {
-        background: #508edb;
-        color: white;
+
+        .nav-tabs > li.active > a:hover {
+            background: #508edb;
+            color: white;
+        }
+
+    div.tab-pane {
+        padding: 10px;
+        background: white;
     }
-    div.tab-pane{
-        padding:10px;
-        background:white;
-    }
-    ul.nav.nav-tabs{
-        margin-bottom:0px;
+
+    ul.nav.nav-tabs {
+        margin-bottom: 0px;
     }
     .table-header {
         margin-top: 20px;
     }
 
-    .table-header.popup {
-        margin-top: 0 !important;
-    }
+        .table-header.popup {
+            margin-top: 0 !important;
+        }
 
             .table-header.popup div {
                 background: #0b294e;
@@ -56,24 +62,11 @@
         padding-top: 5px;
         height: 30px;
     }
-    .table-row {
-        padding: 10px 10px 5px 10px;
-    }
-    .table-row.received div {
-        height: 60px;
-        border-bottom: 1px solid gray;
-    }
-    .table-row.pending div {
-        height: 50px;
-        border-bottom: 1px solid gray;
-    }
-    .table-row.payable div {
-        height: 55px;
-        border-bottom: 1px solid gray;
-    }
+
     .table-row.agencyreport div {
-        height: 60px;
+        padding: 10px 0px 5px 0px;
         border-bottom: 1px solid gray;
+        height: 60px;
     }
 
     .table-row-popup div {
@@ -92,6 +85,16 @@
             border: none;
             outline: none !important;
         }
+
+    div.table-footer {
+        background: #0b294e;
+        height: 30px;
+        padding-top:5px;
+    }
+    div.table-footer label{
+        color:white;
+        font-weight:bold;
+    }
 </style>
 <div class="page-sidebar-wrapper">
     <div class="page-sidebar navbar-collapse collapse">
@@ -99,32 +102,29 @@
             <li class="nav-item" style="padding-left:10px;padding-bottom:10px">
                 <strong class="title">SELECT REPORT</strong>
             </li>
-            <li class="nav-item reports active">
-                <a href="/Endorsements" class="nav-link account-menu-item" data-id="63">
+            <li class="nav-item reports">
+                <a href="/Endorsements" class="nav-link account-menu-item">
                     <strong class="title">Endorsements</strong>
                 </a>
             </li>
             <li class="nav-item reports">
-                <a href="/Commissions" class="nav-link account-menu-item" data-id="63">
+                <a href="/Commissions" class="nav-link account-menu-item">
                     <strong class="title">Commissions & Fees</strong>
                 </a>
             </li>
-            <li class="nav-item reports">
-                <a href="/AgencyReports" class="nav-link account-menu-item" data-id="63">
+            <li class="nav-item reports active">
+                <a href="/AgencyReports" class="nav-link account-menu-item">
                     <strong class="title">Agency Reports</strong>
                 </a>
             </li>
-
         </ul>
     </div>
 </div>
 <div class="page-content-wrapper">
     <div class="page-content">
         <div class="row" style="border-left:5px solid #edf0f4;padding-top:5px;">
-            <partial name="Endorsements/Endorsements.cshtml" />
+            <partial name="AgencyReports/AgencyReports.cshtml" />
         </div>
     </div>
 </div>
-<script>
-    $(".page-sidebar.navbar-collapse.collapse").attr("style", 'height :800px !important');
-</script>
+<script>$(".page-sidebar.navbar-collapse.collapse").attr("style", 'height :800px !important');</script>

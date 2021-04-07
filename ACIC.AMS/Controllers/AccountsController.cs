@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ACIC.AMS.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class AccountsController : Controller
     {
         public IActionResult Index()

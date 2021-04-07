@@ -61,6 +61,119 @@ namespace ACIC.AMS.Web.APIControllers
             }
         }
 
+        [Route("reports/commissions/unearned")]
+        [HttpGet]
+        public IActionResult GetUnearnedCommissions(DateTime asOff)
+        {
+            try
+            {
+                var response = endorsementDataStore.GetUnearnedCommissionsReport(asOff);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("reports/brokerfees/unearned")]
+        [HttpGet]
+        public IActionResult GetUnearnedBrokerFees(DateTime asOff)
+        {
+            try
+            {
+                var response = endorsementDataStore.GetUnearnedBrokerFeesReport(asOff);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("reports/agency")]
+        [HttpGet]
+        public IActionResult GetAgencyReports(DateTime? from = null, DateTime? to = null)
+        {
+            try
+            {
+                var response = endorsementDataStore.GetAgencyReport(from, to);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("reports/agency/download")]
+        [HttpGet]
+        public IActionResult DownloadAgencyReport(DateTime? from = null, DateTime? to = null)
+        {
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"agency-reports-{DateTime.Now.ToShortDateString()}.xlsx";
+            var endorsements = endorsementDataStore.GetAgencyReport(from, to);
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    IXLWorksheet worksheet =
+                    workbook.Worksheets.Add("Book-Of-Business");
+                    worksheet.Cell(1, 1).Value = "Carrier";
+                    worksheet.Cell(1, 2).Value = "MGA";
+                    worksheet.Cell(1, 3).Value = "Account";
+                    worksheet.Cell(1, 4).Value = "Policy Number";
+                    worksheet.Cell(1, 5).Value = "Type of Coverage";
+                    worksheet.Cell(1, 6).Value = "Effective";
+                    worksheet.Cell(1, 7).Value = "Expiration";
+                    worksheet.Cell(1, 8).Value = "Initial Premium";
+                    worksheet.Cell(1, 9).Value = "Commulative Premium";
+                    worksheet.Cell(1, 10).Value = "Initial Commission";
+                    worksheet.Cell(1, 11).Value = "Commulative Commission";
+                    worksheet.Cell(1, 12).Value = "Agent";
+                    worksheet.Cell(1, 1).Style.Font.Bold = true;
+                    worksheet.Cell(1, 2).Style.Font.Bold = true;
+                    worksheet.Cell(1, 3).Style.Font.Bold = true;
+                    worksheet.Cell(1, 4).Style.Font.Bold = true;
+                    worksheet.Cell(1, 5).Style.Font.Bold = true;
+                    worksheet.Cell(1, 6).Style.Font.Bold = true;
+                    worksheet.Cell(1, 7).Style.Font.Bold = true;
+                    worksheet.Cell(1, 8).Style.Font.Bold = true;
+                    worksheet.Cell(1, 9).Style.Font.Bold = true;
+                    worksheet.Cell(1, 10).Style.Font.Bold = true;
+                    worksheet.Cell(1, 11).Style.Font.Bold = true;
+                    worksheet.Cell(1, 12).Style.Font.Bold = true;
+
+                    for (int index = 1; index <= endorsements.Count; index++)
+                    {
+
+                        worksheet.Cell(index + 1, 1).Value = endorsements[index - 1].Carrier;
+                        worksheet.Cell(index + 1, 2).Value = endorsements[index - 1].Mga;
+                        worksheet.Cell(index + 1, 3).Value = endorsements[index - 1].Account;
+                        worksheet.Cell(index + 1, 4).Value = endorsements[index - 1].PolicyNumber;
+                        worksheet.Cell(index + 1, 5).Value = endorsements[index - 1].CoverageTypes;
+                        worksheet.Cell(index + 1, 6).Value = endorsements[index - 1].Effective.ToShortDateString();
+                        worksheet.Cell(index + 1, 7).Value = endorsements[index - 1].Expiration.ToShortDateString();
+                        worksheet.Cell(index + 1, 8).Value = endorsements[index - 1].InitialPremium;
+                        worksheet.Cell(index + 1, 9).Value = endorsements[index - 1].CommulativePremium;
+                        worksheet.Cell(index + 1, 10).Value = endorsements[index - 1].InitialCommission;
+                        worksheet.Cell(index + 1, 11).Value = endorsements[index - 1].CommulativeCommission;
+                        worksheet.Cell(index + 1, 12).Value = endorsements[index - 1].Agent;
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+                        return File(content, contentType, fileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [Route("reports/endorsements/payable")]
         [HttpGet]
         public IActionResult GetPayableEndorsements()
@@ -315,6 +428,189 @@ namespace ACIC.AMS.Web.APIControllers
                         worksheet.Cell(index + 1, 9).Value = endorsements[index - 1].OtherFees;
                         worksheet.Cell(index + 1, 10).Value = endorsements[index - 1].Commission;
                         worksheet.Cell(index + 1, 11).Value = endorsements[index - 1].TotalAmount;
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+                        return File(content, contentType, fileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [Route("reports/commissions/unearned/download")]
+        [HttpGet]
+        public IActionResult DownloadUnearnedCommissionReport(DateTime asOf)
+        {
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"unearned-commissions-as-of-{asOf}.xlsx";
+
+            var reportDs = endorsementDataStore.GetUnearnedCommissionsReport(asOf);
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    IXLWorksheet worksheet =
+                    workbook.Worksheets.Add($"Comissions-{asOf.ToShortDateString().Replace('/', '-')}");
+                    worksheet.Cell(1, 1).Value = "Account";
+                    worksheet.Cell(1, 2).Value = "Type of Coverage";
+                    worksheet.Cell(1, 3).Value = "Policy Number";
+                    worksheet.Cell(1, 4).Value = "Effective";
+                    worksheet.Cell(1, 5).Value = "Commulative Commissions";
+                    worksheet.Cell(1, 6).Value = "Unearned";
+                    worksheet.Cell(1, 7).Value = "Earned";
+                    worksheet.Cell(1, 1).Style.Font.Bold = true;
+                    worksheet.Cell(1, 2).Style.Font.Bold = true;
+                    worksheet.Cell(1, 3).Style.Font.Bold = true;
+                    worksheet.Cell(1, 4).Style.Font.Bold = true;
+                    worksheet.Cell(1, 5).Style.Font.Bold = true;
+                    worksheet.Cell(1, 6).Style.Font.Bold = true;
+                    worksheet.Cell(1, 7).Style.Font.Bold = true;
+
+                    for (int index = 1; index <= reportDs.Count; index++)
+                    {
+                        worksheet.Cell(index + 1, 1).Value = reportDs[index - 1].LegalName;
+                        worksheet.Cell(index + 1, 2).Value = reportDs[index - 1].CoverageTypes;
+                        worksheet.Cell(index + 1, 3).Value = reportDs[index - 1].PolicyNumber;
+                        worksheet.Cell(index + 1, 4).Value = reportDs[index - 1].Effective;
+                        worksheet.Cell(index + 1, 5).Value = reportDs[index - 1].Commission;
+                        worksheet.Cell(index + 1, 6).Value = reportDs[index - 1].Unearned;
+                        worksheet.Cell(index + 1, 7).Value = reportDs[index - 1].Earned;
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+                        return File(content, contentType, fileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [Route("reports/brokerfees/unearned/download")]
+        [HttpGet]
+        public IActionResult DownloadBrokerFeesReport(DateTime asOf)
+        {
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"unearned-brokerfees-as-of-{asOf}.xlsx";
+
+            var reportDs = endorsementDataStore.GetUnearnedBrokerFeesReport(asOf);
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    IXLWorksheet worksheet =
+                    workbook.Worksheets.Add($"Broker-Fees-{asOf.ToShortDateString().Replace('/', '-')}");
+                    worksheet.Cell(1, 1).Value = "Account";
+                    worksheet.Cell(1, 2).Value = "Type of Coverage";
+                    worksheet.Cell(1, 3).Value = "Policy Number";
+                    worksheet.Cell(1, 4).Value = "Effective";
+                    worksheet.Cell(1, 5).Value = "Commulative BrokerFees";
+                    worksheet.Cell(1, 6).Value = "Unearned";
+                    worksheet.Cell(1, 7).Value = "Earned";
+                    worksheet.Cell(1, 1).Style.Font.Bold = true;
+                    worksheet.Cell(1, 2).Style.Font.Bold = true;
+                    worksheet.Cell(1, 3).Style.Font.Bold = true;
+                    worksheet.Cell(1, 4).Style.Font.Bold = true;
+                    worksheet.Cell(1, 5).Style.Font.Bold = true;
+                    worksheet.Cell(1, 6).Style.Font.Bold = true;
+                    worksheet.Cell(1, 7).Style.Font.Bold = true;
+
+                    for (int index = 1; index <= reportDs.Count; index++)
+                    {
+                        worksheet.Cell(index + 1, 1).Value = reportDs[index - 1].LegalName;
+                        worksheet.Cell(index + 1, 2).Value = reportDs[index - 1].CoverageTypes;
+                        worksheet.Cell(index + 1, 3).Value = reportDs[index - 1].PolicyNumber;
+                        worksheet.Cell(index + 1, 4).Value = reportDs[index - 1].Effective;
+                        worksheet.Cell(index + 1, 5).Value = reportDs[index - 1].BrokerFees;
+                        worksheet.Cell(index + 1, 6).Value = reportDs[index - 1].Unearned;
+                        worksheet.Cell(index + 1, 7).Value = reportDs[index - 1].Earned;
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+                        return File(content, contentType, fileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [Route("reports/commissions/unearned/items")]
+        [HttpGet]
+        public IActionResult GetUnearnedBrokerFees(int policyId, int coverageType, DateTime asOf)
+        {
+            try
+            {
+                var response = endorsementDataStore.GetUnearnedCommissionsDetail(policyId, coverageType, asOf);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("reports/commissions/unearned/items/download")]
+        [HttpGet]
+        public IActionResult DownloadCommissionDetails(int policyId, int coverageType, DateTime asOf)
+        {
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"unearned-commission-details-{policyId}-{coverageType}-{asOf}.xlsx";
+
+            var reportDs = endorsementDataStore.GetUnearnedCommissionsDetail(policyId, coverageType, asOf);
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    IXLWorksheet worksheet =
+                    workbook.Worksheets.Add("Unearned-Commission-Details");
+                    worksheet.Cell(1, 1).Value = "Account";
+                    worksheet.Cell(1, 2).Value = "Policy No";
+                    worksheet.Cell(1, 3).Value = "Type of Coverage";
+                    worksheet.Cell(1, 4).Value = "Effective";
+                    worksheet.Cell(1, 5).Value = "Expiration";
+                    worksheet.Cell(1, 6).Value = "Commission";
+                    worksheet.Cell(1, 7).Value = "Rate per Day";
+                    worksheet.Cell(1, 8).Value = "Unearned";
+                    worksheet.Cell(1, 9).Value = "Earned";
+                    worksheet.Cell(1, 10).Value = "Reference";
+                    worksheet.Cell(1, 1).Style.Font.Bold = true;
+                    worksheet.Cell(1, 2).Style.Font.Bold = true;
+                    worksheet.Cell(1, 3).Style.Font.Bold = true;
+                    worksheet.Cell(1, 4).Style.Font.Bold = true;
+                    worksheet.Cell(1, 5).Style.Font.Bold = true;
+                    worksheet.Cell(1, 6).Style.Font.Bold = true;
+                    worksheet.Cell(1, 7).Style.Font.Bold = true;
+                    worksheet.Cell(1, 8).Style.Font.Bold = true;
+                    worksheet.Cell(1, 9).Style.Font.Bold = true;
+                    worksheet.Cell(1, 10).Style.Font.Bold = true;
+
+                    for (int index = 1; index <= reportDs.Count; index++)
+                    {
+                        worksheet.Cell(index + 1, 1).Value = reportDs[index - 1].LegalName;
+                        worksheet.Cell(index + 1, 2).Value = reportDs[index - 1].PolicyNumber;
+                        worksheet.Cell(index + 1, 3).Value = reportDs[index - 1].CoverageTypes;
+                        worksheet.Cell(index + 1, 4).Value = reportDs[index - 1].Effective;
+                        worksheet.Cell(index + 1, 5).Value = reportDs[index - 1].Expiration;
+                        worksheet.Cell(index + 1, 6).Value = reportDs[index - 1].Commission;
+                        worksheet.Cell(index + 1, 7).Value = reportDs[index - 1].DailyCommission;
+                        worksheet.Cell(index + 1, 8).Value = reportDs[index - 1].Unearned;
+                        worksheet.Cell(index + 1, 9).Value = reportDs[index - 1].Earned;
+                        worksheet.Cell(index + 1, 10).Value = reportDs[index - 1].Reference;
                     }
                     using (var stream = new MemoryStream())
                     {

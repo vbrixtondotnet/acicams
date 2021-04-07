@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ACIC.AMS.DataStore.Interfaces;
-using ACIC.AMS.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ACIC.AMS.Controllers
+namespace ACIC.AMS.Web.Controllers
 {
     [ApiExplorerSettings(IgnoreApi = true)]
 
-    public class LoginController : Controller
+    public class CommissionsController : Controller
     {
-        
+        [Route("AgentCommissions")]
         public IActionResult Index()
         {
             return View();
         }
-
-
 
     }
 }

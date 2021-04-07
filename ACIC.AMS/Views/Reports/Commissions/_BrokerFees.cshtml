@@ -4,7 +4,8 @@
     <div class="col-md-12">
         <div class="col-md-2"><label>Account</label></div>
         <div class="col-md-2"><label>Type of Coverage</label></div>
-        <div class="col-md-2"><label>Endorsement Number</label></div>
+        <div class="col-md-2"><label>Policy Number</label></div>
+        <div class="col-md-2"><label>Date as Of</label></div>
         <div class="col-md-2"><label>Status</label></div>
     </div>
 </div>
@@ -12,70 +13,55 @@
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-2">
-            <select class="form-control" id="slcAccount">
+            <select class="form-control" id="slcBrokerFeesAccount">
                 <option value="">&nbsp</option>
             </select>
         </div>
         <div class="col-md-2">
-            <select class="form-control" id="slcCoverageTypes">
+            <select class="form-control" id="slcBrokerFeesCoverageTypes">
                 <option value="">&nbsp</option>
                 <option value="1">Auto Liability</option>
                 <option value="2">Motor Truck Cargo</option>
                 <option value="3">Physical Damage</option>
             </select>
         </div>
-        <div class="col-md-2"><input type="text" class="form-control" id="txtEndorsementNo"/></div>
-        <div class="col-md-2">
-            <select class="form-control" id="slcStatus">
-                <option value="">All</option>
-                <option value="1">Paid</option>
-                <option value="2">Unpaid</option>
-            </select>
-        </div>
-        <div class="col-md-2"><button class="btn btn-danger" id="btnClearFilters">Clear Filters</button></div>
+        <div class="col-md-2"><input type="text" class="form-control" id="txtBrokerFeesPolicyNo" /></div>
+        <div class="col-md-2"><input type="date" class="form-control" id="txtBrokerFeesDateAsOf" /></div>
+        <div class="col-md-2"><button class="btn btn-danger" id="btnClearBrokerFeesFilters">Clear Filters</button></div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 table-header">
-        <div class="col-md-1" style="width:15%; text-align:center"><label>Account</label></div>
-        <div class="col-md-1" style="width:18%; text-align:center"><label>Carrier<br />MGA</label></div>
-        <div class="col-md-1" style="width:4%; text-align:center"><label>Endt <br/> No</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Premium</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>SL Taxes</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Fees</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Commission</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Payable Amount</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Down Payment</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Payment Status</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label>Financing</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><button class="btn btn-success" id="btnExportRecievedEndReport" style="padding:2px;">Export (.xlsx)</button></div>
+        <div class="col-md-1" style="width:20%; text-align:center"><label>Account</label></div>
+        <div class="col-md-1" style="width:15%; text-align:left"><label>Type of Coverage</label></div>
+        <div class="col-md-1" style="width:10%; text-align:left"><label>Policy No</label></div>
+        <div class="col-md-1" style="width:15%; text-align:center"><label>Effective</label></div>
+        <div class="col-md-1" style="width:14%; text-align:center"><label>Commulative Broker Fees</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Unearned</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Earned</label></div>
+        <div class="col-md-1" style="width:12%; text-align:center"><button class="btn btn-success" id="btnExportBrokerFeesReport" style="padding:2px;">Export (.xlsx)</button></div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 table-sub-header">
-        <div class="col-md-1" style="width:15%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:18%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:4%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:7%; text-align:right"><label id="subhTotalPremium">&nbsp;</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalSLTaxes">&nbsp;</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalFees">&nbsp;</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalCommission">&nbsp;</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center"><label id="subhTotalPayableAmount">&nbsp;</label></div>
-        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
-        <div class="col-md-1" style="width:7%; text-align:center">&nbsp</div>
+        <div class="col-md-1" style="width:20%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:15%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:10%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:15%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:14%; text-align:center"><label id="thCommulativeBrokerFees">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="thUnearnedBrokerFees">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="thEarnedBrokerFees">&nbsp;</label></div>
+        <div class="col-md-1" style="width:12%; text-align:center">&nbsp;</div>
     </div>
 </div>
 
 
-<div class="row" style="height:680px; overflow-y:scroll;" id="receivedReportTable">
-    <div class="row" id="driversPreloader">
+<div class="row" style="height:680px; overflow-y:scroll;" id="brokerFeesUnearnedReportTable">
+    <div class="row" id="brokerFeesPreloader">
         <div class="col-md-12 text-center" style="padding-top:75px;">
             <img src="~/assets/images/preloader.gif" />
         </div>
     </div>
-    
 </div>
 
 <div class="modal fade" id="mdlFinanceReference" tabindex="-1" role="basic" aria-hidden="true">

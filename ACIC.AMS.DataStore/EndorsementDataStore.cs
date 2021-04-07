@@ -254,5 +254,56 @@ namespace ACIC.AMS.DataStore
                         and e.PolicyId IS NOT NULL";
             return this.ExecuteQuery<PendingEndorsementReport>(sql);
         }
+
+        public List<UnearnedCommissionsReport> GetUnearnedCommissionsReport(DateTime asOf)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@AsOf", $"'{asOf.ToShortDateString()}'");
+
+            return this.ExecuteQuery<UnearnedCommissionsReport>("[dbo].[GetUnearnedCommissions]", parameters);
+        }
+
+        public List<UnearnedBrokerFeesReport> GetUnearnedBrokerFeesReport(DateTime asOf)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@AsOf", $"'{asOf.ToShortDateString()}'");
+
+            return this.ExecuteQuery<UnearnedBrokerFeesReport>("[dbo].[GetUnearnedBrokerFees]", parameters);
+        }
+
+        public List<UnearnedCommissionsDetail> GetUnearnedCommissionsDetail(int policyId, int coverageType, DateTime asOf)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@PolicyId", policyId);
+            parameters.Add("@CoverageType", coverageType);
+            parameters.Add("@AsOf", $"'{asOf.ToShortDateString()}'");
+
+            return this.ExecuteQuery<UnearnedCommissionsDetail>("[dbo].[GetUnearnedCommissionDetails]", parameters);
+        }
+
+        public List<UnearnedBrokerFeesDetail> GetUnearnedBrokerFeesDetail(int policyId, int coverageType, DateTime asOf)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("@PolicyId", policyId);
+            parameters.Add("@CoverageType", coverageType);
+            parameters.Add("@AsOf", $"'{asOf.ToShortDateString()}'");
+
+            return this.ExecuteQuery<UnearnedBrokerFeesDetail>("[dbo].[GetUnearnedBrokerFeesDetails]", parameters);
+        }
+
+        public List<AgencyReport> GetAgencyReport(DateTime? from, DateTime? to)
+        {
+            Dictionary<string, object> parameters = null;
+
+            if (from != null && to != null)
+            {
+                parameters = new Dictionary<string, object>();
+                parameters.Add("@From", $"'{((DateTime)from).ToShortDateString()}'");
+                parameters.Add("@To", $"'{((DateTime)to).ToShortDateString()}'");
+            }
+            
+            return this.ExecuteQuery<AgencyReport>("[dbo].[GetAgencyReports]", parameters);
+        }
+
     }
 }

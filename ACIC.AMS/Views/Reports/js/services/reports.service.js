@@ -35,6 +35,33 @@
             }
         });
     },
+    getUnearnedCommissionsReportItems: function (asOff, callback) {
+        $.ajax({
+            type: "GET",
+            url: "/api/reports/commissions/unearned?asOff=" + asOff,
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
+    getUnearnedBrokerFeesReportItems: function (asOff, callback) {
+        $.ajax({
+            type: "GET",
+            url: "/api/reports/brokerfees/unearned?asOff=" + asOff,
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
+    getAgencyReports: function (from = null, to = null,  callback) {
+        $.ajax({
+            type: "GET",
+            url: "/api/reports/agency?from=" + from + '&to=' + to,
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
     updateDownPayment: function (accountId, ern, coverageType, policyId, status, callback) {
         //int accountId, string ern, int coverageType, int policyId, int status
         //
@@ -109,5 +136,15 @@
                 if (callback) callback();
             }
         });
-    }
+    },
+
+    getUnearnedCommissionsReportDetails: function (policyId, coverageType, asOff, callback) {
+        $.ajax({
+            type: "GET",
+            url: "/api/reports/commissions/unearned/items?policyId=" + policyId + "&coverageType=" + coverageType+"&asOf=" + asOff,
+            success: function (data) {
+                if (callback) callback(data);
+            }
+        });
+    },
 }

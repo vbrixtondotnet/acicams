@@ -15,7 +15,7 @@ namespace ACIC.AMS.DataStore.Interfaces
         Policy SavePolicy(Policy policy);
         List<PolicyEndorsementUnitStats> GetPolicyEndorsementUnitStats(int accountId, int policyId);
         List<ActivePolicyVehicle> GetActivePolicyVehicles(int policyId);
-        AgentCommissions GetPolicyAgentCommissions(int policyId);
+        PolicyAgentCommissions GetPolicyAgentCommissions(int policyId);
         bool SetInceptionStage(int policyId, bool isInceptionStage);
         DdCoverageType GetCoverageType(int coverageTypeId);
     }

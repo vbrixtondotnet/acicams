@@ -1,0 +1,131 @@
+﻿
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2"><label>Account</label></div>
+        <div class="col-md-2"><label>Type of Coverage</label></div>
+        <div class="col-md-2"><label>Policy Number</label></div>
+        <div class="col-md-2"><label>Date as Of</label></div>
+        <div class="col-md-2"><label>Status</label></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <select class="form-control" id="slcCommissionsAccount">
+                <option value="">&nbsp</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcComissionsCoverageTypes">
+                <option value="">&nbsp</option>
+                <option value="1">Auto Liability</option>
+                <option value="2">Motor Truck Cargo</option>
+                <option value="3">Physical Damage</option>
+            </select>
+        </div>
+        <div class="col-md-2"><input type="text" class="form-control" id="txtComissionsPolicyNumber" /></div>
+        <div class="col-md-2"><input type="date" class="form-control" id="txtComissionsDateAsOf" /></div>
+        <div class="col-md-2">
+            <select class="form-control" id="slcCommissionStatus">
+                <option value="">All</option>
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-2"><button class="btn btn-danger" id="btnClearCommissionsFilters">Clear Filters</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-header">
+        <div class="col-md-1" style="width:20%; text-align:center"><label>Account</label></div>
+        <div class="col-md-1" style="width:15%; text-align:left"><label>Type of Coverage</label></div>
+        <div class="col-md-1" style="width:10%; text-align:left"><label>Policy No</label></div>
+        <div class="col-md-1" style="width:15%; text-align:center"><label>Effective</label></div>
+        <div class="col-md-1" style="width:14%; text-align:center"><label>Commulative Commissions</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Unearned</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label>Earned</label></div>
+        <div class="col-md-1" style="width:12%; text-align:center"><button class="btn btn-success" id="btnExportCommissionsReport" style="padding:2px;">Export (.xlsx)</button></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-sub-header">
+        <div class="col-md-1" style="width:20%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:15%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:10%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:15%; text-align:center">&nbsp;</div>
+        <div class="col-md-1" style="width:14%; text-align:center"><label id="thCommulativeCommissions">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="thUnearned">&nbsp;</label></div>
+        <div class="col-md-1" style="width:7%; text-align:center"><label id="thEarned">&nbsp;</label></div>
+        <div class="col-md-1" style="width:12%; text-align:center">&nbsp;</div>
+    </div>
+</div>
+
+
+<div class="row" style="height:680px; overflow-y:scroll;" id="comissionsUnearnedReportTable">
+    <div class="row" id="commissionsPreloader">
+        <div class="col-md-12 text-center" style="padding-top:75px;">
+            <img src="~/assets/images/preloader.gif" />
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlCommissionDetails" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+
+                <div class="modal-body" style="padding:0 !important;">
+                    <div class="portlet-body form vehicle-form">
+                        <div class="row">
+                            <div class="col-md-12 table-header popup">
+                                <div class="col-md-6" style="height:35px;">
+                                    <div class="col-md-4"><label>Account</label></div>
+                                    <div class="col-md-8"><small id="lblCommissionDetailsAccount"></small></div>
+                                </div>
+                                <div class="col-md-6" style="height:35px;">
+                                    <div class="col-md-2"><label>Expiration</label></div>
+                                    <div class="col-md-10"><small id="lblCommissionDetailsExpiration"></small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 table-header popup">
+                                <div class="col-md-12" style="height:35px;">
+                                    <div class="col-md-2"><label>Policy No</label></div>
+                                    <div class="col-md-10"><small id="lblCommissionDetailsPolicyNo"></small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 table-header popup">
+                                <div class="col-md-12" style="height:35px;">
+                                    <div class="col-md-2"><label>Type of Coverage</label></div>
+                                    <div class="col-md-10"><small id="lblCommissionDetailsCoverageType"></small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 table-header popup h40">
+                                <div class="col-md-2 text-center"><small>Effective</small></div>
+                                <div class="col-md-1 text-center"><small>Commission</small></div>
+                                <div class="col-md-2 text-center"><small>Rate per Day</small></div>
+                                <div class="col-md-1 text-center"><small>Unearned</small></div>
+                                <div class="col-md-1 text-center"><small>Earned</small></div>
+                                <div class="col-md-2 text-center"><small>Reference</small></div>
+                                <div class="col-md-3 text-center" style="padding:0 !important;"><button id="btnExportCommissionDetails" class="btn btn-sm" style="background:#4bb678">Export (.xlsx)</button></div>
+                            </div>
+                        </div>
+                        <div class="row" id="commissionDetailItems">
+
+                        </div>
+                        <div class="row" id="commissionDetailItemsPreloader">
+                            <div class="col-md-12 text-center" style="padding-top:15px;">
+                                <img src="~/assets/images/preloader.gif" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
