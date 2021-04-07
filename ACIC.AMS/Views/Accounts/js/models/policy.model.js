@@ -69,7 +69,7 @@
         this.expirationString = null;
         this.inceptionStage = false;
         this.mgafees = null;
-        this.mgaid = 2;
+        this.mgaid = 0;
         this.mganame = "";
         this.nonTaxedRateUnit = null;
         this.notes = null;
