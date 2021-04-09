@@ -1,5 +1,4 @@
 ﻿
-
 var PolicyComponent = {
     availableCoverageTypes: null,
     dTable: null,
@@ -10,6 +9,8 @@ var PolicyComponent = {
     premiumFinancers: null,
     rateCalculator: null,
     agentCommissions: null,
+    selectedPolicyId: null,
+    editMode: false,
     init: function () {
         this.initEventHandlers();
         this.getCarriers();
@@ -81,7 +82,7 @@ var PolicyComponent = {
             }
         });
     },
-    getPolicies: function (id) {
+    getPolicies: function (id, callback) {
         $("#policiesPreloader").removeClass('hide');
         $(".policy-list-content").addClass('hide');
 
@@ -91,6 +92,8 @@ var PolicyComponent = {
 
             $("#policiesPreloader").addClass('hide');
             $(".policy-list-content").removeClass('hide');
+
+            if (callback) callback();
         });
     },
     onCoverageTypeChange: function (checkGross) {
@@ -127,6 +130,14 @@ var PolicyComponent = {
         });
         PolicyComponent.policy.accountId = CurrentAccount.accountId;
         BindingService.bindModelToForm("frmPolicy", PolicyComponent.policy);
+        PolicyComponent.editMode = true;
+    },
+    closePolicyForm: function () {
+        if (PolicyComponent.editMode) {
+            PolicyComponent.viewPolicy(PolicyComponent.selectedPolicyId);
+        }
+        $("#mdlPolicy").modal('hide');
+        PolicyComponent.editMode = false;
     },
     viewPolicy: function (policyId) {
         PolicyComponent.policy = $.extend({}, PolicyModel.new());
@@ -485,10 +496,15 @@ var PolicyComponent = {
             blockerOnly: true
         });
 
+        PolicyComponent.policy.effective = $("#txtPolicyEffectiveDate").val();
+        PolicyComponent.policy.expiration = $("#txtPolicyExpirationDate").val();
+        PolicyComponent.policy.bindDate = $("#txtPolicyBindDate").val();
+
         PolicyService.savePolicy(PolicyComponent.policy,
            function (data) {
                $("#mdlPolicy").modal('hide');
-               PolicyComponent.getPolicies(CurrentAccount.accountId);
+               PolicyComponent.getPolicies(CurrentAccount.accountId, function () {
+                   PolicyComponent.closePolicyForm(); });
                App.unblockUI("#frmPolicy");
 
         }, function (data) {
@@ -599,8 +615,13 @@ var PolicyComponent = {
 
         $("html").on("click", '.btn-view-policy', function () {
             var policyId = $(this).attr('data-id');
+            PolicyComponent.selectedPolicyId = policyId;
             PolicyComponent.viewPolicy(policyId);
-        })
+        });
+
+        $("#btnClosePolicyForm").click(function () {
+            PolicyComponent.closePolicyForm();
+        });
 
         $("#slcPolicyCoverageType").bind("change", function () {
             PolicyComponent.onCoverageTypeChange(true);

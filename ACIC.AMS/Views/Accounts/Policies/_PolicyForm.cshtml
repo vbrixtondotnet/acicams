@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Bind Date</label>
                                             <div class="col-md-9">
-                                                <input type="date" class="form-control" id="" placeholder="mm/dd/yyy" data-model="bindDate">
+                                                <input type="date" class="form-control" id="txtPolicyBindDate" placeholder="mm/dd/yyy" data-model="bindDate">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Expiration</label>
                                             <div class="col-md-9">
-                                                <input type="date" class="form-control" id="txtPolicyExpirationDate" placeholder="mm/dd/yyy" data-model="expiration">
+                                                <input type="date" class="form-control" id="txtPolicyExpirationDate" placeholder="mm/dd/yyy" data-model="expiration" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -330,7 +330,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn dark btn-outline" id="btnClosePolicyForm">Close</button>
                     <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>&nbsp;Save</button>
                 </div>
             </form>
