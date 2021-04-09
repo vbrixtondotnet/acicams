@@ -611,6 +611,7 @@ var PolicyComponent = {
         });
 
         $("#btnRateCalculatorConfirm").click(function () {
+            debugger;
             PolicyComponent.assignRate();
         });
 
