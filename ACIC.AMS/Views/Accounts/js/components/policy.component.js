@@ -199,8 +199,8 @@ var PolicyComponent = {
         var year = effectivityDate.getFullYear();
         var month = effectivityDate.getMonth();
         var day = effectivityDate.getDate();
-        var expiryDate = new Date(year + 1, month, day);
-        var expiryDateString = ValidationService.formatDate(expiryDate);
+        var expiryDate = new Date(year + 1, month, day + 1);
+        var expiryDateString = ValidationService.formatDate(expiryDate.toISOString());   
         $("#txtPolicyExpirationDate").val(expiryDateString).trigger('change');
 
     },
