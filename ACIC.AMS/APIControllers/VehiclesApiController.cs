@@ -68,7 +68,7 @@ namespace ACIC.AMS.Web.APIControllers
         {
             try
             {
-                Vehicle vehicleResponse  = vehicleDataStore.UpdateVehicle(vehicle);
+                Vehicle vehicleResponse = vehicleDataStore.UpdateVehicle(vehicle);
 
                 if (vehicleResponse != null)
                     return Ok(vehicleResponse);
