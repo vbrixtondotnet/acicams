@@ -28,7 +28,7 @@ namespace ACIC.AMS.Web.APIControllers
 
                 return new FileStreamResult(stream, "application/octet-stream");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

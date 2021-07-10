@@ -22,7 +22,7 @@ namespace ACIC.AMS.Web.APIControllers
     public class AccountsApiController : ControllerBase
     {
         private readonly IAccountDataStore accountDataStore;
-        private readonly IContactDataStore contactDataStore; 
+        private readonly IContactDataStore contactDataStore;
         private readonly IPolicyDataStore policyDataStore;
         private readonly IEndorsementDataStore endorsementDataStore;
         private readonly IDriverDataStore driverDataStore;
@@ -87,7 +87,7 @@ namespace ACIC.AMS.Web.APIControllers
 
         }
 
-      
+
 
         [Route("accounts")]
         [HttpPost]
@@ -98,7 +98,7 @@ namespace ACIC.AMS.Web.APIControllers
                 AccountDetails accountDetails = accountDataStore.Save(account);
                 return Ok(accountDetails);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

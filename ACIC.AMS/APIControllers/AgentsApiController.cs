@@ -69,13 +69,13 @@ namespace ACIC.AMS.Web.APIControllers
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
             return BadRequest();
-           
+
         }
 
     }
